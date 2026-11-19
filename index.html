@@ -263,16 +263,15 @@ button.ml{appearance:none}
 <div id="app" class="wrap"></div>
 <script>
 (function(){
-var CREW=[{"id": "tim", "name": "Tim Alward", "role": "Lead", "status": "Locked"}, {"id": "andy", "name": "Andy Sankar", "role": "ENG D", "status": "Locked"}, {"id": "michal", "name": "Michal Maksymowicz", "role": "ENG E", "status": "Locked"}, {"id": "joel", "name": "Joel Tower", "role": "ENG B", "status": "Locked"}, {"id": "brandon", "name": "Brandon Dew", "role": "ENG C", "status": "Locked"}, {"id": "joshl", "name": "Josh Laemmle", "role": "ENG F", "status": "Locked"}, {"id": "dave", "name": "David Wade", "role": "ENG A", "status": "Locked"}, {"id": "rick", "name": "Rick Alexander", "role": "Floater 3", "status": "Locked"}, {"id": "adriana", "name": "Adriana Salvo", "role": "Floater 2", "status": "Locked"}, {"id": "heather", "name": "Heather Marshall", "role": "Floater 1", "status": "Locked"}, {"id": "freddie", "name": "Freddie Aponte", "role": "Comms lead", "status": "Locked"}];
+var CREW=[{"id": "tim", "name": "Tim Alward", "role": "Lead", "status": "Locked"}, {"id": "andy", "name": "Andy Sankar", "role": "ENG D", "status": "Locked"}, {"id": "michal", "name": "Michal Maksymowicz", "role": "ENG E", "status": "Locked"}, {"id": "joel", "name": "Joel Tower", "role": "ENG B", "status": "Locked"}, {"id": "brandon", "name": "Brandon Dew", "role": "ENG C", "status": "Locked"}, {"id": "joshl", "name": "Josh Laemmle", "role": "ENG F", "status": "Locked"}, {"id": "dave", "name": "David Wade", "role": "ENG A", "status": "Locked"}, {"id": "rick", "name": "Rick Alexander", "role": "Social mixer", "status": "Locked"}, {"id": "adriana", "name": "Adriana Salvo", "role": "Floater 2", "status": "Locked"}, {"id": "heather", "name": "Heather Marshall", "role": "Floater 1", "status": "Locked"}, {"id": "freddie", "name": "Freddie Aponte", "role": "Comms lead", "status": "Locked"}];
 var DAYS=[
- {d:'Fri Nov 20',k:'Travel',t:'Advance crew travels in for initial course prep. Hotel TBD from Scratch.'},
- {d:'Sat Nov 21',k:'Prep',t:'Initial course prep with Scratch crew, PAs and some G&E. Rest of audio crew travels in.'},
- {d:'Sun Nov 22',k:'Prep',t:'Main on-course prep day, full crew. Kit build, comms pairing, TC jam test, block schedule walkthrough.'},
- {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Schedule v8: athletes arrive 6:30, Christmas Card 7:00–7:45, mic-up before the 7:45 ride, range warm-up 8:15. Tiger arrives 11:30. Up to 6–7 main-unit setups at once, plus up to 3 MCV setups on the ZMBZ unit. Last athletes out about 5:45 (sunset 5:45).'},
- {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Schedule v8: P790 amateur MCV from 6:30 (sunrise 6:45), athletes arrive 7:00, first setups 7:45. No Christmas Card or range warm-up, so mic in wardrobe. Adds Haeran Ryu, Karl and amateurs; no Tiger. TP5 speed testing runs to 6:00.'},
- {d:'Wed Nov 25',k:'Travel',t:'Travel home (half-rate travel day). Room on the 24th only on request.'}];
+ {d:'Sat Nov 21',k:'Travel',t:'Travel day. Hotel rooms start tonight: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd, Palm Beach Gardens. Rooms are under your own name; show ID at check-in. Production tents open at 2 PM; no audio prep today.'},
+ {d:'Sun Nov 22',k:'Prep',t:'Prep starts Sunday morning, full crew. Kit build, TX/lav rigs, freq plan, TC jam test, comms pairing and a Hub link/unlink rehearsal at the range, block schedule walkthrough.'},
+ {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Sound call 6:00–6:15 AM at the production tent. Christmas Card 7:30–8:15, mic-up 8:15–8:30, Range Warm Up 8:30–9:00 with Hubs 1–5 linked, then teams break off with their own Hubs. Tiger mic\'d 11:45 before his 12:30 Tiger Talks. Wrap around 6:00 (sunset 5:45).'},
+ {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Sound call 6:00–6:15 AM. Pros arrive 7:00 and are mic\'d at breakfast 7:00–7:30, every mixer on a mic station with the A2s; first setups 7:45. Fore Play arrives 7:45, Bridgeman 9:15. Nelly and Tiger are off Day 2; Haeran Ryu and the amateurs are added. Wrap around 6:00. Hotel checkout is today; most of us travel home after wrap.'},
+ {d:'Wed Nov 25',k:'Travel',t:'Paid travel day home (half rate). Need a room the night of the 24th? Tell Tim.'}];
 function schedule(){
- return '<p class="note">Location: Apogee Club, Hobe Sound/Indiantown FL (about 35 min north of West Palm). Dates per Maurece, Oct 30. Hotel and call times still waiting on Scratch.</p><div class="card">'+
+ return '<p class="note">Location: APOGEE, 2103 SW Bridge Rd, Hobe Sound, FL 33455. Hotel: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd. Sound call 6:00–6:15 AM at the production tent both shoot days. Block times can still move; this page is the latest.</p><div class="card">'+
  DAYS.map(function(x){return '<div class="day"><div class="d">'+x.d.split(' ').slice(1).join(' ')+'<span>'+x.d.split(' ')[0]+'</span></div><div><span class="k">'+x.k+'</span><div>'+esc(x.t)+'</div></div></div>';}).join('')+'</div>';
 }
 
@@ -344,13 +343,13 @@ function buildCrew(crew){
   const byUnit=id=>CREW.filter(c=>{const u=unitOf(c.role);return u&&u.id===id}).map(c=>c.id);
   const FP=byUnit("foreplay"),BRAVO=byUnit("bravo"),CHAR=byUnit("charlie");
   /* Day 1 morning (Tim, Nov 18): Tim, Joel and the A2s at Christmas Card; every other mixer + Freddie at the range */
-  const CC=[...(A1?[A1]:[]),...BRAVO,...A2S];
+  const CC=[...(A1?[A1]:[]),...BRAVO,...A2S,...SOCIAL];
   const RANGEMIX=MIXERS.filter(id=>!BRAVO.includes(id));
   FIXED={
     d1:[
       {who:CC,n:"Christmas Card (Tim, Joel, Heather, Adriana, Rick)",s:450,e:495,c:"range",w:[]},
       {who:RANGEMIX,n:"At the range from 7:30: mic Wagner, TM staff, Grant, Ruffels as they arrive; set up to receive",s:450,e:510,c:"prep",w:[]},
-      {who:[...(A1?[A1]:[]),...BRAVO],n:"Mic-up 6 pros right after Christmas Card (with the A2s)",s:495,e:510,c:"prep",w:[]},
+      {who:[...(A1?[A1]:[]),...BRAVO,...SOCIAL],n:"Mic-up 6 pros right after Christmas Card (with the A2s)",s:495,e:510,c:"prep",w:[]},
       {who:CHAR,n:"Range master: range Scorpio, 16 Wisy RX + comms send to the linked Hubs (11 talent). Then takes his own kit to Charlie",s:510,e:540,c:"range",w:[]},
       {who:FP,n:"Mic-up Bridgeman, Thor (with A2s)",s:525,e:540,c:"prep",w:[]},
       {who:COMMS,n:"Comms: at the range from 6:30 setting up the linked Hubs + Scorpio feed, then team Hubs",s:390,e:1110,c:"comms",w:[]}
@@ -364,7 +363,7 @@ function buildCrew(crew){
 }
 const A2EV={
   d1:[
-    ["Mic-up 6 pros after Christmas Card",495,510,["Rory","Scottie","Tommy","Collin","Charley","Brooke"],"mic",3],
+    ["Mic-up 6 pros after Christmas Card",495,510,["Rory","Scottie","Tommy","Collin","Charley","Brooke"],"mic",2],
     ["Mic-up Bridgeman, Thor at arrival (with Andy)",525,540,["Jacob","Michael"],"mic",1],
     ["Mic-up Tiger",705,720,["Tiger"],"mic",1],
     ["Wrap Bridgeman before PopStroke (no audio)",825,840,["Jacob"],"wrap",1],
@@ -378,7 +377,7 @@ const A2EV={
     ["Wrap: de-mic, collect TX",1080,1095,["Michael","Grant","Ryan"],"wrap",1]
   ],
   d2:[
-    ["Mic-up 10 pros at breakfast",420,450,["Scottie","Tommy","Collin","Charley","Brooke","Michael","Haeran","Grant","Ryan","Johnson"],"mic",4],
+    ["Mic-up 10 pros at breakfast",420,450,["Scottie","Tommy","Collin","Charley","Brooke","Michael","Haeran","Grant","Ryan","Johnson"],"mic",2],
     ["Mic-up Simone for TCP Irons",495,510,["Matt"],"mic",1],
     ["Mic-up Bridgeman at arrival",570,585,["Jacob"],"mic",1],
     ["Wrap: de-mic, collect TX",780,795,["Scottie"],"wrap",1],
@@ -469,7 +468,7 @@ function coverage(d){
   const need=EXTRA[d].map(([s,e,n])=>({n,s,e,w:talentFor(d,n,s,e),c:"unc",need:"mix"}));
   const xl=[];const fits=(L,b)=>!L.some(x=>x.s<b.e+BUF&&x.e+BUF>b.s);
   const place=b=>{let L=xl.find(L=>!L.social&&fits(L,b));if(!L){L=[];xl.push(L)}L.push(b)};
-  const SOC=need.filter(b=>/^Social Sessions/.test(b.n)).sort((a,b)=>a.s-b.s);if(SOC.length){const L0=[];SOC.forEach(b=>L0.push(b));L0.social=true;xl.push(L0)}
+  const SOC=need.filter(b=>/^Social Sessions/.test(b.n)).sort((a,b)=>a.s-b.s);if(SOC.length){if(SOCIAL.length&&lanes[SOCIAL[0]]){SOC.forEach(b=>lanes[SOCIAL[0]].push({...b,c:"sound",need:undefined}))}else{const L0=[];SOC.forEach(b=>L0.push(b));L0.social=true;xl.push(L0)}}
   need.filter(b=>!/^Social Sessions/.test(b.n)).sort((a,b)=>a.s-b.s).forEach(b=>{let L=xl.find(L=>!L.social&&fits(L,b));if(!L){L=[];xl.push(L)}L.push(b)});
   CREW.filter(c=>c.kind==="mixer").forEach(c=>{
     if(lunchGap(lanes[c.id])>=30)return;
@@ -547,7 +546,7 @@ function draw(){
   const notes=$("tl-notes");
   if(VIEW==="mix"){
     const {lanes}=coverage(day);
-    notes.innerHTML=`<div class="bnote" style="grid-column:1/-1"><h3>How this is built</h3><p>Scratch's units from TM262151 2026 Crew Assignments (Day 1 rebuilt Nov 17 from the athlete columns' team tags), with Maurece's Nov 11 answers. Alpha, Bravo, Charlie, Delta, Fore Play and YouTube each keep one dedicated mixer all day; nobody is pulled between units. Echo and Studio Photography are MOS, PopStroke and TP5 Speed Testing have no audio. Anything Scratch wants covered that no unit mixer can take (Day 1 Grant and Ruffels pieces, Day 2 Bag Swap; TP5 DOC is MCV per Scratch's Nov 16 day tabs) lands in the red Extra mixer lanes, along with a 30 min lunch relief for every unit mixer with no break between 11:30 and 14:30. A2s cover mic-ups and end-of-day wraps; no lunch battery swaps (extended batteries on MTP61/MTP60 run 12–14 h, Tim Nov 16). Draft until Scratch locks blocks on Tuesday.</p></div>`+CREW.map(c=>{
+    notes.innerHTML=`<div class="bnote" style="grid-column:1/-1"><h3>How this is built</h3><p>Scratch's units from TM262151 2026 Crew Assignments (Day 1 rebuilt Nov 17 from the athlete columns' team tags), with Maurece's Nov 11 answers. Alpha, Bravo, Charlie, Delta, Fore Play and YouTube each keep one dedicated mixer all day; nobody is pulled between units. Echo and Studio Photography are MOS, PopStroke and TP5 Speed Testing have no audio. Anything Scratch wants covered that no unit mixer can take (Day 1 Grant and Ruffels pieces, Day 2 Bag Swap; TP5 DOC is MCV per Scratch's Nov 16 day tabs) lands in the red Extra mixer lanes, along with a 30 min lunch relief for every unit mixer with no break between 11:30 and 14:30. A2s cover mic-ups and end-of-day wraps; no lunch battery swaps (extended batteries on MTP61/MTP60 run 12–14 h, Tim Nov 16). Draft until Scratch locks blocks. Rick Alexander covers every Social Sessions block as the social mixer.</p></div>`+CREW.map(c=>{
       const jobs=lanes[c.id].filter(b=>!b.fixed);const all=lanes[c.id];
       const mins=jobs.reduce((t,b)=>t+(b.e-b.s),0);
       const lg=c.kind==="comms"?999:lunchGap(all);
@@ -613,7 +612,7 @@ function html(){
     </aside>
   </div>
   <div class="bnotes" id="tl-notes"></div>
-  <p class="hint">Setups and times from Scratch's prelim schedule v8 (top block of each day).</p>
+  <p class="hint">Setups and times rebuilt from Scratch's schedule athlete columns (Day 1 Nov 17, Day 2 Nov 18). Still draft until Scratch locks blocks.</p>
 </div>`;
 }
 function mount(el,crew){
@@ -633,7 +632,7 @@ return {mount:mount,camTeams:camTeams,model:function(crew,d){buildCrew(crew);var
 
 function cams(){
  var R=[['Gary M','CAM A · FX6','Sticks',1],['Paul B','CAM B · FX6','Sticks',1],['Aidan C','CAM C · FX6','Sticks',1],['David D','CAM D · FX6','Sticks',1],['Dom E','CAM E · FX6','Sticks · Day 1 only',1],['Matt A','CAM F · FX6 + CAM M · 4D','Sticks + gimbal; Day 2 adds a drone',2],['Justin N','CAM G · FX6','Sticks',1],['Jackson V','CAM H · FX6 + CAM Z · 4D','Sticks + gimbal',2],['Gordon C','CAM I · FX6 + CAM Q · 4D','Sticks + gimbal',2],['Mike M','CAM N · 4D + CAM J · FX6','Gimbal + handheld',2],['Matt W','CAM O · 4D + CAM K · FX6','Gimbal + sticks',2],['Mike S','CAM P · 4D','Gimbal',1],['John S','CAM R · 4D','Gimbal',1],['Xavier','CAM S · FX9','Jib',1],['Jared C','CAM T · C300','Sticks',1],['Nick S','Ember + drone','High-speed (Rotation Station)',1],['Andres T','Phantom','High-speed',1],['Juan N','Drone','','no'],['Giancarlo Z','GoPros + drone','','no'],['Mark S, Christian C','No camera listed','Likely producers / director',''],['Andres U, Federico H, Gil H, Chloe I','No camera listed','Second group, likely photo / BTS','']];
- return '<p class="note">From Scratch\'s "TM262151 2026 Crew Assignments" (Nov 9, still in progress). Operators and cameras are set; Scratch hasn\'t put them on blocks yet, so mixers aren\'t matched to camera teams.</p>'+
+ return '<p class="note">From Scratch\'s "TM262151 2026 Crew Assignments" (Nov 9, still in progress). Operators and cameras per that sheet; camera teams per Scratch\'s TEAM ROSTER tab (Nov 13), listed below with each unit\'s mixer.</p>'+
  '<div class="cam-stats"><div><b class="tab-num">20</b><span>lettered cameras Day 1</span></div><div><b class="tab-num">19</b><span>Day 2 (no Dom / CAM E)</span></div><div><b class="tab-num">~22</b><span>bodies needing TC incl. Ember + Phantom</span></div><div><b class="tab-num">28</b><span>TC boxes in our kits (17 Lockit + Brandon 6 UltraSync, 5 JB-1)</span></div></div>'+
  '<div class="tbl"><table><thead><tr><th>Operator</th><th>Camera(s)</th><th>Rig</th><th class="num">TC</th></tr></thead><tbody>'+R.map(function(r){return '<tr><td class="name" style="white-space:normal">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="prev">'+esc(r[2])+'</td><td class="num">'+esc(r[3])+'</td></tr>';}).join('')+'</tbody></table></div>'+
  '<p class="note" style="margin-top:8px">Five operators run an FX6 and a 4D. Plan hops and TC per operator, and expect the 4D as the second angle on the same setup.</p>'+
