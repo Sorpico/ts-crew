@@ -1,0 +1,833 @@
+<!doctype html><html><head><meta charset=utf8><meta name="robots" content="noindex,nofollow,noarchive"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Supershoot 2026 Crew Schedule</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link id="pg-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&amp;family=Source+Sans+3:wght@400;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+/* Layout: call-sheet style — slim header band, tab strip, dense working tables */
+:root{
+  --bg:#f3f4f2; --panel:#ffffff; --ink:#1b2320; --muted:#5b6661; --line:#d9ddd8;
+  --accent:#c77a12; --accent-ink:#ffffff; --tint:#eaece8;
+  --ok:#1f7a4a; --ok-bg:#dff1e6; --warn:#9a6400; --warn-bg:#fbefd6;
+  --bad:#a33a2c; --bad-bg:#f8e1dc; --idle:#55606b; --idle-bg:#e6e9ec;
+  --grid:#e7ecea; --sound:#1f7a5a; --off:#c26a12; --mcv:#8a93a6; --other:#c9d3cf; --other-ink:#2b3633; --range:#2f5fa8; --over:#c0392b; --cursor:#c0392b; --lunch:rgba(194,106,18,.08); --fg:var(--ink); --rule:var(--line);
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131816; --panel:#1b2220; --ink:#e7ebe8; --muted:#9aa5a0; --line:#2e3834;
+  --accent:#e59a34; --accent-ink:#1a1206; --tint:#222b28;
+  --ok:#7fd3a2; --ok-bg:#18362a; --warn:#f0c26e; --warn-bg:#3a2d12;
+  --bad:#f1998b; --bad-bg:#40211c; --idle:#b4bec8; --idle-bg:#262e35; --grid:#222c28; --sound:#2fa77b; --off:#e08a2e; --mcv:#5d6678; --other:#35423d; --other-ink:#d6dfdb; --range:#4c7fd0; --over:#ef5b4b; --cursor:#ef5b4b; --lunch:rgba(224,138,46,.10); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131816; --panel:#1b2220; --ink:#e7ebe8; --muted:#9aa5a0; --line:#2e3834;
+  --accent:#e59a34; --accent-ink:#1a1206; --tint:#222b28;
+  --ok:#7fd3a2; --ok-bg:#18362a; --warn:#f0c26e; --warn-bg:#3a2d12;
+  --bad:#f1998b; --bad-bg:#40211c; --idle:#b4bec8; --idle-bg:#262e35; --grid:#222c28; --sound:#2fa77b; --off:#e08a2e; --mcv:#5d6678; --other:#35423d; --other-ink:#d6dfdb; --range:#4c7fd0; --over:#ef5b4b; --cursor:#ef5b4b; --lunch:rgba(224,138,46,.10); color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--accent);padding-bottom:12px}
+h1{font-family:var(--f-display);font-weight:700;font-size:2.1rem;letter-spacing:.01em;margin:0;line-height:1;text-wrap:balance}
+.sub{color:var(--muted);font-size:.9rem;margin-top:4px}
+.po{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);text-align:right}
+.po b{color:var(--ink)}
+#save{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.counts{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+.count{display:flex;align-items:baseline;gap:6px;padding:6px 10px;border-radius:4px;font-size:.85rem}
+.count b{font-family:var(--f-display);font-size:1.35rem;font-variant-numeric:tabular-nums}
+nav{display:flex;gap:2px;margin:18px 0 0;border-bottom:1px solid var(--line);overflow-x:auto}
+nav button{font-family:var(--f-display);font-size:1.05rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:8px 14px;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section{padding-top:18px}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.3rem;margin:22px 0 8px;letter-spacing:.02em}
+h2:first-child{margin-top:0}
+.note{color:var(--muted);font-size:.88rem;max-width:70ch;margin:0 0 10px}
+.tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;color:var(--muted);text-align:left;padding:8px 10px;background:var(--tint);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-mono)}
+.mono{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);word-break:break-all}
+.name{font-weight:600;white-space:nowrap}
+.prev{font-size:.8rem;color:var(--muted)}
+select,input[type=text],textarea{font:inherit;font-size:.88rem;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:4px 6px;max-width:100%}
+textarea{width:100%;min-width:160px;resize:vertical;min-height:30px}
+input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent)}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.s-Locked{background:var(--ok-bg);color:var(--ok)}
+.s-Checking,.s-Asked{background:var(--warn-bg);color:var(--warn)}
+.s-Out{background:var(--bad-bg);color:var(--bad)}
+.s-Not\ asked{background:var(--idle-bg);color:var(--idle)}
+select.status{font-weight:600;border-radius:999px;padding:2px 6px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid2>*{min-width:0}
+.short{color:var(--bad);font-weight:600}
+.okc{color:var(--ok);font-weight:600}
+.day{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.day:last-child{border-bottom:0}
+.day .d{font-family:var(--f-display);font-weight:700;font-size:1.15rem;line-height:1.1}
+.day .d span{display:block;font-family:var(--f-mono);font-weight:400;font-size:.75rem;color:var(--muted)}
+.day .k{display:inline-block;font-family:var(--f-display);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.78rem;color:var(--accent);margin-bottom:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.todo{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border-bottom:1px solid var(--line)}
+.todo:last-child{border-bottom:0}
+.todo.done span{color:var(--muted);text-decoration:line-through}
+.btn{font:inherit;font-size:.85rem;font-weight:600;background:var(--accent);color:var(--accent-ink);border:0;border-radius:4px;padding:6px 12px;cursor:pointer}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line)}
+.addrow input{flex:1;min-width:0}
+
+/* Timeline (merged from the Overlap Board) */
+.tl{display:flex;flex-direction:column;gap:14px}
+.tl-bar{display:flex;flex-wrap:wrap;gap:8px}
+.tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:3px}
+.tabs button{font:600 .95rem var(--f-display);letter-spacing:.04em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);padding:7px 12px;border-radius:6px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.tabs button:focus-visible,.lane-bar:focus-visible{outline:2px solid var(--cursor);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.82rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:10px;border-radius:2px;display:inline-block;flex:none}
+.tl-board{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px;align-items:start}
+@media (max-width:900px){.tl-board{grid-template-columns:minmax(0,1fr)}}
+.scroller{overflow-x:auto;background:var(--panel);border:1px solid var(--rule);border-radius:10px;min-width:0}
+.chart{position:relative;min-width:980px;user-select:none}
+.tl-row{display:grid;grid-template-columns:170px 1fr}
+.tl-row .lab{font-size:.8rem;padding:0 10px;display:flex;align-items:center;border-right:1px solid var(--rule);background:var(--panel);position:sticky;left:0;z-index:3;min-width:0}
+.tl-row .lab b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-row .track{position:relative;height:34px;border-bottom:1px solid var(--grid)}
+.tl-row.grp .lab,.tl-row.grp .track{height:26px;background:var(--bg)}
+.tl-row.grp .lab{font:600 .72rem var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tl-row.axis .track{height:28px}
+.tl-row.tall .track,.tl-row.tall .lab{height:44px}
+.tl-row.cnt .track{height:64px}
+.tick{position:absolute;top:0;bottom:0;border-left:1px solid var(--grid)}
+.tick span{position:absolute;top:6px;left:4px;font:400 .7rem var(--f-mono);color:var(--muted)}
+.lane-bar{position:absolute;top:4px;bottom:4px;border-radius:4px;font-size:.72rem;line-height:1.1;padding:3px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;display:flex;align-items:center}
+.lane-bar.dim{opacity:.28}
+.c-sound{background:var(--sound);color:#fff}
+.c-offsite{background:var(--off);color:#fff}
+.c-mcv{background:var(--mcv);color:#fff}
+.c-other{background:var(--other);color:var(--other-ink)}
+.c-range{background:var(--range);color:#fff}
+.c-prep{background:transparent;color:var(--fg);border:1.5px dashed var(--muted)}
+.c-comms{background:transparent;color:var(--muted);border:1.5px dotted var(--rule)}
+.c-a2{background:color-mix(in srgb,var(--range) 14%,var(--panel));color:var(--fg);border:1px solid color-mix(in srgb,var(--range) 45%,transparent)}
+.c-unc{background:var(--over);color:#fff}
+.c-lunch{background:var(--lunch);color:var(--off);border:1px dashed color-mix(in srgb,var(--off) 55%,transparent)}
+.c-relief{background:color-mix(in srgb,var(--over) 12%,var(--panel));color:var(--over);border:1.5px dashed var(--over)}
+.tl-row.xneed .lab{background:color-mix(in srgb,var(--over) 8%,var(--panel))}
+.tl-row.grp.xneed .lab,.tl-row.grp.xneed .track{background:color-mix(in srgb,var(--over) 10%,var(--bg));color:var(--over)}
+.c-hs{background:color-mix(in srgb,var(--range) 22%,var(--panel));color:var(--fg);border:1px solid color-mix(in srgb,var(--range) 60%,transparent)}
+.c-hs-off{background:color-mix(in srgb,var(--off) 22%,var(--panel));color:var(--fg);border:1px dashed var(--off)}
+.tl-row.hs .lab{background:color-mix(in srgb,var(--range) 6%,var(--panel))}
+.cbar{position:absolute;bottom:4px;border-radius:2px 2px 0 0;background:var(--sound)}
+.cbar.over{background:var(--over)}
+.cnum{position:absolute;font:600 .66rem var(--f-mono);color:var(--muted);text-align:center}
+.cap{position:absolute;left:0;right:0;border-top:1.5px dashed var(--fg);opacity:.55}
+.cap span{position:absolute;left:6px;top:-16px;font:600 .66rem var(--f-mono);color:var(--fg);background:var(--panel);padding:0 4px}
+.band{position:absolute;top:0;bottom:0;background:var(--lunch);pointer-events:none}
+.band span{position:absolute;left:4px;font:600 .64rem var(--f-mono);color:var(--off);letter-spacing:.04em}
+.cursor{position:absolute;top:0;bottom:0;width:2px;background:var(--cursor);pointer-events:none;z-index:2}
+.cursor span{position:absolute;top:2px;left:4px;font:600 .7rem var(--f-mono);color:var(--panel);background:var(--cursor);padding:1px 4px;border-radius:3px}
+.tl-aside{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;position:sticky;top:max(12px,env(safe-area-inset-top,0px))}
+.tl-aside h2{margin:0;font-size:1.4rem;display:flex;align-items:baseline;gap:10px}
+.tl-aside h2 .t{font-family:var(--f-mono);font-size:1.05rem}
+.verdict{font:600 .78rem var(--f-display);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:4px;align-self:flex-start}
+.verdict.ok{background:var(--ok-bg);color:var(--ok)}
+.verdict.over{background:var(--bad-bg);color:var(--bad)}
+.live{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.live li{display:grid;grid-template-columns:10px minmax(0,1fr);gap:8px;font-size:.85rem}
+.live li .sw{width:10px;height:10px;margin-top:4px}
+.live small{display:block;color:var(--muted);font-size:.76rem}
+.hint{color:var(--muted);font-size:.8rem;margin:0}
+.bnotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.bnote{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-size:.88rem;min-width:0}
+.bnote h3{font:700 .85rem var(--f-display);letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px;color:var(--muted)}
+.bnote p{margin:0}
+.tab-num{font-variant-numeric:tabular-nums}
+.cam-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:12px}
+.cam-stats div{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.cam-stats b{font-family:var(--f-display);font-size:1.6rem;line-height:1}
+.cam-stats span{font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.lane-bar{transition:opacity .15s}}
+@media (max-width:560px){.day{grid-template-columns:1fr}.po{text-align:left}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+/* Crew timeline (phone-first) */
+[hidden]{display:none!important}
+.mtl{display:flex;flex-direction:column;gap:10px}
+.mt-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mt-ctl2{gap:6px 12px}
+.seg{display:inline-flex;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:3px;gap:2px}
+.seg button{font:600 .9rem var(--f-display);letter-spacing:.04em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:6px;cursor:pointer;min-height:40px;line-height:1}
+.seg button small{font:400 .72rem var(--f-mono);letter-spacing:0;text-transform:none;opacity:.8;margin-left:4px}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.zoom button{min-width:44px;font-size:1.05rem}
+.zoom button[data-z="fit"]{font-size:.85rem}
+.me{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--muted)}
+.me select{min-height:40px;font-size:.95rem;font-weight:600}
+.lnk{font:600 .85rem var(--f-display);letter-spacing:.05em;text-transform:uppercase;background:none;border:0;color:var(--accent);padding:8px 4px;cursor:pointer;min-height:40px}
+.lnk.now{color:var(--cursor)}
+.seg button:focus-visible,.lnk:focus-visible,.ml:focus-visible,.mb:focus-visible,.me select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mt-legend{font-size:.8rem}
+.mt-sc{overflow:auto;max-height:72vh;max-height:72dvh;background:var(--panel);border:1px solid var(--rule);border-radius:10px;touch-action:pan-x pan-y;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;position:relative}
+.mt-chart{--pph:84;--lw:104px;position:relative;width:calc(var(--lw) + 13 * var(--pph) * 1px);user-select:none;-webkit-user-select:none}
+.mr{display:flex;min-height:46px}
+.ml{position:sticky;left:0;z-index:3;flex:none;width:var(--lw);box-sizing:border-box;background:var(--panel);border:0;border-right:1px solid var(--rule);border-bottom:1px solid var(--grid);padding:4px 22px 4px 10px;text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;justify-content:center;cursor:pointer;position:sticky}
+button.ml{appearance:none}
+.ml-n{font-weight:600;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15}
+.ml small{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chev{position:absolute;right:8px;top:50%;width:7px;height:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);transition:transform .15s}
+.ml[aria-expanded="true"] .chev{transform:translateY(-30%) rotate(-135deg)}
+.mt{position:relative;flex:none;width:calc(13 * var(--pph) * 1px);border-bottom:1px solid var(--grid);background-image:repeating-linear-gradient(to right,var(--grid) 0 1px,transparent 1px calc(var(--pph) * 1px))}
+.mr-ax{position:sticky;top:0;z-index:5;min-height:30px}
+.mr-ax .ml{z-index:6;cursor:default;font:600 .7rem var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule)}
+.mr-ax .mt{background:var(--panel);background-image:none;border-bottom:1px solid var(--rule)}
+.tk{position:absolute;top:0;bottom:0;left:calc((var(--s) - 360) / 60 * var(--pph) * 1px);border-left:1px solid var(--rule)}
+.tk span{position:absolute;top:8px;left:4px;font:600 .7rem var(--f-mono);color:var(--ink);white-space:nowrap}
+.tk-hh,.tk-q{border-left-color:var(--grid);display:none}
+.tk-hh span,.tk-q span{color:var(--muted);font-weight:400}
+.z-hh .tk-hh,.z-q .tk-q{display:block}
+.tk span b,.tk span i{font:inherit;font-style:normal}
+.z-lo .tk span i{display:none}
+.mr-g{min-height:24px}
+.mr-g .ml{font:600 .68rem var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg);cursor:default;padding:0 10px}
+.mr-g .mt{background:var(--bg);background-image:none}
+.mr.is-me .ml{box-shadow:inset 4px 0 0 var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--panel))}
+.mr.is-me .mt{background-color:color-mix(in srgb,var(--accent) 5%,transparent)}
+.mr.is-unc .ml-n{color:var(--over)}
+.mb{position:absolute;top:5px;bottom:5px;left:calc((var(--s) - 360) / 60 * var(--pph) * 1px + 1px);width:calc(var(--d) / 60 * var(--pph) * 1px - 2px);min-width:6px;border-radius:4px;font:inherit;font-size:.74rem;line-height:1.1;padding:0 6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;text-align:left}
+.mb span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;min-width:0}
+.mb.c-prep,.mb.c-comms{border-width:1.5px}
+.mb.dim{opacity:.5}
+.md{position:sticky;left:0;z-index:4;width:var(--vw,100%);box-sizing:border-box;background:var(--tint);border-bottom:1px solid var(--rule)}
+.md-in{padding:6px 10px 8px}
+.md-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.md-list li{display:grid;grid-template-columns:10px 92px minmax(0,1fr);gap:8px;align-items:baseline;padding:7px 2px;border-bottom:1px solid var(--line);cursor:pointer;font-size:.86rem}
+.md-list li:last-child{border-bottom:0}
+.md-list .sw{width:10px;height:10px;align-self:center}
+.md-t{font:600 .78rem var(--f-mono);font-variant-numeric:tabular-nums}
+.md-n b{font-weight:600}
+.md-n small{display:block;color:var(--muted);font-size:.78rem}
+.md-n small.md-cov{color:var(--sound)}
+.md-empty{color:var(--muted);font-size:.85rem;padding:4px 0}
+.mband{position:absolute;top:30px;bottom:0;left:calc(var(--lw) + (var(--s) - 360) / 60 * var(--pph) * 1px);width:calc(var(--d) / 60 * var(--pph) * 1px);background:var(--lunch);pointer-events:none;z-index:1}
+.mband span{position:sticky;top:34px;display:block;padding:2px 4px;font:600 .62rem var(--f-mono);color:var(--off);letter-spacing:.04em;white-space:nowrap;overflow:hidden}
+.mcur{position:absolute;top:0;bottom:0;left:calc(var(--lw) + (var(--s) - 360) / 60 * var(--pph) * 1px);width:2px;background:var(--cursor);pointer-events:none;z-index:2}
+.mcur span{position:sticky;top:6px;display:inline-block;margin-left:3px;font:600 .68rem var(--f-mono);color:#fff;background:var(--cursor);padding:1px 4px;border-radius:3px;z-index:7}
+.mt-live{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.mt-live summary{cursor:pointer;font:600 1.1rem var(--f-display);display:flex;align-items:center;gap:10px;flex-wrap:wrap;list-style-position:outside}
+.mt-live summary b{font-family:var(--f-mono);font-size:1rem}
+.mt-live .live{margin-top:10px}
+.mt-live li.is-me b{color:var(--accent)}
+.mt-sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:0 max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));pointer-events:none}
+.mt-sheet .sh-in{pointer-events:auto;max-width:520px;margin:0 auto;background:var(--panel);border:1px solid var(--rule);border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.25);padding:14px 16px;position:relative}
+.sh-in h3{font:700 1.3rem var(--f-display);margin:8px 36px 2px 0;line-height:1.1}
+.sh-in p{margin:6px 0 0;font-size:.9rem}
+.sh-t{font-family:var(--f-mono);color:var(--muted)}
+.sh-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:0;background:none;font-size:1.6rem;color:var(--muted);cursor:pointer}
+.sh-in .pill{font-size:.72rem}
+.sh-in .pill.c-prep,.sh-in .pill.c-comms{color:var(--ink)}
+@media (max-width:640px){
+  header h1{font-size:1.55rem}
+  .sub{font-size:.82rem}
+  .wrap{padding-block:12px 40px}
+  .seg button{padding:8px 10px}
+  .po{display:none}
+  .sub .addr{display:none}
+  nav{margin-top:10px}
+  section{padding-top:12px}
+  .mt-ctl{gap:6px}
+  .mt-ctl:first-child .seg{flex:1 1 0}
+  .mt-ctl:first-child .seg button{flex:1;padding:8px 6px}
+  .seg button small{display:none}
+  .me{flex:1 1 100%}
+  .me select{flex:1;min-width:0}
+  .mt-ctl2 .lnk{padding:8px 2px}
+}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+
+.mr.is-hs .ml{padding-left:18px;background:color-mix(in srgb,var(--range) 6%,var(--panel))}
+.mr.is-hs .ml-n{font-size:.8rem}
+.mr.is-hs{min-height:40px}
+
+@media (max-width:640px){.teams thead{display:none}.teams table,.teams tbody{display:block}.teams tr{display:block;padding:10px 12px;border-bottom:1px solid var(--line)}.teams tr:last-child{border-bottom:0}.teams td{display:block;border:0;padding:2px 0;white-space:normal!important;min-width:0!important}.teams td:first-child{font-family:var(--f-display);font-size:1.1rem}}
+
+.mr-g.is-xg .ml,.mr-g.is-xg .mt{background:color-mix(in srgb,var(--over) 10%,var(--bg));color:var(--over)}
+.mr.is-unc .ml{background:color-mix(in srgb,var(--over) 7%,var(--panel))}
+.mb.c-relief{border-width:1.5px}
+
+</style>
+<div id="app" class="wrap"></div>
+<script>
+(function(){
+var CREW=[{"id": "tim", "name": "Tim Alward", "role": "Lead", "status": "Locked"}, {"id": "andy", "name": "Andy Sankar", "role": "ENG D", "status": "Locked"}, {"id": "michal", "name": "Michal Maksymowicz", "role": "ENG E", "status": "Locked"}, {"id": "joel", "name": "Joel Tower", "role": "ENG B", "status": "Locked"}, {"id": "brandon", "name": "Brandon Dew", "role": "ENG C", "status": "Locked"}, {"id": "joshl", "name": "Josh Laemmle", "role": "ENG F", "status": "Locked"}, {"id": "dave", "name": "David Wade", "role": "ENG A", "status": "Locked"}, {"id": "rick", "name": "Rick Alexander", "role": "Floater 3", "status": "Locked"}, {"id": "adriana", "name": "Adriana Salvo", "role": "Floater 2", "status": "Locked"}, {"id": "heather", "name": "Heather Marshall", "role": "Floater 1", "status": "Locked"}, {"id": "freddie", "name": "Freddie Aponte", "role": "Comms lead", "status": "Locked"}];
+var DAYS=[
+ {d:'Fri Nov 20',k:'Travel',t:'Advance crew travels in for initial course prep. Hotel TBD from Scratch.'},
+ {d:'Sat Nov 21',k:'Prep',t:'Initial course prep with Scratch crew, PAs and some G&E. Rest of audio crew travels in.'},
+ {d:'Sun Nov 22',k:'Prep',t:'Main on-course prep day, full crew. Kit build, comms pairing, TC jam test, block schedule walkthrough.'},
+ {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Schedule v8: athletes arrive 6:30, Christmas Card 7:00–7:45, mic-up before the 7:45 ride, range warm-up 8:15. Tiger arrives 11:30. Up to 6–7 main-unit setups at once, plus up to 3 MCV setups on the ZMBZ unit. Last athletes out about 5:45 (sunset 5:45).'},
+ {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Schedule v8: P790 amateur MCV from 6:30 (sunrise 6:45), athletes arrive 7:00, first setups 7:45. No Christmas Card or range warm-up, so mic in wardrobe. Adds Haeran Ryu, Karl and amateurs; no Tiger. TP5 speed testing runs to 6:00.'},
+ {d:'Wed Nov 25',k:'Travel',t:'Travel home (half-rate travel day). Room on the 24th only on request.'}];
+function schedule(){
+ return '<p class="note">Location: Apogee Club, Hobe Sound/Indiantown FL (about 35 min north of West Palm). Dates per Maurece, Oct 30. Hotel and call times still waiting on Scratch.</p><div class="card">'+
+ DAYS.map(function(x){return '<div class="day"><div class="d">'+x.d.split(' ').slice(1).join(' ')+'<span>'+x.d.split(' ')[0]+'</span></div><div><span class="k">'+x.k+'</span><div>'+esc(x.t)+'</div></div></div>';}).join('')+'</div>';
+}
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var Board=(function(){
+const RAW = {"d1": [{"n": "TP5 DOC Cold Open (MCV)", "s": 420, "e": 450, "w": ["Rory"], "c": "mcv"}, {"n": "Christmas Card", "s": 450, "e": 495, "w": ["Scottie", "Tommy", "Collin", "Charley", "Brooke", "Rory"], "c": "range"}, {"n": "P790 Beauty Mode MCV", "s": 450, "e": 555, "w": ["AMATEURS"], "c": "mcv"}, {"n": "Range Warm Up", "s": 510, "e": 540, "w": ["Rory", "Scottie", "Tommy", "Collin", "Charley", "Brooke", "Johnson", "Brian", "Keith", "Adrian", "Matt"], "c": "range"}, {"n": "Warm Up (course)", "s": 510, "e": 540, "w": ["Grant", "Ryan"], "c": "other"}, {"n": "Social Sessions (Scottie)", "s": 540, "e": 555, "w": ["Scottie"], "c": "sound"}, {"n": "Chosen + FIF MCVs / Tee Box", "s": 555, "e": 645, "w": ["Rory"], "c": "mcv"}, {"n": "DRS First Look", "s": 555, "e": 600, "w": ["Tommy", "Grant"], "c": "sound"}, {"n": "P Series Forged (Collin)", "s": 555, "e": 645, "w": ["Collin"], "c": "sound"}, {"n": "Flight Club", "s": 555, "e": 600, "w": ["Charley", "Brooke", "Johnson"], "c": "sound"}, {"n": "Retail - Holley", "s": 555, "e": 600, "w": ["Jacob", "Michael", "James"], "c": "sound"}, {"n": "Fore Play Range Warm Up", "s": 555, "e": 600, "w": ["Fore"], "c": "range"}, {"n": "Full Bag + Ball Fitting w/ Simone", "s": 555, "e": 675, "w": ["Ryan", "Matt"], "c": "sound"}, {"n": "Doc Hold (MCV)", "s": 570, "e": 630, "w": ["Scottie"], "c": "mcv"}, {"n": "Social Sessions (Tommy)", "s": 615, "e": 630, "w": ["Tommy"], "c": "sound"}, {"n": "Retail - Wagner / CH", "s": 615, "e": 645, "w": ["Charley", "Johnson"], "c": "sound"}, {"n": "Social Sessions (Brooke)", "s": 615, "e": 690, "w": ["Brooke"], "c": "sound"}, {"n": "Range Warm Up / Social (Bridgeman, Thor)", "s": 615, "e": 660, "w": ["Jacob", "Michael"], "c": "sound"}, {"n": "DRS First Look (Fore Play)", "s": 630, "e": 675, "w": ["Fore", "Brian", "Adrian"], "c": "sound"}, {"n": "Lie Detectors - Irons", "s": 645, "e": 675, "w": ["Scottie", "Tommy"], "c": "sound"}, {"n": "TP5 MCV x2", "s": 660, "e": 720, "w": ["Rory"], "c": "mcv"}, {"n": "Studio Photography", "s": 660, "e": 675, "w": ["Collin"], "c": "other"}, {"n": "TCP - Golf Ball", "s": 675, "e": 735, "w": ["Jacob", "Johnson"], "c": "sound"}, {"n": "Tommy's Fairway Clinic", "s": 690, "e": 735, "w": ["Scottie", "Tommy", "Michael", "Adrian"], "c": "sound"}, {"n": "FIF MCV / Tee Box", "s": 690, "e": 750, "w": ["Collin"], "c": "mcv"}, {"n": "Ball Fitting w/ Simone", "s": 690, "e": 735, "w": ["Fore", "Matt"], "c": "sound"}, {"n": "Social Sessions (Ruffels)", "s": 690, "e": 705, "w": ["Ryan"], "c": "sound"}, {"n": "Lie Detectors", "s": 705, "e": 750, "w": ["Charley", "Brooke"], "c": "sound"}, {"n": "Studio Photography", "s": 720, "e": 750, "w": ["Ryan"], "c": "other"}, {"n": "TW Warm Up", "s": 735, "e": 750, "w": ["Tiger"], "c": "other"}, {"n": "Eras Tour - Ball", "s": 735, "e": 810, "w": ["Rory", "Grant", "Brian", "Keith"], "c": "sound"}, {"n": "Tiger Talks - Driver", "s": 750, "e": 780, "w": ["Tiger", "Scottie"], "c": "sound"}, {"n": "Fore Play - Chase the Ace", "s": 750, "e": 825, "w": ["Jacob", "Michael", "Fore"], "c": "sound"}, {"n": "Flight Club", "s": 765, "e": 810, "w": ["Tommy", "Collin", "Johnson"], "c": "sound"}, {"n": "Ruffels w/ Hull / Henderson", "s": 765, "e": 810, "w": ["Ryan", "Charley", "Brooke"], "c": "sound"}, {"n": "Tiger Talks - Escape Artist", "s": 780, "e": 810, "w": ["Tiger", "Scottie"], "c": "sound"}, {"n": "Eras Tour - Driver", "s": 825, "e": 900, "w": ["Tiger", "Rory", "Scottie", "Brian", "Keith"], "c": "sound"}, {"n": "TP5 & Fairways DOC (Tommy)", "s": 825, "e": 900, "w": ["Tommy"], "c": "sound"}, {"n": "P-Series First Look", "s": 825, "e": 900, "w": ["Collin", "Ryan", "Matt"], "c": "sound"}, {"n": "Social Sessions (Grant)", "s": 825, "e": 885, "w": ["Grant"], "c": "sound"}, {"n": "Chosen MCV / Tee Box", "s": 840, "e": 900, "w": ["Charley"], "c": "mcv"}, {"n": "Studio Photography", "s": 840, "e": 870, "w": ["Brooke"], "c": "other"}, {"n": "Retail - MT", "s": 840, "e": 870, "w": ["Michael", "Johnson"], "c": "sound"}, {"n": "Canada", "s": 885, "e": 960, "w": ["Brooke"], "c": "sound"}, {"n": "Bridgeman vs Riggs @ PopStroke (no audio)", "s": 885, "e": 1065, "w": ["Jacob", "Fore"], "c": "other"}, {"n": "Studio Photography", "s": 885, "e": 915, "w": ["Michael"], "c": "other"}, {"n": "Collin / Grant TP5 Skills", "s": 900, "e": 990, "w": ["Grant", "Collin", "Adrian"], "c": "sound"}, {"n": "Social Sessions (Ruffels)", "s": 900, "e": 915, "w": ["Ryan"], "c": "sound"}, {"n": "Flight Club", "s": 915, "e": 960, "w": ["Tiger", "Scottie", "Johnson"], "c": "sound"}, {"n": "Studio Photography", "s": 915, "e": 930, "w": ["Rory"], "c": "other"}, {"n": "Bag Swap Match", "s": 915, "e": 1050, "w": ["Tommy", "Charley"], "c": "sound"}, {"n": "Ruffels w/ Thor", "s": 930, "e": 975, "w": ["Michael", "Ryan"], "c": "sound"}, {"n": "Social Sessions (Tiger)", "s": 975, "e": 990, "w": ["Tiger"], "c": "sound"}, {"n": "Chosen + FIF MCV / Tee Box", "s": 975, "e": 1065, "w": ["Scottie"], "c": "mcv"}, {"n": "TCP - Driver", "s": 975, "e": 1050, "w": ["Johnson", "Matt"], "c": "sound"}, {"n": "TP5 Year in Review (Collin)", "s": 990, "e": 1050, "w": ["Collin"], "c": "sound"}, {"n": "Perfect 9", "s": 990, "e": 1080, "w": ["Michael", "Grant", "Ryan"], "c": "sound"}], "d2": [{"n": "P790 Beauty Mode MCV", "s": 450, "e": 675, "w": ["AMATEURS"], "c": "mcv"}, {"n": "1 Club / Bag Swap Match - CA/EU", "s": 465, "e": 570, "w": ["Charley", "Brooke"], "c": "sound"}, {"n": "Chosen + FIF MCVs Tee Box", "s": 465, "e": 540, "w": ["Tommy"], "c": "mcv"}, {"n": "DOT vs. NOT", "s": 465, "e": 585, "w": ["Collin", "Michael", "Grant", "Ryan"], "c": "sound"}, {"n": "Korea", "s": 465, "e": 570, "w": ["Haeran"], "c": "sound"}, {"n": "Retail - SS (Wagner)", "s": 465, "e": 495, "w": ["Scottie", "Johnson"], "c": "sound"}, {"n": "Fore Play w/ Scheffler", "s": 510, "e": 540, "w": ["Scottie", "Fore"], "c": "sound"}, {"n": "TCP - Irons", "s": 510, "e": 600, "w": ["Johnson", "Matt"], "c": "sound"}, {"n": "Rotation Station", "s": 555, "e": 570, "w": ["Fore"], "c": "other"}, {"n": "Social Sessions (Tommy)", "s": 555, "e": 585, "w": ["Tommy"], "c": "sound"}, {"n": "Studio Photography", "s": 555, "e": 585, "w": ["Scottie"], "c": "other"}, {"n": "Canada (Brady, Mapes, Jared)", "s": 585, "e": 600, "w": ["Brooke"], "c": "sound"}, {"n": "FIF MCV Tee Box", "s": 585, "e": 630, "w": ["Charley", "Haeran"], "c": "mcv"}, {"n": "2v2v2 w/ FP Gamers", "s": 600, "e": 645, "w": ["Tommy", "Jacob", "Michael", "Fore"], "c": "sound"}, {"n": "Bag Swap Match", "s": 600, "e": 645, "w": ["Scottie", "Collin"], "c": "sound"}, {"n": "Social Sessions (Grant, Ruffels)", "s": 600, "e": 645, "w": ["Grant", "Ryan"], "c": "sound"}, {"n": "Retail - BH (Wagner)", "s": 615, "e": 645, "w": ["Brooke", "Johnson"], "c": "sound"}, {"n": "James / Spider (no film)", "s": 645, "e": 690, "w": ["Haeran", "James"], "c": "other"}, {"n": "2v2 Match / SKY + team", "s": 660, "e": 780, "w": ["Scottie", "Tommy", "Grant", "Ryan"], "c": "sound"}, {"n": "Fore Play w/ Thor", "s": 660, "e": 780, "w": ["Michael", "Fore"], "c": "sound"}, {"n": "Retail - CM (Wagner)", "s": 660, "e": 690, "w": ["Collin", "Johnson"], "c": "sound"}, {"n": "Studio Photography", "s": 660, "e": 690, "w": ["Charley"], "c": "other"}, {"n": "TBD (Bridgeman)", "s": 660, "e": 690, "w": ["Jacob"], "c": "other"}, {"n": "FIF MCV Tee Box", "s": 675, "e": 735, "w": ["Brooke"], "c": "mcv"}, {"n": "Flight Club", "s": 705, "e": 750, "w": ["Charley", "Haeran", "Adrian"], "c": "sound"}, {"n": "Studio Photography", "s": 705, "e": 735, "w": ["Jacob"], "c": "other"}, {"n": "TP5 DOC & Family Testing", "s": 705, "e": 780, "w": ["Collin"], "c": "sound"}, {"n": "Canada (Austin, Aiden, Brady)", "s": 750, "e": 795, "w": ["Brooke"], "c": "sound"}, {"n": "Retail - JB (Wagner)", "s": 750, "e": 780, "w": ["Jacob", "Johnson"], "c": "sound"}, {"n": "Social Sessions - EU (Charley)", "s": 765, "e": 795, "w": ["Charley"], "c": "sound"}, {"n": "Studio Photography", "s": 765, "e": 795, "w": ["Haeran"], "c": "other"}, {"n": "Flight Club", "s": 795, "e": 840, "w": ["Collin", "Michael", "Johnson"], "c": "sound"}, {"n": "Mini Camp v2", "s": 795, "e": 840, "w": ["Tommy", "Ryan", "Adrian"], "c": "sound"}, {"n": "CG vs. MOI putter fitting", "s": 810, "e": 855, "w": ["Jacob", "James"], "c": "sound"}, {"n": "LPGA (Fore Play)", "s": 810, "e": 945, "w": ["Charley", "Brooke", "Haeran", "Fore"], "c": "sound"}, {"n": "Studio Photography", "s": 810, "e": 840, "w": ["Grant"], "c": "other"}, {"n": "Chosen MCV Tee Box", "s": 855, "e": 915, "w": ["Grant", "Ryan"], "c": "mcv"}, {"n": "Retail - TF (Wagner)", "s": 855, "e": 885, "w": ["Tommy", "Johnson"], "c": "sound"}, {"n": "TP5 Speed Testing", "s": 870, "e": 930, "w": ["Jacob", "Michael"], "c": "other"}, {"n": "Studio Photography", "s": 900, "e": 930, "w": ["Tommy"], "c": "other"}, {"n": "P790 Beauty Mode MCV", "s": 945, "e": 1035, "w": ["AMATEURS"], "c": "mcv"}, {"n": "Rotation Station", "s": 945, "e": 960, "w": ["Jacob", "Michael"], "c": "other"}, {"n": "Ruffels w/ Tommy", "s": 945, "e": 975, "w": ["Tommy", "Ryan"], "c": "sound"}, {"n": "Korea", "s": 960, "e": 1035, "w": ["Haeran"], "c": "sound"}, {"n": "Team TM vs. Impossible Shots", "s": 975, "e": 1035, "w": ["Jacob", "Michael"], "c": "sound"}, {"n": "TP5 Speed Testing", "s": 1050, "e": 1080, "w": ["Jacob", "Michael"], "c": "other"}]};
+const NAMES={Fore:"Fore Play",Michael:"Thor",Jacob:"Bridgeman",Ryan:"Ruffels",Johnson:"Wagner",AMATEURS:"Amateurs",Brian:"Bazzel",Keith:"Sbarbaro",Adrian:"Rietveld",Matt:"Simone",James:"Holley"};
+const T0=6*60, T1=19*60;
+const META={
+  d1:{peak:810,bands:[[735,795,"LUNCH"]],notes:[
+    ["Range block","Christmas Card 07:30–08:15, mic-up 08:15–08:30, Range Warm Up 08:30–09:00 with 6 pros + Wagner + 4 TaylorMade staff (11 talent on the Scorpio). Hubs 1–5 linked."],
+    ["Rebuilt Nov 17","From Scratch's athlete columns (team tags). The team columns on Scratch's sheet still show the old blocks. Untagged setups sit in the red Extra lanes until Scratch assigns them."],
+    ["Off-site","Bridgeman vs Riggs at PopStroke 14:45–17:45 has no audio; de-mic after Chase the Ace."]]},
+  d2:{peak:465,bands:[[690,870,"LUNCH (30 MIN EACH)"]],notes:[
+    ["Rebuilt Nov 18","Day 2 rebuilt from Scratch's athlete columns and team tags. Nelly is off Day 2. Bridgeman arrives 9:15, Fore Play 7:45, everyone else 7:00."],
+    ["Crunch","7:45: Korea, DOT vs. NOT, Retail, the CA/EU Bag Swap and Fore Play prep all start together, right after the breakfast mic-up."],
+    ["No team tag","1 Club / Bag Swap CA/EU, both Canadas, the 2v2 SKY match, CG vs. MOI and two socials have no unit. They sit in the red extra lanes. MCVs, Studio Photography, TP5 Speed Testing and Rotation Station are not ours."]]}
+};
+const ORDER=["range","sound","offsite","mcv","other"];
+const GROUPLAB={range:"Group / range",sound:"Sound setups",offsite:"Off-site",mcv:"MCV spots",other:"Other units"};
+const talks=c=>c==="sound"||c==="offsite"||c==="range";
+const fmt=m=>String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+const who=w=>w.map(x=>NAMES[x]||x);
+const h=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function prep(list){
+  const by={};
+  list.forEach(b=>{(by[b.n]=by[b.n]||[]).push({...b,w:[...b.w]})});
+  const out=[];
+  Object.values(by).forEach(arr=>{
+    arr.sort((a,b)=>a.s-b.s);
+    const m=[];
+    arr.forEach(b=>{const l=m[m.length-1]; if(l&&b.s<l.e&&b.s===l.s){l.e=Math.max(l.e,b.e);l.w=[...new Set([...l.w,...b.w])]} else m.push(b)});
+    out.push(...m);
+  });
+  return out;
+}
+let day="d1", cur=META.d1.peak, VIEW="mix", data={};
+for(const k in RAW) RAW[k].forEach(b=>{if(b.n.startsWith("Social Sessions"))b.c="sound"});
+for(const k in RAW) data[k]=prep(RAW[k]);
+try{const d=localStorage.getItem("tm26tl_day");if(d&&data[d]){day=d;cur=META[d].peak}const v=localStorage.getItem("tm26tl_view");if(v==="mix"||v==="set")VIEW=v}catch(e){}
+
+/* ---------- crew from the Roster tab ---------- */
+const BUF=15;
+let CREW=[],MIXERS=[],SOCIAL=[],A2S=[],COMMS=[],A1=null,TEAMS=6,FIXED={},PINNED={};
+function kindOf(role){
+  if(/^ENG /.test(role))return "mixer";
+  if(role==="Social mixer")return "social";
+  if(/^Floater/.test(role))return "a2";
+  if(role==="Comms lead")return "comms";
+  if(role==="Lead")return "a1";
+  return null;
+}
+function buildCrew(crew){
+  const rank={mixer:0,social:1,a2:2,comms:3,a1:4};
+  CREW=crew.filter(c=>c.status!=="Out"&&kindOf(c.role)).map(c=>({id:c.id,name:c.name,role:c.role,status:c.status,kind:kindOf(c.role)}))
+    .sort((a,b)=>rank[a.kind]-rank[b.kind]||a.role.localeCompare(b.role));
+  MIXERS=CREW.filter(c=>c.kind==="mixer").map(c=>c.id);
+  SOCIAL=CREW.filter(c=>c.kind==="social").map(c=>c.id);
+  A2S=CREW.filter(c=>c.kind==="a2").map(c=>c.id);
+  COMMS=CREW.filter(c=>c.kind==="comms").map(c=>c.id);
+  A1=(CREW.find(c=>c.kind==="a1")||{}).id||null;
+  TEAMS=MIXERS.length||1;
+  CREW.forEach(c=>{
+    c.desc=unitOf(c.role)?"Unit "+unitOf(c.role).name+" · "+c.role:c.kind==="mixer"?"Mixer · "+c.role+" · no unit":c.kind==="social"?"Social mixer":c.kind==="a2"?"A2 · mic-ups, changes, wraps":c.kind==="comms"?"Comms · Roaming Hub + field Hubs":"A1 · range, TC, floater";
+    if(c.status!=="Locked")c.desc+=" · "+c.status;
+  });
+  const mic=[...MIXERS,...SOCIAL.slice(0,1)];
+  const byUnit=id=>CREW.filter(c=>{const u=unitOf(c.role);return u&&u.id===id}).map(c=>c.id);
+  const FP=byUnit("foreplay"),BRAVO=byUnit("bravo"),CHAR=byUnit("charlie");
+  /* Day 1 morning (Tim, Nov 18): Tim, Joel and the A2s at Christmas Card; every other mixer + Freddie at the range */
+  const CC=[...(A1?[A1]:[]),...BRAVO,...A2S];
+  const RANGEMIX=MIXERS.filter(id=>!BRAVO.includes(id));
+  FIXED={
+    d1:[
+      {who:CC,n:"Christmas Card (Tim, Joel, Heather, Adriana, Rick)",s:450,e:495,c:"range",w:[]},
+      {who:RANGEMIX,n:"At the range from 7:30: mic Wagner, TM staff, Grant, Ruffels as they arrive; set up to receive",s:450,e:510,c:"prep",w:[]},
+      {who:[...(A1?[A1]:[]),...BRAVO],n:"Mic-up 6 pros right after Christmas Card (with the A2s)",s:495,e:510,c:"prep",w:[]},
+      {who:CHAR,n:"Range master: range Scorpio, 16 Wisy RX + comms send to the linked Hubs (11 talent). Then takes his own kit to Charlie",s:510,e:540,c:"range",w:[]},
+      {who:FP,n:"Mic-up Bridgeman, Thor (with A2s)",s:525,e:540,c:"prep",w:[]},
+      {who:COMMS,n:"Comms: at the range from 6:30 setting up the linked Hubs + Scorpio feed, then team Hubs",s:390,e:1110,c:"comms",w:[]}
+    ],
+    d2:[
+      {who:mic,n:"Mic-up 10 pros at breakfast 7:00–7:30 (everyone rolls 7:45). Every mixer on a station with the A2s",s:420,e:450,c:"prep",w:[]},
+      {who:COMMS,n:"Comms: team Hubs (Bravo on Hubs 2 + 5)",s:420,e:1080,c:"comms",w:[]}
+    ]
+  };
+  PINNED={};
+}
+const A2EV={
+  d1:[
+    ["Mic-up 6 pros after Christmas Card",495,510,["Rory","Scottie","Tommy","Collin","Charley","Brooke"],"mic",3],
+    ["Mic-up Bridgeman, Thor at arrival (with Andy)",525,540,["Jacob","Michael"],"mic",1],
+    ["Mic-up Tiger",705,720,["Tiger"],"mic",1],
+    ["Wrap Bridgeman before PopStroke (no audio)",825,840,["Jacob"],"wrap",1],
+    ["Wrap: de-mic, collect TX",900,915,["Brian","Keith"],"wrap",1],
+    ["Wrap: de-mic, collect TX",930,945,["Rory"],"wrap",1],
+    ["Wrap: de-mic, collect TX",960,975,["Brooke"],"wrap",1],
+    ["Wrap: de-mic, collect TX",975,990,["Adrian"],"wrap",1],
+    ["Wrap: de-mic, collect TX",990,1005,["Tiger"],"wrap",1],
+    ["Wrap: de-mic, collect TX",1050,1065,["Tommy","Collin","Charley","Johnson","Matt"],"wrap",2],
+    ["Wrap: de-mic, collect TX",1065,1080,["Scottie"],"wrap",1],
+    ["Wrap: de-mic, collect TX",1080,1095,["Michael","Grant","Ryan"],"wrap",1]
+  ],
+  d2:[
+    ["Mic-up 10 pros at breakfast",420,450,["Scottie","Tommy","Collin","Charley","Brooke","Michael","Haeran","Grant","Ryan","Johnson"],"mic",4],
+    ["Mic-up Simone for TCP Irons",495,510,["Matt"],"mic",1],
+    ["Mic-up Bridgeman at arrival",570,585,["Jacob"],"mic",1],
+    ["Wrap: de-mic, collect TX",780,795,["Scottie"],"wrap",1],
+    ["Wrap: de-mic, collect TX",840,855,["Collin"],"wrap",1],
+    ["Wrap: de-mic, collect TX",885,900,["Johnson"],"wrap",1],
+    ["Wrap: de-mic, collect TX",945,960,["Charley","Brooke"],"wrap",1],
+    ["Wrap: de-mic, collect TX",975,990,["Grant","Tommy","Ryan"],"wrap",1],
+    ["Wrap: de-mic, collect TX",1035,1050,["Jacob","Michael","Haeran"],"wrap",1]
+  ]
+};
+/* Scratch's camera units from "TM262151 2026 Crew Assignments" (2026 DAY 1 / DAY 2, columns Alpha–Youtube, read Nov 9).
+   One mixer and one headset system per unit, all day. Mixers never leave their unit. Edit here when Scratch changes blocks. */
+const UNITS=[
+  {id:"alpha",name:"Alpha",role:"ENG A",hub:"Hub 1 + 8S kit",hs:"8 headsets",crewN:7,what:"Scratch label: Flight Club / Fairway Jesus / Canada. Blocks: Flight Club ×3, Lie Detectors, Fairway Clinic, Bag Swap; Day 2 #1 vs #1, LPGA Match, Chase the Ace",cams:"A Gary Manske (DTL), B John Spinnato (Ronin), C Dom Easter (FX6), D Matt Andrew (FX6), G Justin Naro (catch cam) · 1st AC Andres Uribe · wireless/video Carlos Cuervo"},
+  {id:"bravo",name:"Bravo",role:"ENG B",hub:"Hubs 2 + 5 linked",hs:"16 headsets",crewN:10,what:"Scratch label: Era's Tour / Tiger Talks. Blocks: Rory Mini M2, Tiger Talks ×2, TCP Golf Ball, Eras Tour Driver; Day 2 Grant vs Ruffels, TCP Driver, James/Spider",cams:"A Paul Berner (DTL), B Michael Mapes (Ronin), C Jackson Van Meter, D Gordon Casey, catch cam Jared Clemons, Ember Nick Solomon, jib Xavier Mercado + Cody Alderman · 1st AC Federico Hanozet · wireless/video Carlos Cuervo"},
+  {id:"charlie",name:"Charlie",role:"ENG C",hub:"Hub 3 + 8S kit",hs:"8 headsets",crewN:5,what:"Scratch label: Retail / Training. Blocks: Ruffels 3-ball, Canada, Eras Tour Ball; Day 2 Retail, putter fitting, Canada, Korea, Lie Detectors",cams:"A Matt Wilson (DTL/Ronin), B David De Souza (FX6), C Mike Sauers (FX6/Ronin), Giancarlo Zevallos (GoPro/Ember/drone, shared) · 1st AC Chloe Irigoyen"},
+  {id:"delta",name:"Delta",role:"ENG E",hub:"Hub 4 + 8S kit",hs:"8 headsets",crewN:4,what:"Day 1 (Scratch, Nov 19): Range, DRS 9:15, Lie Detectors Irons 10:45 (Scottie, Tommy) and 11:45 (Charley, Brooke), P-Series First Look 1:45, Bag Swap 3:15–5:30. Socials moved to Scratch\'s new Social Sessions column. Day 2 DOT vs. NOT, Bag Swap",cams:"Christian Carnahan, Cam Schultz, Justin Charles, Gil (positions not filled in yet)"},
+  {id:"foreplay",name:"Fore Play",role:"ENG D",hub:"No comms, TC only",hs:"—",nocomms:true,what:"Dedicated mixer (Maurece, Nov 11): 3-Ball Match, P-Series, Greenskeepers, Fix It, DRS. PopStroke off-site has no audio",cams:"Fore Play's own cameras · counts TBD, we feed TC"},
+  {id:"youtube",name:"YouTube",role:"ENG F",hub:"No comms, TC only",hs:"—",nocomms:true,what:"Dedicated mixer (Maurece, Nov 11): TP5 Skills, Match, P-Series, DRS",cams:"Creator cameras · counts TBD, we feed TC"}
+];
+/* Audio Scratch wants that no unit mixer can take (Maurece, Nov 11). Shown in red as extra-mixer lanes. */
+const EXTRA={
+  d1:[[540, 555, "Social Sessions (Scottie)"], [555, 645, "P Series Forged (Collin)"], [615, 705, "Social Sessions (Tommy 10:15, Brooke + Bridgeman + Thor 10:30, Ruffels 11:30)"], [825, 885, "Social Sessions (Grant)"], [825, 900, "TP5 & Fairways DOC (Tommy)"], [900, 915, "Social Sessions (Ruffels)"], [975, 990, "Social Sessions (Tiger)"], [990, 1050, "TP5 Year in Review (Collin)"]],
+  d2:[[555,585,"Social Sessions (Tommy)"],[600,645,"Social Sessions (Grant, Ruffels)"],[765,795,"Social Sessions - EU (Charley)"],[705,780,"TP5 DOC & Family Testing (Collin; DOC unit or MCV?)"],[750,795,"Canada (Brooke; Austin, Aiden, Brady; Scratch: Floaters / Undetermined)"],[810,855,"CG vs. MOI putter fitting (Brady + Brooke; no team tag)"]]
+};
+const UBLK={
+  d1:{
+    alpha:[[510, 540, "Range Warm Up"], [690, 735, "Tommy's Fairway Clinic"], [750, 780, "Tiger Talks - Driver"], [780, 810, "Tiger Talks - Escape Artist"], [915, 960, "Flight Club"]],
+    bravo:[[510, 525, "Range Warm Up"], [525, 540, "Rory Mini M2"], [555, 600, "Flight Club"], [735, 810, "Eras Tour - Ball"], [825, 900, "Eras Tour - Driver"], [900, 990, "Collin / Grant TP5 Skills (Mapes A cam)"]],
+    charlie:[[555, 600, "Retail - Holley"], [615, 645, "Retail - Wagner / CH"], [675, 735, "TCP - Golf Ball"], [765, 810, "Flight Club"], [840, 870, "Retail - MT"], [885, 960, "Canada"], [975, 1050, "TCP - Driver"]],
+    delta:[[510, 540, "Range Warm Up"], [555, 600, "DRS First Look"], [645, 675, "Lie Detectors - Irons (Scottie, Tommy)"], [705, 750, "Lie Detectors - Irons (Charley, Brooke)"], [825, 900, "P-Series First Look"], [915, 1050, "Bag Swap Match"]],
+    foreplay:[[555, 600, "Fore Play Range Warm Up"], [630, 675, "DRS First Look (Fore Play)"], [690, 735, "Ball Fitting w/ Simone"], [750, 825, "Fore Play - Chase the Ace"]],
+    youtube:[[555, 675, "Full Bag + Ball Fitting w/ Simone"], [765, 810, "Ruffels w/ Hull / Henderson"], [930, 975, "Ruffels w/ Thor"], [990, 1080, "Perfect 9 (Ruffels crew, Brady, Naro)"]],
+    echo:[]
+  },
+  d2:{
+    alpha:[[465,570,"Korea (Haeran)"],[705,750,"Flight Club (Charley, Haeran, Rietveld)"],[795,840,"Flight Club (Collin, Thor, Wagner)"],[960,1035,"Korea (Haeran)"]],
+    bravo:[[465,570,"1 Club / Bag Swap Match - CA/EU (Brady, Mapes, Jared)"],[585,600,"Canada (Brooke; Brady, Mapes, Jared)"],[795,840,"Mini Camp v2"],[975,1035,"Team TM vs. Impossible Shots"]],
+    charlie:[[465,495,"Retail - SS (Wagner)"],[510,600,"TCP - Irons"],[615,645,"Retail - BH (Wagner)"],[660,690,"Retail - CM (Wagner)"],[750,780,"Retail - JB (Wagner)"],[855,885,"Retail - TF (Wagner)"]],
+    delta:[[465,585,"DOT vs. NOT (+ Naro)"],[600,645,"Bag Swap Match"],[660,780,"2v2 Match / SKY + team"]],
+    foreplay:[[510,540,"Fore Play w/ Scheffler"],[600,645,"2v2v2 w/ FP Gamers"],[660,780,"Fore Play w/ Thor"],[810,945,"LPGA (Fore Play)"]],
+    youtube:[[945,975,"Ruffels w/ Tommy"]],
+    echo:[[555,570,"Rotation Station"],[945,960,"Rotation Station"]]
+  }
+};
+const unitOf=role=>UNITS.find(u=>u.role===role);
+function talentFor(d,n,s,e){const key=n.replace(/ \(.*$/,"").replace(/\?$/,"").toLowerCase();const m=data[d].filter(b=>b.n.toLowerCase().startsWith(key.slice(0,12))&&b.s<e&&b.e>s);return [...new Set(m.flatMap(b=>b.w))];}
+function unitBlocks(d,uid){return (UBLK[d][uid]||[]).map(([s,e,n])=>({n,s,e,w:talentFor(d,n,s,e),c:/^Range/.test(n)?"range":/PopStroke/.test(n)?"offsite":/^Golden/.test(n)?"other":"sound",unit:uid}));}
+function teamRows(d){
+  return UNITS.map((u,i)=>{const c=CREW.find(x=>x.role===u.role);return {...u,num:String(i+1),mixer:c||null,hubNow:d==="d1"&&u.hubD1?u.hubD1:u.hub};});
+}
+function commsTeams(d,lanes){
+  const out=[];
+  if(d==="d1")out.push({id:"hs-range",lab:"Range · linked team Hubs",short:"Range",sub:"Hubs 1–5 linked, program follows the main Hub · 40 headsets · unplug at 08:45",bars:[{n:"Range: Christmas Card + Warm Up",s:420,e:525,w:[],c:"hs",fixed:true,hs:true}]});
+  teamRows(d).filter(t=>!t.nocomms).forEach(t=>{
+    const who=t.mixer?t.mixer.name.split(" ")[0]:"no mixer";
+    out.push({id:"hs-"+t.id,lab:t.name,short:t.name,sub:who+" · "+t.hubNow+" · "+t.hs+(t.crewN?" · "+t.crewN+" camera on comms":""),bars:unitBlocks(d,t.id).filter(b=>b.c!=="range").map(b=>({...b,c:b.c==="offsite"?"hs-off":"hs",fixed:true,hs:true}))});
+  });
+  return out;
+}
+function camTeams(crew){buildCrew(crew);return {teams:teamRows("d1"),none:"Echo (Rotation Station, Ember + Phantom) and Studio Photography are MOS per Maurece; no mixer, no TC on the high-speed rigs. Fore Play and YouTube get timecode but no comms."};}
+function lunchGap(items){
+  const W0=690,W1=870;let t=W0,best=0;
+  items.filter(b=>b.c!=="lunch"&&b.e>W0&&b.s<W1).sort((a,b)=>a.s-b.s).forEach(b=>{best=Math.max(best,Math.min(b.s,W1)-t);t=Math.max(t,b.e)});
+  return Math.max(best,W1-t);
+}
+function coverage(d){
+  const lanes={};CREW.forEach(c=>lanes[c.id]=[]);const reliefAt={};
+  const busyTo={};CREW.forEach(c=>busyTo[c.id]=-999);
+  FIXED[d].forEach(f=>f.who.forEach(id=>{if(!lanes[id])return;lanes[id].push({...f,fixed:true});busyTo[id]=Math.max(busyTo[id],f.e-BUF)}));
+  const unc=[];
+  const mos=unitBlocks(d,"echo").map(b=>({...b,c:"mcv"}));
+  UNITS.forEach(u=>{const c=CREW.find(x=>x.role===u.role);const bl=unitBlocks(d,u.id);
+    if(!c){bl.filter(b=>b.c!=="range").forEach(b=>unc.push({...b,n:u.name+": "+b.n}));return}
+    bl.forEach(b=>lanes[c.id].push(b));});
+  const last={};A2S.forEach(x=>last[x]=-999);
+  const freeAt=(id,s,e)=>!lanes[id].some(x=>x.s<e&&x.e>s);
+  A2EV[d].forEach(([n,s,e,w,k,need])=>{
+    const ev={n,s,e,w,c:k==="mic"?"prep":k==="offsite"?"offsite":"a2",fixed:true,a2:k};
+    if(k==="offsite"){const m=Object.keys(lanes).find(id=>lanes[id].some(x=>x.c==="offsite"&&x.s<e&&x.e>=s));if(m)lanes[m].push(ev);return}
+    const pool=A2S.filter(id=>freeAt(id,s,e)).sort((a,b)=>last[a]-last[b]);
+    const take=pool.slice(0,need);
+    if(take.length<need&&A1&&freeAt(A1,s,e))take.push(A1);
+    take.forEach(id=>{lanes[id].push(ev);if(id in last)last[id]=s});
+    if(take.length<need)unc.push({...ev,n:n+" (short "+(need-take.length)+" A2)"});
+  });
+  /* extra mixer needs + lunch relief, packed into as few extra-mixer lanes as possible */
+  const need=EXTRA[d].map(([s,e,n])=>({n,s,e,w:talentFor(d,n,s,e),c:"unc",need:"mix"}));
+  const xl=[];const fits=(L,b)=>!L.some(x=>x.s<b.e+BUF&&x.e+BUF>b.s);
+  const place=b=>{let L=xl.find(L=>!L.social&&fits(L,b));if(!L){L=[];xl.push(L)}L.push(b)};
+  const SOC=need.filter(b=>/^Social Sessions/.test(b.n)).sort((a,b)=>a.s-b.s);if(SOC.length){const L0=[];SOC.forEach(b=>L0.push(b));L0.social=true;xl.push(L0)}
+  need.filter(b=>!/^Social Sessions/.test(b.n)).sort((a,b)=>a.s-b.s).forEach(b=>{let L=xl.find(L=>!L.social&&fits(L,b));if(!L){L=[];xl.push(L)}L.push(b)});
+  CREW.filter(c=>c.kind==="mixer").forEach(c=>{
+    if(lunchGap(lanes[c.id])>=30)return;
+    const u=unitOf(c.role);let pick=null;
+    for(let t=690;t<=840&&!pick;t+=15){const b={n:"Lunch relief: "+c.name.split(" ")[0]+(u?" ("+u.name+")":""),s:t,e:t+30,w:[],c:"relief",need:"relief",fixed:true};
+      if(lanes[c.id].some(x=>!x.fixed&&x.s<=t&&x.e>=t+30)&&xl.some(L=>fits(L,b)))pick=b;}
+    if(!pick)for(let t=690;t<=840&&!pick;t+=15){if(lanes[c.id].some(x=>!x.fixed&&x.s<=t&&x.e>=t+30))pick={n:"Lunch relief: "+c.name.split(" ")[0]+(u?" ("+u.name+")":""),s:t,e:t+30,w:[],c:"relief",need:"relief",fixed:true};}
+    if(pick){place(pick);reliefAt[c.id]=pick.s}
+  });
+  /* every op gets a 30 min lunch (Tim, Nov 18): first free 30 min between 11:30 and 2:30, A2s staggered; relief time if no gap */
+  const LL=[];const lunchBlk=(s)=>({n:"Lunch (30 min)",s,e:s+30,w:[],c:"lunch",fixed:true});
+  CREW.filter(c=>lanes[c.id]).forEach(c=>{
+    const L=lanes[c.id];const CM=c.kind==="comms";const free=t=>!L.some(x=>!(CM&&x.c==="comms")&&x.s<t+30&&x.e>t);let t0=null;
+    if(c.kind==="mixer"&&reliefAt[c.id]!=null)t0=reliefAt[c.id];
+    if(t0==null){const iA2=c.kind!=="mixer";for(let t=690;t<=840&&t0==null;t+=15){if(free(t)&&!(iA2&&LL.some(u=>u<t+30&&u+30>t)))t0=t}}
+    if(t0==null)for(let t=690;t<=840&&t0==null;t+=15)if(free(t))t0=t;
+    if(t0!=null){const lb=lunchBlk(t0);if(CM)lb.n="Lunch (30 min) · once comms are out and working";L.push(lb);if(c.kind!=="mixer")LL.push(t0)}
+  });
+  xl.forEach(L=>L.sort((a,b)=>a.s-b.s));
+  return {lanes,unc:[...unc,...xl.flat()],a2short:unc,extras:xl,mos};
+}
+
+let chart,root;
+const pct=m=>((m-T0)/(T1-T0)*100)+"%";
+const $=id=>root.querySelector("#"+id);
+
+function draw(){
+  const bars=data[day];
+  chart.innerHTML="";
+  const mk=(cls,lab)=>{const r=document.createElement("div");r.className="tl-row "+cls;r.innerHTML=`<div class="lab">${lab}</div><div class="track"></div>`;chart.appendChild(r);return r.querySelector(".track")};
+  const ax=mk("axis","<b style='color:var(--muted);font-weight:500'>Time</b>");
+  for(let m=T0;m<=T1;m+=60){const t=document.createElement("div");t.className="tick";t.style.left=pct(m);t.innerHTML=`<span>${fmt(m)}</span>`;ax.appendChild(t)}
+  const ct=mk("cnt",`<b>Setups needing sound<br><span style='font-weight:400;color:var(--muted)'>vs ${TEAMS} mixers</span></b>`);
+  let maxc=0; const counts=[];
+  const CV0=coverage(day);const CNT=[...Object.values(CV0.lanes).flat().filter(b=>!b.fixed&&(b.c==="sound"||b.c==="offsite")),...CV0.extras.flat().filter(b=>b.need==="mix")];
+  for(let m=T0;m<T1;m+=15){const n=CNT.filter(b=>b.s<=m&&b.e>m).length;counts.push([m,n]);maxc=Math.max(maxc,n)}
+  const H=52, scale=H/Math.max(maxc,TEAMS);
+  counts.forEach(([m,n])=>{if(!n)return;const b=document.createElement("div");b.className="cbar"+(n>TEAMS?" over":"");b.style.left=`calc(${pct(m)} + 1px)`;b.style.width=`calc(${15/(T1-T0)*100}% - 2px)`;b.style.height=(n*scale)+"px";ct.appendChild(b);
+    const t=document.createElement("div");t.className="cnum";t.textContent=n;t.style.left=pct(m);t.style.width=(15/(T1-T0)*100)+"%";t.style.bottom=(n*scale+6)+"px";ct.appendChild(t)});
+  const cap=document.createElement("div");cap.className="cap";cap.style.bottom=(4+TEAMS*scale)+"px";cap.innerHTML=`<span>${TEAMS} mixers</span>`;ct.appendChild(cap);
+  const addBar=(tr,b,label)=>{const el=document.createElement("div");el.className="lane-bar c-"+b.c;el.tabIndex=0;
+    el.style.left=pct(b.s);el.style.width=`calc(${(b.e-b.s)/(T1-T0)*100}% - 2px)`;
+    el.textContent=label;el.title=`${b.n}\n${fmt(b.s)}–${fmt(b.e)}${b.w.length?"\n"+who(b.w).join(", "):""}`;
+    el.dataset.s=b.s;el.dataset.e=b.e;
+    el.addEventListener("click",e=>{e.stopPropagation();setCur(b.s)});
+    el.addEventListener("keydown",e=>{if(e.key==="Enter")setCur(b.s)});
+    tr.appendChild(el)};
+  if(VIEW==="mix"){
+    const {lanes,unc}=coverage(day);
+    const grp={mixer:"Mixers",social:"Social",a2:"A2 / tech",comms:"Comms",a1:"A1 / supervisor"};let last="";
+    CREW.forEach(c=>{
+      if(c.kind!==last){mk("grp",grp[c.kind]);last=c.kind}
+      const tr=mk("lane",`<b title="${h(c.name)} · ${h(c.desc)}">${h(c.name)}<br><span style="font-weight:400;color:var(--muted);font-size:.7rem">${h(c.desc)}</span></b>`);
+      tr.parentElement.classList.add("tall");
+      lanes[c.id].forEach(b=>addBar(tr,b,b.n+(b.w.length&&!b.fixed?" · "+who(b.w).join(", "):"")));
+      if(c.kind==="comms")commsTeams(day,lanes).forEach(t=>{const t2=mk("lane hs",`<b title="${h(t.lab)} · ${h(t.sub)}" style="padding-left:14px">${h(t.lab)}<br><span style="font-weight:400;color:var(--muted);font-size:.7rem">${h(t.sub)}</span></b>`);t2.parentElement.classList.add("tall");t.bars.forEach(b=>addBar(t2,b,b.n))});
+    });
+    const cv=coverage(day);
+    if(cv.extras.length){mk("grp xneed",`Extra mixers: ${cv.extras.length}`);cv.extras.forEach((L,i)=>{const tr=mk("lane xneed",`<b style='color:var(--over)'>${L.social?'Social station':'Extra mixer '+(i+1)}<br><span style='font-weight:400;font-size:.7rem'>Not booked · ${L.filter(b=>b.need==="mix").length} setups, ${L.filter(b=>b.need==="relief").length} lunch reliefs</span></b>`);tr.parentElement.classList.add("tall");L.forEach(b=>addBar(tr,b,b.n+(b.w&&b.w.length?" · "+who(b.w).join(", "):"")))})}
+    if(cv.a2short.length){mk("grp","Short on A2s");const tr=mk("lane","<b style='color:var(--over)'>Needs an A2</b>");cv.a2short.forEach(b=>addBar(tr,{...b,c:"unc"},b.n))}
+    const {mos}=coverage(day);if(mos.length){mk("grp","No sound");const tr=mk("lane","<b>Echo · Rotation Station<br><span style='font-weight:400;color:var(--muted);font-size:.7rem'>MOS per Maurece</span></b>");tr.parentElement.classList.add("tall");mos.forEach(b=>addBar(tr,b,b.n))}
+  } else
+  ORDER.forEach(cat=>{
+    const inCat=bars.filter(b=>b.c===cat); if(!inCat.length)return;
+    mk("grp",GROUPLAB[cat]);
+    const lanes={};inCat.forEach(b=>(lanes[b.n]=lanes[b.n]||[]).push(b));
+    Object.entries(lanes).sort((a,b)=>Math.min(...a[1].map(x=>x.s))-Math.min(...b[1].map(x=>x.s))).forEach(([name,arr])=>{
+      const tr=mk("lane",`<b title="${h(name)}">${h(name)}</b>`);
+      arr.forEach(b=>addBar(tr,b,who(b.w).join(", ")));
+    });
+  });
+  const ov=document.createElement("div");ov.style.cssText="position:absolute;top:0;bottom:0;left:170px;right:0;pointer-events:none";chart.appendChild(ov);
+  META[day].bands.forEach(([s,e,l])=>{const b=document.createElement("div");b.className="band";b.style.left=pct(s);b.style.width=((e-s)/(T1-T0)*100)+"%";b.innerHTML=`<span style="top:auto;bottom:6px">${l}</span>`;ov.appendChild(b)});
+  const c=document.createElement("div");c.className="cursor";c.id="tl-cursor";c.innerHTML="<span></span>";ov.appendChild(c);
+  const notes=$("tl-notes");
+  if(VIEW==="mix"){
+    const {lanes}=coverage(day);
+    notes.innerHTML=`<div class="bnote" style="grid-column:1/-1"><h3>How this is built</h3><p>Scratch's units from TM262151 2026 Crew Assignments (Day 1 rebuilt Nov 17 from the athlete columns' team tags), with Maurece's Nov 11 answers. Alpha, Bravo, Charlie, Delta, Fore Play and YouTube each keep one dedicated mixer all day; nobody is pulled between units. Echo and Studio Photography are MOS, PopStroke and TP5 Speed Testing have no audio. Anything Scratch wants covered that no unit mixer can take (Day 1 Grant and Ruffels pieces, Day 2 Bag Swap; TP5 DOC is MCV per Scratch's Nov 16 day tabs) lands in the red Extra mixer lanes, along with a 30 min lunch relief for every unit mixer with no break between 11:30 and 14:30. A2s cover mic-ups and end-of-day wraps; no lunch battery swaps (extended batteries on MTP61/MTP60 run 12–14 h, Tim Nov 16). Draft until Scratch locks blocks on Tuesday.</p></div>`+CREW.map(c=>{
+      const jobs=lanes[c.id].filter(b=>!b.fixed);const all=lanes[c.id];
+      const mins=jobs.reduce((t,b)=>t+(b.e-b.s),0);
+      const lg=c.kind==="comms"?999:lunchGap(all);
+      const first=all.length?fmt(Math.min(...all.map(b=>b.s))):"–", lastE=all.length?fmt(Math.max(...all.map(b=>b.e))):"–";
+      const a=all.filter(x=>x.a2);const k=t=>a.filter(x=>x.a2===t).length;
+      return `<div class="bnote"><h3>${h(c.name)}</h3><p class="tab-num">${jobs.length} setup${jobs.length===1?"":"s"} · ${(mins/60).toFixed(1)} h rolling · ${first}–${lastE}</p>${a.length?`<p class="tab-num" style="font-size:.82rem;margin-top:2px">${k("mic")} mic-ups · ${k("chg")} changes / lunch · ${k("wrap")+k("offsite")} wraps</p>`:""}<p class="tab-num" style="color:${lg<30?"var(--over)":"var(--muted)"};font-size:.8rem;margin-top:4px">${c.kind==="comms"?"30 min lunch once comms are out and working (Tim, Nov 18)":lg<30?"No lunch window between 11:30 and 14:30":"Longest break 11:30–14:30: "+lg+" min"}</p></div>`}).join("");
+  } else
+  notes.innerHTML=META[day].notes.map(([hh,p])=>`<div class="bnote"><h3>${hh}</h3><p>${p}</p></div>`).join("");
+  setCur(cur);
+}
+function setCur(m){
+  m=Math.max(T0,Math.min(T1-15,Math.round(m/15)*15));cur=m;
+  const c=$("tl-cursor");if(!c)return;c.style.left=pct(m);c.querySelector("span").textContent=fmt(m);
+  $("tl-lt").textContent=fmt(m);
+  const live=data[day].filter(b=>b.s<=m&&b.e>m).sort((a,b)=>ORDER.indexOf(a.c)-ORDER.indexOf(b.c));
+  const n=live.filter(b=>talks(b.c)&&b.c!=="range").length;
+  const v=$("tl-verdict");
+  v.className="verdict "+(n>TEAMS?"over":"ok");
+  v.textContent=n>TEAMS?`${n} talking setups · ${n-TEAMS} over ${TEAMS} mixers`:`${n} talking setup${n===1?"":"s"} · covered`;
+  if(VIEW==="mix"){
+    const {lanes,unc}=coverage(day);
+    const u=unc.filter(b=>b.s<=m&&b.e>m);
+    const busy=CREW.filter(c=>c.kind==="mixer"&&lanes[c.id].some(b=>!b.fixed&&b.s<=m&&b.e>m)).length;
+    v.className="verdict "+(u.length?"over":"ok");
+    v.textContent=u.length?`${u.length} setup${u.length>1?"s":""} with no mixer`:`${busy} of ${TEAMS} mixers rolling · all covered`;
+    $("tl-live").innerHTML=CREW.map(c=>{
+      const now=lanes[c.id].find(b=>b.s<=m&&b.e>m);
+      const next=lanes[c.id].filter(b=>b.s>m).sort((a,b)=>a.s-b.s)[0];
+      return `<li><i class="sw ${now?"c-"+now.c:""}" style="${now?"":"border:1px solid var(--rule)"}"></i><div><b>${h(c.name)}</b> <span style="color:var(--muted);font-size:.76rem">${now?fmt(now.s)+"–"+fmt(now.e):"free"}</span><small>${now?h(now.n)+(now.w.length&&!now.fixed?" · "+who(now.w).join(", "):""):(next?"next "+fmt(next.s)+" "+h(next.n):"done for the day")}</small></div></li>`}).join("")
+      +u.map(b=>`<li><i class="sw c-unc"></i><div><b style="color:var(--over)">${h(b.n)}</b><small>no mixer free</small></div></li>`).join("");
+  } else
+  $("tl-live").innerHTML=live.length?live.map(b=>`<li><i class="sw c-${b.c}"></i><div><b>${h(b.n)}</b> <span class="tab-num" style="color:var(--muted);font-size:.76rem">${fmt(b.s)}–${fmt(b.e)}</span><small>${who(b.w).join(", ")}</small></div></li>`).join(""):`<li><i></i><div style="color:var(--muted)">Nothing on camera.</div></li>`;
+  chart.querySelectorAll(".lane-bar").forEach(el=>el.classList.toggle("dim",!(+el.dataset.s<=m&&+el.dataset.e>m)));
+}
+let drag=false,wired=false;
+function toMin(e){const r=chart.getBoundingClientRect();const x=e.clientX-r.left-170;const w=r.width-170;return T0+(x/w)*(T1-T0)}
+function html(){
+  const b=(k,v,l,cur)=>`<button role="tab" data-tl${k}="${v}" aria-selected="${cur===v}">${l}</button>`;
+  return `<div class="tl">
+  <div class="tl-bar">
+    <div class="tabs" role="tablist">${b("day","d1","Day 1 · Mon 11/23",day)}${b("day","d2","Day 2 · Tue 11/24",day)}</div>
+    <div class="tabs" role="tablist">${b("view","mix","By crew",VIEW)}${b("view","set","By setup",VIEW)}</div>
+  </div>
+  <div class="legend">
+    <span><i class="sw c-sound"></i>Sound setup</span>
+    <span><i class="sw c-range"></i>Group / range (Roaming Hub)</span>
+    <span><i class="sw c-offsite"></i>Off-site</span>
+    <span><i class="sw c-mcv"></i>MCV spot (likely MOS)</span>
+    <span><i class="sw c-other"></i>Other unit</span>
+    <span><i class="sw c-prep"></i>Mic-up</span>
+    <span><i class="sw c-a2"></i>A2: change / lunch / wrap</span>
+    <span><i class="sw c-hs"></i>Unit headsets live (under Comms)</span>
+    <span><i class="sw c-unc"></i>Needs an extra mixer</span>
+    <span><i class="sw c-lunch"></i>Lunch (30 min)</span><span><i class="sw c-relief"></i>Lunch relief needed</span>
+  </div>
+  <div class="tl-board">
+    <div class="scroller"><div class="chart" id="tl-chart"></div></div>
+    <aside class="tl-aside" aria-live="polite">
+      <h2>Live at <span class="t" id="tl-lt">16:00</span></h2>
+      <span class="verdict" id="tl-verdict"></span>
+      <ul class="live" id="tl-live"></ul>
+      <p class="hint">Click or drag on the timeline to move the red line. Click a bar to jump to its start.</p>
+    </aside>
+  </div>
+  <div class="bnotes" id="tl-notes"></div>
+  <p class="hint">Setups and times from Scratch's prelim schedule v8 (top block of each day).</p>
+</div>`;
+}
+function mount(el,crew){
+  root=el;buildCrew(crew);
+  el.innerHTML=html();
+  chart=$("tl-chart");
+  chart.addEventListener("pointerdown",e=>{if(e.clientX-chart.getBoundingClientRect().left<170)return;drag=true;setCur(toMin(e))});
+  if(!wired){wired=true;
+    window.addEventListener("pointermove",e=>{if(drag&&chart&&chart.isConnected)setCur(toMin(e))});
+    window.addEventListener("pointerup",()=>drag=false);}
+  el.querySelectorAll("[data-tlday]").forEach(x=>x.addEventListener("click",()=>{day=x.dataset.tlday;cur=META[day].peak;try{localStorage.setItem("tm26tl_day",day)}catch(e){}mount(el,crew)}));
+  el.querySelectorAll("[data-tlview]").forEach(x=>x.addEventListener("click",()=>{VIEW=x.dataset.tlview;try{localStorage.setItem("tm26tl_view",VIEW)}catch(e){}mount(el,crew)}));
+  draw();
+}
+return {mount:mount,camTeams:camTeams,model:function(crew,d){buildCrew(crew);var r=coverage(d);return {crew:CREW,lanes:r.lanes,unc:r.unc,extras:r.extras||[],a2short:r.a2short||[],mos:r.mos||[],comms:commsTeams(d,r.lanes),bars:data[d],meta:META[d],teams:TEAMS,who:who};}};
+})();
+
+function cams(){
+ var R=[['Gary M','CAM A · FX6','Sticks',1],['Paul B','CAM B · FX6','Sticks',1],['Aidan C','CAM C · FX6','Sticks',1],['David D','CAM D · FX6','Sticks',1],['Dom E','CAM E · FX6','Sticks · Day 1 only',1],['Matt A','CAM F · FX6 + CAM M · 4D','Sticks + gimbal; Day 2 adds a drone',2],['Justin N','CAM G · FX6','Sticks',1],['Jackson V','CAM H · FX6 + CAM Z · 4D','Sticks + gimbal',2],['Gordon C','CAM I · FX6 + CAM Q · 4D','Sticks + gimbal',2],['Mike M','CAM N · 4D + CAM J · FX6','Gimbal + handheld',2],['Matt W','CAM O · 4D + CAM K · FX6','Gimbal + sticks',2],['Mike S','CAM P · 4D','Gimbal',1],['John S','CAM R · 4D','Gimbal',1],['Xavier','CAM S · FX9','Jib',1],['Jared C','CAM T · C300','Sticks',1],['Nick S','Ember + drone','High-speed (Rotation Station)',1],['Andres T','Phantom','High-speed',1],['Juan N','Drone','','no'],['Giancarlo Z','GoPros + drone','','no'],['Mark S, Christian C','No camera listed','Likely producers / director',''],['Andres U, Federico H, Gil H, Chloe I','No camera listed','Second group, likely photo / BTS','']];
+ return '<p class="note">From Scratch\'s "TM262151 2026 Crew Assignments" (Nov 9, still in progress). Operators and cameras are set; Scratch hasn\'t put them on blocks yet, so mixers aren\'t matched to camera teams.</p>'+
+ '<div class="cam-stats"><div><b class="tab-num">20</b><span>lettered cameras Day 1</span></div><div><b class="tab-num">19</b><span>Day 2 (no Dom / CAM E)</span></div><div><b class="tab-num">~22</b><span>bodies needing TC incl. Ember + Phantom</span></div><div><b class="tab-num">28</b><span>TC boxes in our kits (17 Lockit + Brandon 6 UltraSync, 5 JB-1)</span></div></div>'+
+ '<div class="tbl"><table><thead><tr><th>Operator</th><th>Camera(s)</th><th>Rig</th><th class="num">TC</th></tr></thead><tbody>'+R.map(function(r){return '<tr><td class="name" style="white-space:normal">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="prev">'+esc(r[2])+'</td><td class="num">'+esc(r[3])+'</td></tr>';}).join('')+'</tbody></table></div>'+
+ '<p class="note" style="margin-top:8px">Five operators run an FX6 and a 4D. Plan hops and TC per operator, and expect the 4D as the second angle on the same setup.</p>'+
+ '<h2 style="margin-top:22px">Camera units and comms stations</h2><p class="note">From Scratch\'s 2026 Crew Assignments, columns Alpha through YouTube. Each unit keeps one mixer and one headset system all day. Camera crews per Scratch\'s TEAM ROSTER tab (Nov 13). Mixers are Tim\'s assignments; Scratch\'s mixer names are placeholders.</p>'+
+ (function(){var T=Board.camTeams(typeof S!=='undefined'&&S.crew?S.crew:CREW);return '<div class="tbl teams"><table><thead><tr><th>Unit</th><th>Shoots</th><th>Mixer</th><th>Headsets</th><th>Cameras</th></tr></thead><tbody>'+T.teams.map(function(t){return '<tr><td class="name">'+esc(t.name)+'</td><td style="white-space:normal;min-width:220px">'+esc(t.what)+'</td><td class="name">'+esc(t.mixer?t.mixer.name:'Needs a mixer')+'<br><span class="prev">'+esc(t.role)+'</span></td><td>'+esc(t.hubNow)+'<br><span class="prev">'+esc(t.hs)+'</span></td><td class="prev" style="white-space:normal;min-width:160px">'+esc(t.cams)+'</td></tr>';}).join('')+'</tbody></table></div><p class="note" style="margin-top:8px">'+esc(T.none)+' On Day 1, Hubs 1–5 are linked at the range with program on the main Hub (tested by Lensrentals Nov 16). At 08:45 the links come out: Alpha Hub 1, Charlie Hub 3, Delta Hub 4, and Bravo keeps Hubs 2 + 5 linked. The Roaming Hub is the spare.</p>';})()+
+ '';
+}
+
+/* Crew timeline: zoomable (pinch, ctrl+wheel, buttons), expandable lanes, phone-first */
+var MTL=(function(){
+var T0=360,T1=1140,ZMIN=18,ZMAX=480;
+var st={day:'d1',view:'mix',pph:null,cur:null,me:'',open:{},all:false,legend:false};
+try{var sv=JSON.parse(localStorage.getItem('tm26mtl')||'{}');['day','view','me','pph'].forEach(function(k){if(sv[k]!=null)st[k]=sv[k];});}catch(e){}
+function save(){try{localStorage.setItem('tm26mtl',JSON.stringify({day:st.day,view:st.view,me:st.me,pph:st.pph}));}catch(e){}}
+var root,CREW_IN,M,sc,chart;
+var fmt=function(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
+var GRP={mixer:'Mixers',social:'Social',a2:'A2 / tech',comms:'Comms',a1:'A1 / supervisor'};
+var CAT={range:'Group / range',sound:'Sound setups',offsite:'Off-site',mcv:'MCV spots',other:'Other units',prep:'Mic-up'};
+var ORDER=['range','sound','offsite','mcv','other'];
+function shootDay(){var d=new Date();if(d.getFullYear()!==2026||d.getMonth()!==10)return null;return d.getDate()===23?'d1':d.getDate()===24?'d2':null;}
+function nowMin(){var d=new Date();return d.getHours()*60+d.getMinutes();}
+function lw(){return window.innerWidth<640?104:180;}
+function short(c){if(c.desc&&c.desc.indexOf('Unit ')===0)return c.desc.slice(5).split(' · ')[0];return c.kind==='mixer'?c.role.replace('ENG ','Mixer '):c.kind==='social'?'Social mixer':c.kind==='a2'?'A2':c.kind==='comms'?'Comms':'A1';}
+function first(n){return n.split(' ')[0];}
+
+function model(){
+  M=Board.model(CREW_IN,st.day);
+  M.byBar=new Map();
+  M.crew.forEach(function(c){M.lanes[c.id].forEach(function(b){if(!b.fixed){var a=M.byBar.get(b)||[];a.push(c.name);M.byBar.set(b,a);}});});
+}
+function rows(){
+  var out=[];
+  if(st.view==='mix'){
+    var list=M.crew.slice();
+    if(st.me){var me=list.find(function(c){return c.id===st.me;});if(me){out.push({g:'You'});pushLane(out,me,true);list=list.filter(function(c){return c!==me;});}}
+    var last='';
+    list.forEach(function(c){if(c.kind!==last){out.push({g:GRP[c.kind]});last=c.kind;}pushLane(out,c,false);});
+    if(M.mos&&M.mos.length)out.push({g:'No sound'},{id:'mos',lab:'Echo',sub:'Rotation Station · MOS?',full:'Echo · Rotation Station, no mixer (confirm MOS)',bars:M.mos});
+    if(M.extras&&M.extras.length){out.push({g:'Extra mixers: '+M.extras.length,xg:true});M.extras.forEach(function(L,i){var nm=L.filter(function(b){return b.need==='mix';}).length,nr=L.length-nm;out.push({id:'x'+i,lab:(L.every(function(b){return /^Social Sessions/.test(b.n)})?'Social station':'Extra '+(i+1)),sub:'Needed · '+nm+' setup'+(nm===1?'':'s')+(nr?', '+nr+' lunch relief':''),full:'Extra mixer '+(i+1)+' (not booked)',bars:L,unc:true});});}
+    if(M.a2short&&M.a2short.length)out.push({g:'Short on A2s'},{id:'a2s',lab:'Needs an A2',sub:'',bars:M.a2short.map(function(b){return Object.assign({},b,{c:'unc'});}),unc:true});
+  } else {
+    ORDER.forEach(function(cat){
+      var inCat=M.bars.filter(function(b){return b.c===cat;});if(!inCat.length)return;
+      out.push({g:CAT[cat]});
+      var by={};inCat.forEach(function(b){(by[b.n]=by[b.n]||[]).push(b);});
+      Object.keys(by).sort(function(a,b){return Math.min.apply(0,by[a].map(function(x){return x.s;}))-Math.min.apply(0,by[b].map(function(x){return x.s;}));})
+        .forEach(function(n){out.push({id:'s:'+n,lab:n,sub:by[n].length+'×',bars:by[n]});});
+    });
+  }
+  return out;
+}
+function pushLane(out,c,me){out.push(laneRow(c,me));if(c.kind==='comms')M.comms.forEach(function(t){var p=t.lab.split(' · ');out.push({id:t.id,lab:t.short||p[1]||p[0],sub:t.short?t.sub:p[0]+' · '+t.sub,full:t.lab+' · '+t.sub,bars:t.bars,hsRow:true});});}
+function laneRow(c,me){return {id:c.id,lab:/\(/.test(c.name)?c.name:first(c.name)+(c.name.split(' ')[1]?' '+c.name.split(' ')[1][0]+'.':''),full:c.name,sub:short(c),bars:M.lanes[c.id].slice().sort(function(a,b){return a.s-b.s;}),me:me};}
+
+function barHTML(b,i,rid){
+  var who=M.who(b.w||[]).join(', ');
+  var lab=st.view==='mix'?b.n:(who||b.n);
+  return '<button class="mb c-'+b.c+'" style="--s:'+b.s+';--d:'+(b.e-b.s)+'" data-r="'+esc(rid)+'" data-i="'+i+'" aria-label="'+esc(b.n+' '+fmt(b.s)+' to '+fmt(b.e))+'"><span>'+esc(lab)+'</span></button>';
+}
+function detailHTML(r){
+  if(!r.bars.length)return '<div class="md-empty">Nothing scheduled.</div>';
+  return '<ol class="md-list">'+r.bars.map(function(b,i){
+    var who=M.who(b.w||[]).join(', ');var cov=M.byBar.get(b);
+    return '<li data-r="'+esc(r.id)+'" data-i="'+i+'"><i class="sw c-'+b.c+'"></i><span class="md-t">'+fmt(b.s)+'–'+fmt(b.e)+'</span><span class="md-n"><b>'+esc(b.n)+'</b>'+(who?'<small>'+esc(who)+'</small>':'')+(st.view==='set'&&cov?'<small class="md-cov">Sound: '+esc(cov.join(', '))+'</small>':'')+'</span></li>';}).join('')+'</ol>';
+}
+function html(){
+  var sd=shootDay();
+  var b=function(k,v,l,cur){return '<button data-'+k+'="'+v+'" aria-pressed="'+(cur===v)+'">'+l+'</button>';};
+  return '<div class="mtl">'+
+   '<div class="mt-ctl">'+
+    '<div class="seg">'+b('mday','d1','Day 1 <small>Mon 11/23</small>',st.day)+b('mday','d2','Day 2 <small>Tue 11/24</small>',st.day)+'</div>'+
+    '<div class="seg">'+b('mview','mix','By crew',st.view)+b('mview','set','By setup',st.view)+'</div>'+
+    '<label class="me">I am <select id="mt-me"><option value="">Everyone</option>'+M.crew.map(function(c){return '<option value="'+c.id+'"'+(st.me===c.id?' selected':'')+'>'+esc(c.name)+'</option>';}).join('')+'</select></label>'+
+   '</div>'+
+   '<div class="mt-ctl mt-ctl2">'+
+    '<div class="seg zoom" role="group" aria-label="Zoom"><button data-z="out" aria-label="Zoom out">−</button><button data-z="fit">Fit day</button><button data-z="in" aria-label="Zoom in">+</button></div>'+
+    '<button class="lnk" data-all>'+(st.all?'Collapse all':'Expand all')+'</button>'+
+    (sd?'<button class="lnk now" data-now>Now</button>':'')+
+    '<button class="lnk" data-legend aria-expanded="'+st.legend+'">Key</button>'+
+   '</div>'+
+   '<div class="legend mt-legend"'+(st.legend?'':' hidden')+'><span><i class="sw c-sound"></i>Sound setup</span><span><i class="sw c-range"></i>Group / range</span><span><i class="sw c-offsite"></i>Off-site</span><span><i class="sw c-mcv"></i>MCV spot</span><span><i class="sw c-other"></i>Other unit</span><span><i class="sw c-prep"></i>Mic-up</span><span><i class="sw c-a2"></i>A2: change / lunch / wrap</span><span><i class="sw c-lunch"></i>Lunch</span><span><i class="sw c-comms"></i>Comms</span><span><i class="sw c-hs"></i>Headsets live</span></div>'+
+   '<div class="mt-sc" id="mt-sc"><div class="mt-chart" id="mt-chart"></div></div>'+
+   '<p class="hint">Pinch or use − / + to zoom. Tap a name to expand their day; tap a bar for details.</p>'+
+   '<details class="mt-live" open><summary>At <b id="mt-lt"></b> <span id="mt-verdict"></span></summary><ul class="live" id="mt-live"></ul></details>'+
+   '<div class="mt-sheet" id="mt-sheet" hidden></div>'+
+  '</div>';
+}
+function drawChart(){
+  var R=rows();M.rows=R;
+  var h='<div class="mr mr-ax"><div class="ml"><span>'+(st.view==='mix'?'Crew':'Setup')+'</span></div><div class="mt">';
+  for(var m=T0;m<=T1;m+=15){var k=m%60===0?'h':m%30===0?'hh':'q';h+='<div class="tk tk-'+k+'" style="--s:'+m+'"><span>'+(k==='h'?'<b>'+String(m/60).padStart(2,'0')+'</b><i>:00</i>':':'+String(m%60).padStart(2,'0'))+'</span></div>';}
+  h+='</div></div>';
+  R.forEach(function(r){
+    if(r.g){h+='<div class="mr mr-g'+(r.xg?' is-xg':'')+'"><div class="ml">'+esc(r.g)+'</div><div class="mt"></div></div>';return;}
+    var open=st.all||st.open[r.id]||(r.me&&st.open[r.id]!==false);
+    h+='<div class="mr'+(r.me?' is-me':'')+(r.unc?' is-unc':'')+(r.hsRow?' is-hs':'')+'"><button class="ml" data-x="'+esc(r.id)+'" aria-expanded="'+!!open+'" title="'+esc(r.full||r.lab)+'"><span class="ml-n">'+esc(r.lab)+'</span><small>'+esc(r.sub)+'</small><i class="chev" aria-hidden="true"></i></button><div class="mt">'+r.bars.map(function(b,i){return barHTML(b,i,r.id);}).join('')+'</div></div>';
+    if(open)h+='<div class="md"><div class="md-in">'+detailHTML(r)+'</div></div>';
+  });
+  M.meta.bands.forEach(function(b){h+='<div class="mband" style="--s:'+b[0]+';--d:'+(b[1]-b[0])+'"><span>'+esc(b[2])+'</span></div>';});
+  h+='<div class="mcur" id="mt-cur"><span></span></div>';
+  chart.innerHTML=h;
+  sizeDetail();setCur(st.cur);
+}
+function sizeDetail(){if(sc)chart.style.setProperty('--vw',sc.clientWidth+'px');}
+function applyZoom(p,focusX){
+  var old=st.pph;p=Math.max(ZMIN,Math.min(ZMAX,p));
+  var L=lw();var fx=focusX==null?(sc.clientWidth-L)/2+L:focusX;
+  var t=old?(sc.scrollLeft+fx-L)/old:0;
+  st.pph=p;chart.style.setProperty('--pph',p);chart.style.setProperty('--lw',L+'px');
+  chart.classList.toggle('z-hh',p>=110);chart.classList.toggle('z-q',p>=240);chart.classList.toggle('z-lo',p<60);
+  if(old)sc.scrollLeft=t*p-(fx-L);
+}
+function fitPPH(){return (sc.clientWidth-lw())/((T1-T0)/60);}
+function scrollTo(m){var L=lw();sc.scrollLeft=Math.max(0,(m-T0)/60*st.pph-(sc.clientWidth-L)*0.3);}
+function setCur(m){
+  if(m==null){var mine=st.me&&M.lanes[st.me];m=mine&&mine.length?Math.min.apply(0,mine.map(function(b){return b.s;})):405;}
+  m=Math.max(T0,Math.min(T1-1,Math.round(m)));st.cur=m;
+  var c=root.querySelector('#mt-cur');if(c){c.style.setProperty('--s',m);c.querySelector('span').textContent=fmt(m);}
+  root.querySelector('#mt-lt').textContent=fmt(m);
+  chart.querySelectorAll('.mb').forEach(function(el){var r=findRow(el.dataset.r),b=r&&r.bars[+el.dataset.i];el.classList.toggle('dim',!(b&&b.s<=m&&b.e>m));});
+  var v=root.querySelector('#mt-verdict'),L=root.querySelector('#mt-live');
+  var u=M.unc.filter(function(b){return b.s<=m&&b.e>m;});
+  if(st.view==='mix'){
+    var busy=M.crew.filter(function(c){return c.kind==='mixer'&&M.lanes[c.id].some(function(b){return !b.fixed&&b.s<=m&&b.e>m;});}).length;
+    v.className='verdict '+(u.length?'over':'ok');v.textContent=u.length?u.length+' with no mixer':busy+' of '+M.teams+' mixers rolling';
+    var list=M.crew.slice();if(st.me){list.sort(function(a,b){return (b.id===st.me)-(a.id===st.me);});}
+    L.innerHTML=list.map(function(c){
+      var now=M.lanes[c.id].find(function(b){return b.s<=m&&b.e>m;});
+      var nx=M.lanes[c.id].filter(function(b){return b.s>m;}).sort(function(a,b){return a.s-b.s;})[0];
+      return '<li'+(c.id===st.me?' class="is-me"':'')+'><i class="sw '+(now?'c-'+now.c:'')+'" style="'+(now?'':'border:1px solid var(--rule)')+'"></i><div><b>'+esc(c.name)+'</b> <span class="tab-num" style="color:var(--muted);font-size:.76rem">'+(now?fmt(now.s)+'–'+fmt(now.e):'free')+'</span><small>'+(now?esc(now.n)+(now.w&&now.w.length&&!now.fixed?' · '+esc(M.who(now.w).join(', ')):''):(nx?'next '+fmt(nx.s)+' '+esc(nx.n):'done for the day'))+'</small></div></li>';}).join('');
+  } else {
+    var live=M.bars.filter(function(b){return b.s<=m&&b.e>m;});
+    var n=live.filter(function(b){return b.c==='sound'||b.c==='offsite';}).length;
+    v.className='verdict ok';v.textContent=n+' talking setup'+(n===1?'':'s');
+    L.innerHTML=live.length?live.map(function(b){var cov=M.byBar.get(b);return '<li><i class="sw c-'+b.c+'"></i><div><b>'+esc(b.n)+'</b> <span class="tab-num" style="color:var(--muted);font-size:.76rem">'+fmt(b.s)+'–'+fmt(b.e)+'</span><small>'+esc(M.who(b.w).join(', '))+(cov?' · Sound: '+esc(cov.join(', ')):'')+'</small></div></li>';}).join(''):'<li><i></i><div style="color:var(--muted)">Nothing on camera.</div></li>';
+  }
+}
+function findRow(id){return (M.rows||[]).find(function(r){return r.id===id;});}
+function sheet(r,i){
+  var b=r.bars[i],el=root.querySelector('#mt-sheet');if(!b)return;
+  var who=M.who(b.w||[]).join(', ');var cov=M.byBar.get(b);
+  el.innerHTML='<div class="sh-in"><button class="sh-x" data-close aria-label="Close">×</button><span class="pill c-'+b.c+'">'+esc(b.hs?'Comms · headsets':CAT[b.c]||(b.c==='a2'?'A2':b.c==='comms'?'Comms':b.c==='unc'?'Not covered':b.c))+'</span><h3>'+esc(b.n)+'</h3><p class="sh-t tab-num">'+fmt(b.s)+'–'+fmt(b.e)+' · '+(b.e-b.s)+' min</p>'+(who?'<p><b>Talent</b><br>'+esc(who)+'</p>':'')+(r.hsRow?'<p><b>Headsets live</b><br>'+esc(r.full)+'</p>':cov?'<p><b>Sound</b><br>'+esc(cov.join(', '))+'</p>':(st.view==='mix'&&r.full&&!r.unc?'<p><b>Crew</b><br>'+esc(r.full)+'</p>':''))+'</div>';
+  el.hidden=false;setCur(b.s);
+}
+var pinch=null;
+function wire(){
+  sc.addEventListener('touchstart',function(e){if(e.touches.length===2){var a=e.touches[0],b=e.touches[1],r=sc.getBoundingClientRect();pinch={d:Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY),p:st.pph,fx:(a.clientX+b.clientX)/2-r.left};}},{passive:true});
+  sc.addEventListener('touchmove',function(e){if(pinch&&e.touches.length===2){e.preventDefault();var a=e.touches[0],b=e.touches[1];var d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);applyZoom(pinch.p*d/pinch.d,pinch.fx);}},{passive:false});
+  sc.addEventListener('touchend',function(e){if(e.touches.length<2&&pinch){pinch=null;save();}});
+  ['gesturestart','gesturechange'].forEach(function(t){sc.addEventListener(t,function(e){e.preventDefault();});});
+  sc.addEventListener('wheel',function(e){if(!e.ctrlKey&&!e.metaKey)return;e.preventDefault();var r=sc.getBoundingClientRect();applyZoom(st.pph*Math.exp(-e.deltaY*0.01),e.clientX-r.left);save();},{passive:false});
+  chart.addEventListener('click',function(e){
+    var x=e.target.closest('[data-x]');if(x){var id=x.dataset.x;var r=findRow(id);var isOpen=x.getAttribute('aria-expanded')==='true';st.open[id]=!isOpen;if(st.all&&isOpen){st.all=false;M.rows.forEach(function(rr){if(rr.id&&rr.id!==id)st.open[rr.id]=true;});}var sl=sc.scrollLeft;drawChart();sc.scrollLeft=sl;return;}
+    var bb=e.target.closest('.mb');if(bb){sheet(findRow(bb.dataset.r),+bb.dataset.i);return;}
+    var li=e.target.closest('.md-list li');if(li){sheet(findRow(li.dataset.r),+li.dataset.i);return;}
+    var tr=e.target.closest('.mt');if(tr){var rc=tr.getBoundingClientRect();setCur(T0+(e.clientX-rc.left)/st.pph*60);}
+  });
+}
+function mount(el,crew){
+  root=el;CREW_IN=crew;
+  var sd=shootDay();if(sd&&st.cur==null){st.day=sd;st.cur=nowMin();}
+  model();
+  if(st.me&&!M.crew.some(function(c){return c.id===st.me;}))st.me='';
+  el.innerHTML=html();
+  sc=el.querySelector('#mt-sc');chart=el.querySelector('#mt-chart');
+  var p=st.pph||(window.innerWidth<640?84:fitPPH());st.pph=null;applyZoom(p);st.pph=p;
+  drawChart();wire();
+  requestAnimationFrame(function(){scrollTo(st.cur);});
+  el.querySelectorAll('[data-mday]').forEach(function(x){x.addEventListener('click',function(){st.day=x.dataset.mday;st.cur=null;var sd2=shootDay();if(sd2===st.day)st.cur=nowMin();save();mount(el,crew);});});
+  el.querySelectorAll('[data-mview]').forEach(function(x){x.addEventListener('click',function(){st.view=x.dataset.mview;st.open={};save();mount(el,crew);});});
+  el.querySelector('#mt-me').addEventListener('change',function(e){st.me=e.target.value;if(st.me)st.open[st.me]=true;save();mount(el,crew);});
+  el.querySelectorAll('[data-z]').forEach(function(x){x.addEventListener('click',function(){var z=x.dataset.z;if(z==='fit'){applyZoom(fitPPH());sc.scrollLeft=0;}else applyZoom(st.pph*(z==='in'?1.5:1/1.5));save();});});
+  el.querySelector('[data-all]').addEventListener('click',function(){st.all=!st.all;st.open={};var sl=sc.scrollLeft;el.querySelector('[data-all]').textContent=st.all?'Collapse all':'Expand all';drawChart();sc.scrollLeft=sl;});
+  var nb=el.querySelector('[data-now]');if(nb)nb.addEventListener('click',function(){setCur(nowMin());scrollTo(st.cur);});
+  el.querySelector('[data-legend]').addEventListener('click',function(e){st.legend=!st.legend;el.querySelector('.mt-legend').hidden=!st.legend;e.target.setAttribute('aria-expanded',st.legend);});
+  el.querySelector('#mt-sheet').addEventListener('click',function(e){if(e.target.closest('[data-close]'))e.currentTarget.hidden=true;});
+}
+window.addEventListener('resize',function(){if(sc&&sc.isConnected){sizeDetail();chart.style.setProperty('--lw',lw()+'px');}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root){var s=root.querySelector('#mt-sheet');if(s)s.hidden=true;}});
+return {mount:mount};
+})();
+
+var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(t==='cams'||t==='timeline'||t==='schedule')tab=t;}catch(e){}
+if(location.hash==='#cameras')tab='cams';
+function render(){
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Draft rotation · changes as Scratch locks blocks</div></header>';
+ h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['cams','Cameras']].map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+t[1]+'</button>';}).join('')+'</nav>';
+ h+='<section>'+(tab==='cams'?cams():tab==='schedule'?schedule():'<div id="tl-root"></div>')+'</section>';
+ document.getElementById('app').innerHTML=h;
+ if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
+}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;try{localStorage.setItem('tm26crewtab',tab);}catch(x){}render();});
+render();
+})();
+</script>
+
+</body></html>
