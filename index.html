@@ -37,12 +37,12 @@ h1{font-family:var(--f-display);font-weight:700;font-size:2.1rem;letter-spacing:
 .count b{font-family:var(--f-display);font-size:1.35rem;font-variant-numeric:tabular-nums}
 nav{display:flex;gap:2px;margin:18px 0 0;border-bottom:1px solid var(--line);overflow-x:auto}
 nav button{font-family:var(--f-display);font-size:1.05rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:8px 14px;cursor:pointer;white-space:nowrap}
-nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}@media (max-width:520px){nav button{flex:1 1 auto;padding:8px 4px;font-size:.8rem;letter-spacing:.02em}}
 nav button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 section{padding-top:18px}
 h2{font-family:var(--f-display);font-weight:600;font-size:1.3rem;margin:22px 0 8px;letter-spacing:.02em}
 h2:first-child{margin-top:0}
-.note{color:var(--muted);font-size:.88rem;max-width:70ch;margin:0 0 10px}
+.lst{margin:0 0 10px;padding-left:20px;max-width:70ch}.lst li{margin:4px 0;line-height:1.4}.note{color:var(--muted);font-size:.88rem;max-width:70ch;margin:0 0 10px}
 .tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 th{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;color:var(--muted);text-align:left;padding:8px 10px;background:var(--tint);border-bottom:1px solid var(--line);white-space:nowrap}
@@ -671,6 +671,75 @@ function cams(){
  '';
 }
 
+function kv(rows,cols){return '<div class="tbl teams"><table><tbody>'+rows.map(function(r){return '<tr><td class="name">'+esc(r[0])+'</td>'+r.slice(1).map(function(c,i){return '<td'+(i?' class="prev"':'')+'>'+esc(c)+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';}
+function ul(items){return '<ul class="lst">'+items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function sound(){
+ return '<p class="note">How we run audio. Talent mics, mixer kits, the range kit and timecode. Times are on the Schedule tab.</p>'+
+ '<div class="cam-stats"><div><b class="tab-num">38</b><span>Wisycom TX in the pool (MTP61 / MTP60)</span></div><div><b class="tab-num">16</b><span>Wisy RX on the range Scorpio</span></div><div><b class="tab-num">2</b><span>spare MTPs in every mixer bag</span></div><div><b class="tab-num">TC</b><span>UltraSyncs on every camera, Tentacles in bags and with A2s</span></div></div>'+
+ '<h2>Who carries what</h2>'+kv([
+  ['Dave Wade','Alpha','SD 888'],
+  ['Joel Tower','Bravo','SD 888'],
+  ['Brandon Dew','Charlie','SD Scorpio. Monday he runs the range Scorpio kit for Range Warm Up, then takes his own kit to Charlie at 9:15'],
+  ['Michal Maksymowicz','Delta','SD 833'],
+  ['Andy Sankar','Fore Play / Barstool, audio only','SD 833'],
+  ['Josh Laemmle','YouTube / Ruffels, audio only','SD 833'],
+  ['Rick Alexander','Social sessions, audio only','SD 888 (Tim\'s extra kit). iPhone shoot: slate every session for sync. A2 work between sessions'],
+  ['Heather Marshall, Adriana Salvo','A2s','Mic-ups, changes, wraps. A2 kit + Tentacles'],
+  ['Tim Alward','Lead','Range cart, spare SD 633, spare TX and lavs'],
+  ['Freddie Aponte','Comms','See the Comms tab']])+
+ '<h2>Talent rig</h2>'+ul([
+  '<b>Wisycom MTP61 (or MTP60)</b> with a <b>DPA 6060/6061</b> lav, internal record on, TC jammed.',
+  '<b>Ursa chest strap</b> down to a <b>Viviana waist strap</b>. Women\'s straps for Charley, Brooke and Haeran.',
+  'Name the TX file by talent, and log any TX or frequency change on the mic grid.',
+  'Rigs stay on under wardrobe through Zambezi sets (MCV, DOC, Year in Review). If Zambezi says no, A2s de-mic and re-mic; the fallback slots are on the schedule.',
+  'Barstool talent (Riggs, Frankie, Trent) is not ours. Cover our athletes only.'])+
+ '<h2>Mic-up</h2>'+ul([
+  '<b>Monday:</b> Christmas Card talent at the tent 6:45–7:15 (Rory first). Everyone else at the range on arrival, Bridgeman and Thor at 8:45, Tiger at 11:45.',
+  '<b>Tuesday:</b> each mixer mics their own team at the start of the first set, 7:30–7:45. A2s help DOT vs. NOT and the CA/EU Bag Swap. Extra mic for fitter Jae at Korea (Alpha).',
+  'Athletes stay mic\'d all day. Mic once, collect at wrap.'])+
+ '<h2>Main field kit (every mixer)</h2>'+ul([
+  'Mixer/bag, boom + blimp, 1x MCR54 and a Lectro SRC-B1 RX, hops on 1x A1 TX.',
+  '2 spare MTPs, spare lavs, 4 IFBs (may go down to 2).',
+  'Batteries and chargers for two 12-hour days. Tim has batteries, but bring your stock.',
+  '2 media cards, formatted. Tim has media, but bring your stock.',
+  'TC cable for your recorder and jam cable for your TXs.',
+  'Rain cover for your bag.',
+  'Phone with Unity Intercom and a cable from the phone into your mixer\'s return.'])+
+ '<h2>Range kit (Monday)</h2>'+ul([
+  'Sound cart with 16 Wisycom RX (Scorpio + 4 MCR54), 2x Lectro IFB-A1 for comms/hop, 1x SRC-B1 for producer PTT.',
+  'Green mics go to the local recorder on the cart.',
+  'Comms send into the linked Hollyland Hubs (see Comms).']);
+}
+function comms(){
+ return '<p class="note">Four separate systems. Camera teams are on Hollyland, sound is on Unity, TaylorMade producer/directors are on Lectro in-ears, and production and PAs are on walkies. Sound does not carry walkies.</p>'+
+ '<div class="cam-stats"><div><b class="tab-num">5</b><span>Hollyland C1 Pro Hubs + 1 spare Roaming Hub</span></div><div><b class="tab-num">54</b><span>rented remote headsets</span></div><div><b class="tab-num">8</b><span>producer in-ear packs (6 + 2 spare)</span></div><div><b class="tab-num">30</b><span>production walkies (not sound)</span></div></div>'+
+ '<h2>Hollyland: camera teams</h2>'+kv([
+  ['Range (Mon)','Hubs 1–5 linked, about 40 headsets','Program from the range cart into the main Hub follows to every linked Hub. After Range Warm Up the links come out and each team keeps its own Hub'],
+  ['Alpha','Hub 1','Mixer: Dave'],
+  ['Bravo','Hubs 2 + 5, stay linked','Mixer: Joel. Bigger team, so two Hubs'],
+  ['Charlie','Hub 3','Mixer: Brandon'],
+  ['Delta','Hub 4','Mixer: Michal'],
+  ['Spare','Roaming Hub + loose headsets','Hot spare for any Hub that fails']])+
+ ul(['Camera department only. Sound, grips and PAs are not on Hollyland.',
+  '<b>Mixers:</b> send program to your team\'s Hub (3.5 mm PGM input) and keep it under talkback.',
+  'Headsets charge at the production tent. Freddie runs charging and swaps.'])+
+ '<h2>Producer / director in-ears</h2>'+
+ '<p class="note">For the 6 TaylorMade producer/directors: Tyler Brett, Lauren Nisavic, Mike Barbuti, Steve Breazeale, Mike Esse, Austin Jack.</p>'+
+ ul(['<b>Listen:</b> Lectro R1a in-ear. Each team\'s Hub feeds its own Lectro IFB TX (Block 470). R1a presets: Range, Alpha, Bravo, Charlie, Delta.',
+  '<b>Talk:</b> Lectro TX with a TA5 push-to-talk, one fixed B1 frequency per producer. It lands on your SRC-B1.',
+  '<b>Mixers:</b> when a director joins your team, tune their talk channel into your Lectro receiver and route it only to the Hub feed. <b>Max two directors per team</b> (the SRC-B1 is 2 channels).',
+  'Director talk never goes to the main mix, camera hops or the recorder. Never route the Hub back into the Hub feed.',
+  '<b>Range:</b> the range IFB comes off Tim\'s cart. At the split, Freddie or the team\'s AC plugs the team IFB TX into Hub port 3.',
+  'R1a runs on 9 V lithium (about 20 h). Wired earpieces only; the cord is the antenna.'])+
+ '<h2>Unity Intercom: sound crew</h2>'+
+ ul(['Course-wide over cellular. Tim sends login info.',
+  '<b>Mixers:</b> phone in the bag, cable from the phone into your mixer\'s return so Unity is in your cans.',
+  '<b>A2s:</b> phone + single-ear wired headset.',
+  'Channels: <b>SOUND</b> (all of us), <b>TC/RF</b>, <b>PROD-LINK</b> (production walkie listen), <b>Program</b>.',
+  'About 150–300 ms of delay over cellular. Fine for talk, not for anything lip-sync critical.'])+
+ '<h2>Walkies</h2>'+ul(['30 Action Radio walkies for production and PAs. Sound listens to production on Unity PROD-LINK instead.']);
+}
+
 /* Crew timeline: zoomable (pinch, ctrl+wheel, buttons), expandable lanes, phone-first */
 var MTL=(function(){
 var T0=360,T1=1140,ZMIN=18,ZMAX=480;
@@ -845,12 +914,12 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root){var s
 return {mount:mount};
 })();
 
-var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(t==='cams'||t==='timeline'||t==='schedule')tab=t;}catch(e){}
-if(location.hash==='#cameras')tab='cams';
+var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms'].indexOf(t)>=0)tab=t;}catch(e){}
+if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';
 function render(){
  var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Draft rotation · changes as Scratch locks blocks</div></header>';
- h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['cams','Cameras']].map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+t[1]+'</button>';}).join('')+'</nav>';
- h+='<section>'+(tab==='cams'?cams():tab==='schedule'?schedule():'<div id="tl-root"></div>')+'</section>';
+ h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+t[1]+'</button>';}).join('')+'</nav>';
+ h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
  if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
 }
