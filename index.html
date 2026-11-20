@@ -235,7 +235,7 @@ button.ml{appearance:none}
   .sub{font-size:.82rem}
   .wrap{padding-block:12px 40px}
   .seg button{padding:8px 10px}
-  .po{display:none}
+  .po{display:block;margin-top:2px;font-size:.72rem;text-align:left}
   .sub .addr{display:none}
   nav{margin-top:10px}
   section{padding-top:12px}
@@ -918,7 +918,7 @@ return {mount:mount};
 var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms'].indexOf(t)>=0)tab=t;}catch(e){}
 if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Draft rotation · changes as Scratch locks blocks</div></header>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 20, 2 PM</div></header>';
  h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+t[1]+'</button>';}).join('')+'</nav>';
  h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
