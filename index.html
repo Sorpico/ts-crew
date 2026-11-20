@@ -259,6 +259,28 @@ button.ml{appearance:none}
 .mr.is-unc .ml{background:color-mix(in srgb,var(--over) 7%,var(--panel))}
 .mb.c-relief{border-width:1.5px}
 
+
+/* Mics tab */
+.mic-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+.mic-next{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:8px 12px;margin:0 0 10px;font-size:.9rem}
+.mic-next b{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.04em}
+.mic-sum{display:flex;gap:14px;flex-wrap:wrap;font:600 .8rem var(--f-mono);color:var(--muted);margin:0 0 8px}
+.mic td.t,.mic th.t{font-family:var(--f-mono);white-space:nowrap}
+.mic td.n{font-weight:600;white-space:nowrap}
+.mic td.n small{display:block;font-weight:400;color:var(--muted);font-size:.75rem}
+.mic td.x{color:var(--muted);font-size:.82rem;min-width:16ch}
+.mic .w{display:inline-block;font:600 .68rem var(--f-mono);text-transform:uppercase;padding:1px 5px;border-radius:4px;background:var(--tint);color:var(--muted);margin-left:4px}
+.mic .tbc{background:var(--warn-bg);color:var(--warn);padding:1px 6px;border-radius:4px;font-weight:700}
+.mic .off{color:var(--muted)}
+.mic tr.st-due td{background:var(--warn-bg)}
+.mic tr.st-on td.n::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px}
+.mic tr.st-done td{opacity:.45}
+.mic-off{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+.mic-key{font-size:.78rem;color:var(--muted);margin:8px 0 0}
+.mic td.n .xn{display:none}
+@media (max-width:640px){.mic td,.mic th{padding:7px 6px}.mic.one td.x,.mic.one th.x{display:none}.mic.one td.n{white-space:normal}.mic.one td.n .xn{display:block;color:var(--warn);font-size:.78rem;margin-top:2px;line-height:1.25}.mic td.x{min-width:0}}
+.tl-s{display:none}@media (max-width:640px){.tl-l{display:none}.tl-s{display:inline}}
+@media print{nav,.mic-ctl,.mic-next,.mic-key{display:none!important}.mic tr td{opacity:1!important;background:none!important}body{background:#fff}}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -915,17 +937,80 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root){var s
 return {mount:mount};
 })();
 
-var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms'].indexOf(t)>=0)tab=t;}catch(e){}
-if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';
+
+// ===== MIC GRID: single source. Edit MICS below; times are 24h "H:MM". on/off null = not mic'd that day; 'TBC' = waiting on Scratch.
+var MIC_ASOF='Nov 20, 5:40 PM';
+var MICS=[
+ {n:'Tiger Woods',d1:['11:45','16:30'],d2:null,x1:'Last set: social 4:15'},
+ {n:'Rory McIlroy',d1:['6:45','15:30','tent'],d2:null,x1:'Mic FIRST at the tent, before his 7:00 Cold Open. Last audio set: Eras Driver to 3:00'},
+ {n:'Scottie Scheffler',d1:['6:45','16:00','tent'],d2:['7:30','13:00'],x1:'Wrap before Chosen + FIF MCV 4:15 (Zambezi, last set)'},
+ {n:'Tommy Fleetwood',d1:['6:45','17:30','tent'],d2:['9:00','16:15'],x2:'First set is Zambezi MCVs 7:45–9:00; mic after'},
+ {n:'Collin Morikawa',d1:['6:45','16:30','tent'],d2:['7:30','14:00'],x1:'Year in Review 4:30 is Zambezi: wrap after TP5 Skills'},
+ {n:'Charley Hull',t:'W strap',d1:['6:45','17:30','tent'],d2:['7:30','15:45'],x1:'Last: Bag Swap to 5:30'},
+ {n:'Brooke Henderson',t:'W strap',d1:['6:45','16:00','tent'],d2:['7:30','15:45']},
+ {n:'Johnson Wagner',d1:['7:45','17:30','range'],d2:['7:30','14:45'],x1:'On arrival'},
+ {n:'Grant Horvat',d1:['7:45','18:00','range'],d2:['7:30','14:00'],x1:'On arrival',x2:'Wrap before Chosen MCV 2:15 (Zambezi, last set)'},
+ {n:'Ryan Ruffels',d1:['7:45','18:00','range'],d2:['7:30','16:15'],x1:'On arrival'},
+ {n:'Jacob Bridgeman',d1:['8:45','13:45'],d2:['9:45','18:00'],x1:'PopStroke 2:45 has no audio',x2:'Arrives 9:15. Runs to TP5 Speed Testing 5:30–6:00'},
+ {n:'Michael Thorbjornsen',t:'Thor',d1:['8:45','18:00'],d2:['7:30','18:00'],x2:'Runs to TP5 Speed Testing'},
+ {n:'Haeran Ryu',t:'W strap',d1:null,d2:['7:30','17:15']},
+ {n:'Jae Lee',t:'Fitter, Korea',d1:null,d2:['7:30','17:15'],x2:'Extra mic from Alpha'},
+ {n:'James Holley',t:'TM',d1:['9:15','10:00'],d2:['13:30','14:15'],x1:'Mixer spare. Retail (Charlie)',x2:'Mixer spare. CG vs. MOI'},
+ {n:'Matt Bovee',t:'TM',d1:['13:45','15:00'],d2:null,x1:'Mixer spare. P-Series First Look'},
+ {n:'Jackson Bragg',t:'TM',d1:['10:30','11:15'],d2:['TBC','TBC'],x1:'DRS First Look',x2:'TP5 DOC & Family 11:45, Speed Testing 2:30 + 5:30: audio?'},
+ {n:'Todd Chew',t:'TM',d1:null,d2:['TBC','TBC'],x1:'Only TP5 MCV 11:30 (Zambezi)',x2:'TP5 DOC & Family Testing 11:45: audio?'},
+ {n:'Cory Johnson',t:'TM',d1:null,d2:['TBC','TBC'],x2:'TP5 Speed Testing 2:30 + 5:30: audio?'},
+ {n:'Brian Bazzel',t:'TM',d1:['7:45','15:00','range'],d2:['9:45','13:15'],x2:'After ZMBZ #4 9:00; Canada 9:45 + 12:30'},
+ {n:'Keith Sbarbaro',t:'TM',d1:['7:45','15:00','range'],d2:null,x1:'After Eras Driver'},
+ {n:'Adrian Rietveld',t:'TM',d1:['7:45','16:15','range'],d2:['11:30','14:00']},
+ {n:'Matt Simone',t:'TM',d1:['7:45','17:30','range'],d2:['8:15','10:00'],x1:'Last: TCP Driver to 5:30',x2:'TCP Irons'}
+];
+var MIC_RULES={d1:'Christmas Card pros mic\'d at the tent 6:45–7:15 (BTS audio). Everyone else at their first set or on arrival at the range.',d2:'Talent mic\'d at the start of their first set, 7:30–7:45. Each mixer mics their own team; A2s help the big sets.'};
+var MIC_SHORT={'Johnson Wagner':'Wagner','Michael Thorbjornsen':'Thor','Jacob Bridgeman':'Bridgeman','Ryan Ruffels':'Ruffels','James Holley':'Holley','Matt Bovee':'Bovee','Jackson Bragg':'Bragg','Todd Chew':'Chew','Cory Johnson':'Cory J','Brian Bazzel':'Bazzel','Keith Sbarbaro':'Sbarbaro','Adrian Rietveld':'Rietveld','Matt Simone':'Simone'};
+function sn(r){return MIC_SHORT[r.n]||r.n.split(' ')[0];}
+var micDay=(function(){var d=new Date();if(d.getFullYear()===2026&&d.getMonth()===10){if(d.getDate()===23)return 'd1';if(d.getDate()===24)return 'd2';}try{var v=localStorage.getItem('tm26micday');if(v==='d1'||v==='d2'||v==='both')return v;}catch(e){}return 'd1';})();
+function mm(t){if(!t||t==='TBC')return null;var a=t.split(':');return +a[0]*60+ +a[1];}
+function t12(t){if(t==='TBC')return '<span class="tbc">TBC</span>';var m=mm(t),h=Math.floor(m/60),mi=m%60;return (h%12||12)+':'+String(mi).padStart(2,'0')+(h<12?'a':'p');}
+function micToday(){var d=new Date();if(d.getFullYear()!==2026||d.getMonth()!==10)return null;return d.getDate()===23?'d1':d.getDate()===24?'d2':null;}
+function micStatus(r,day,now){var v=r[day];if(!v||micToday()!==day)return '';var a=mm(v[0]),b=mm(v[1]);if(a==null)return '';if(now<a-30)return '';if(now<a)return 'st-due';if(now<b)return 'st-on';return 'st-done';}
+function mics(){
+ var now=new Date().getHours()*60+new Date().getMinutes(),today=micToday();
+ var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var h='<p class="note">Talent mic-up and wrap times. This tab is the live grid; the printed sheet is for TX# and frequencies. Rigs stay on under wardrobe through Zambezi sets (plan A). Grid as of '+MIC_ASOF+'.</p><div class="mic-ctl">'+seg+'</div>';
+ if(micDay==='both'){
+  var rows=MICS.slice().sort(function(a,b){return key(a,'d1')-key(b,'d1')||key(a,'d2')-key(b,'d2');});
+  h+='<div class="tbl mic"><table><thead><tr><th>Talent</th><th class="t">Mon mic</th><th class="t">Mon wrap</th><th class="t">Tue mic</th><th class="t">Tue wrap</th><th>Notes</th></tr></thead><tbody>'+
+  rows.map(function(r){return '<tr><td class="n">'+esc(r.n)+(r.t?'<small>'+esc(r.t)+'</small>':'')+'</td>'+cells(r.d1)+cells(r.d2)+'<td class="x">'+[r.x1?'Mon: '+esc(r.x1):'',r.x2?'Tue: '+esc(r.x2):''].filter(Boolean).join('<br>')+'</td></tr>';}).join('')+'</tbody></table></div>';
+  return h;
+ }
+ var d=micDay,on=MICS.filter(function(r){return r[d];}).sort(function(a,b){return key(a,d)-key(b,d)||a.n.localeCompare(b.n);}),off=MICS.filter(function(r){return !r[d];});
+ var tbc=on.filter(function(r){return r[d][0]==='TBC';}).length;
+ if(today===d){
+  var up=on.filter(function(r){var a=mm(r[d][0]);return a!=null&&a>=now&&a<=now+60;}),wr=on.filter(function(r){var b=mm(r[d][1]);return b!=null&&b>=now&&b<=now+60;});
+  h+='<div class="mic-next"><b>Next hour</b> · '+(up.length?'Mic: '+up.map(function(r){return esc(sn(r))+' '+t12(r[d][0]);}).join(', '):'No mic-ups')+' · '+(wr.length?'Wrap: '+wr.map(function(r){return esc(sn(r))+' '+t12(r[d][1]);}).join(', '):'No wraps')+'</div>';
+ }
+ h+='<div class="mic-sum"><span>'+(on.length-tbc)+' mic\'d</span>'+(tbc?'<span>'+tbc+' TBC</span>':'')+'<span>'+off.length+' off</span></div>';
+ h+='<p class="note">'+esc(MIC_RULES[d])+'</p>';
+ h+='<div class="tbl mic one"><table><thead><tr><th>Talent</th><th class="t">Mic</th><th class="t">Wrap</th><th class="x">Notes</th></tr></thead><tbody>'+
+ on.map(function(r){var v=r[d],xn=r[d==='d1'?'x1':'x2'];return '<tr class="'+micStatus(r,d,now)+'"><td class="n">'+esc(r.n)+(r.t?'<small>'+esc(r.t)+'</small>':'')+(xn?'<span class="xn">'+esc(xn)+'</span>':'')+'</td><td class="t">'+t12(v[0])+(v[2]?'<span class="w">'+v[2]+'</span>':'')+'</td><td class="t">'+t12(v[1])+'</td><td class="x">'+esc(r[d==='d1'?'x1':'x2']||'')+'</td></tr>';}).join('')+'</tbody></table></div>';
+ if(off.length)h+='<p class="mic-off"><b>Not mic\'d '+(d==='d1'?'Monday':'Tuesday')+':</b> '+off.map(function(r){return esc(r.n);}).join(', ')+'. Also not on the grid: Nelly (off both days), amateurs (Zambezi only), Barstool talent (Riggs, Frankie, Trent; their op runs audio).</p>';
+ if(today===d)h+='<p class="mic-key">Highlighted = mic-up due within 30 min · green dot = wearing a rig now · faded = wrapped. Updates with the clock.</p>';
+ return h;
+ function key(r,dd){var v=r[dd];if(!v)return 9999;var a=mm(v[0]);return a==null?9000:a;}
+ function cells(v){if(!v)return '<td class="t off">off</td><td class="t off">off</td>';return '<td class="t">'+t12(v[0])+(v[2]?'<span class="w">'+v[2]+'</span>':'')+'</td><td class="t">'+t12(v[1])+'</td>';}
+}
+var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics'].indexOf(t)>=0)tab=t;}catch(e){}
+if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#mics')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 20, 2 PM</div></header>';
- h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+t[1]+'</button>';}).join('')+'</nav>';
- h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():'<div id="tl-root"></div>')+'</section>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 20, 5:50 PM</div></header>';
+ h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['mics','Mics'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
+ h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
  if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
 }
-document.addEventListener('click',function(e){var b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;try{localStorage.setItem('tm26crewtab',tab);}catch(x){}render();});
+document.addEventListener('click',function(e){var m=e.target.closest('[data-micday]');if(m){micDay=m.dataset.micday;try{localStorage.setItem('tm26micday',micDay);}catch(x){}render();return;}var b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;try{localStorage.setItem('tm26crewtab',tab);}catch(x){}render();});
 render();
+setInterval(function(){if(tab==='mics'&&micToday())render();},60000);
 })();
 </script>
 
