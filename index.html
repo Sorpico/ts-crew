@@ -281,6 +281,7 @@ button.ml{appearance:none}
 @media (max-width:640px){.mic td,.mic th{padding:7px 6px}.mic.one td.x,.mic.one th.x{display:none}.mic.one td.n{white-space:normal}.mic.one td.n .xn{display:block;color:var(--warn);font-size:.78rem;margin-top:2px;line-height:1.25}.mic td.x{min-width:0}}
 .tl-s{display:none}@media (max-width:640px){.tl-l{display:none}.tl-s{display:inline}}
 @media print{nav,.mic-ctl,.mic-next,.mic-key{display:none!important}.mic tr td{opacity:1!important;background:none!important}body{background:#fff}}
+@media (max-width:640px){.kit td[data-l]::before{content:attr(data-l) ": ";color:var(--muted);font-size:.8rem}.kit td.prev:empty{display:none}}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -707,17 +708,19 @@ function ul(items){return '<ul class="lst">'+items.map(function(x){return '<li>'
 function sound(){
  return '<p class="note">How we run audio. Talent mics, mixer kits, the range kit and timecode. Times are on the Schedule tab.</p>'+
  '<div class="cam-stats"><div><b class="tab-num">38</b><span>Wisycom TX in the pool (MTP61 / MTP60)</span></div><div><b class="tab-num">16</b><span>Wisy RX on the range Scorpio</span></div><div><b class="tab-num">2</b><span>spare MTPs in every mixer bag</span></div><div><b class="tab-num">TC</b><span>UltraSyncs on every camera, Tentacles in bags and with A2s</span></div></div>'+
- '<h2>Who carries what</h2>'+kv([
-  ['Dave Wade','Alpha','SD 888'],
-  ['Joel Tower','Bravo','SD 888'],
-  ['Brandon Dew','Charlie','SD Scorpio. Monday he runs the range Scorpio kit for Range Warm Up, then takes his own kit to Charlie at 9:15'],
-  ['Michal Maksymowicz','Delta','SD 833'],
-  ['Andy Sankar','Fore Play / Barstool, audio only','SD 833'],
-  ['Josh Laemmle','YouTube / Ruffels, audio only','SD 833'],
-  ['Rick Alexander','Social sessions, audio only','SD 888 (Tim\'s extra kit). iPhone shoot: slate every session for sync. A2 work between sessions'],
-  ['Heather Marshall, Adriana Salvo','A2s','Mic-ups, changes, wraps. A2 kit + Tentacles'],
-  ['Tim Alward','Lead','Range cart, spare SD 633, spare TX and lavs'],
-  ['Freddie Aponte','Comms','See the Comms tab']])+
+ '<h2>Who carries what</h2><p class="note">Recorder, plus the TX/RX each person owns and brings into the pool. Every TX listed comes to prep Sunday; the pool is tight, so nothing stays home. Reticle supplies talent MTP61s, lavs, straps and the Hub program cable.</p>'+
+ '<div class="tbl teams kit"><table><thead><tr><th>Who</th><th>Unit</th><th>Recorder</th><th>Bringing into the pool</th><th>Notes</th></tr></thead><tbody>'+[
+  ['Dave Wade','Alpha','SD 888','2× MTP60, 1× MCR54',''],
+  ['Joel Tower','Bravo','SD 888','6× MTP61, 2× MCR54',''],
+  ['Brandon Dew','Charlie','SD Scorpio','2× MTP61, 1× MCR54','Monday he runs the range Scorpio kit for Range Warm Up, then takes his own kit to Charlie at 9:15'],
+  ['Michal Maksymowicz','Delta','SD 833','None','Reticle gives him 1× MCR54 (Baggett sub-rental)'],
+  ['Andy Sankar','Fore Play / Barstool, audio only','SD 833','4× MTP60, 1× MCR54',''],
+  ['Josh Laemmle','YouTube / Ruffels, audio only','SD 833','2× MCR54',''],
+  ['Rick Alexander','Social sessions, audio only','SD 888 (Tim\'s extra kit)','None','Full kit from Reticle. iPhone shoot: slate every session for sync. A2 work between sessions'],
+  ['Heather Marshall, Adriana Salvo','A2s','None','None','Mic-ups, changes, wraps. A2 kit + Tentacles'],
+  ['Tim Alward','Lead','Spare SD 633','12× MTP61, 4× MTP60, 4× MCR54 (Reticle)','Range cart, spare TX and lavs'],
+  ['Freddie Aponte','Comms','None','None','See the Comms tab']
+ ].map(function(r){return '<tr><td class="name">'+esc(r[0])+'</td><td data-l="Unit">'+esc(r[1])+'</td><td data-l="Recorder">'+esc(r[2])+'</td><td data-l="Pool"><b>'+esc(r[3])+'</b></td>'+(r[4]?'<td class="prev" style="white-space:normal;min-width:180px">'+esc(r[4])+'</td>':'<td class="prev"></td>')+'</tr>';}).join('')+'</tbody></table></div>'+
  '<h2>Talent rig</h2>'+ul([
   '<b>Wisycom MTP61 (or MTP60)</b> with a <b>DPA 6060/6061</b> lav, internal record on, TC jammed.',
   '<b>Ursa chest strap</b> down to a <b>Viviana waist strap</b>. Women\'s straps for Charley, Brooke and Haeran.',
@@ -1011,7 +1014,7 @@ function mics(){
 var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics'].indexOf(t)>=0)tab=t;}catch(e){}
 if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#mics')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 20, 5:50 PM</div></header>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 20, 7:00 PM</div></header>';
  h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['mics','Mics'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
  h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
