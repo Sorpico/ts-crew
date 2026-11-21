@@ -290,7 +290,7 @@ var CREW=[{"id": "tim", "name": "Tim Alward", "role": "Lead", "status": "Locked"
 var DAYS=[
  {d:'Sat Nov 21',k:'Travel',t:'Travel day. Hotel rooms start tonight: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd, Palm Beach Gardens. Rooms are under your own name; show ID at check-in. Production tents open at 2 PM; no audio prep today.'},
  {d:'Sun Nov 22',k:'Prep',t:'Prep starts Sunday morning, full crew. Kit build, TX/lav rigs, freq plan, TC jam test, comms pairing and a Hub link/unlink rehearsal at the range, block schedule walkthrough.'},
- {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Crew call 6:15 AM at the production tent, everyone. Christmas Card talent is mic\'d at the tent 6:45–7:15, before the shoot (BTS audio): Tim, Joel and the A2s, then Christmas Card 7:30–8:15 (Tim, Joel, Heather, Adriana, Rick). Freddie heads to the range to set up and link the Hubs. Range crew (Dave, Brandon, Michal, Andy, Josh) at the range by 7:30 to mic arrivals and set up to receive. Range Warm Up 8:30–9:00 with Brandon on the range Scorpio and Hubs 1–5 linked, then teams break off with their own Hubs. Tiger mic\'d 11:45. Wrap around 6:00 (sunset 5:45).'},
+ {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Crew call 6:15 AM at the production tent, everyone. Christmas Card talent is mic\'d at the tent 6:45–7:15, before the shoot (BTS audio): Tim and the A2s (Heather, Adriana, Rick), then Christmas Card 7:30–8:15. Freddie heads to the range to set up and link the Hubs. All mixers (Dave, Joel, Brandon, Michal, Andy, Josh) report to the range with their camera teams, there by 7:30 to mic arrivals and set up to receive. Range Warm Up 8:30–9:00 with Brandon on the range Scorpio and Hubs 1–5 linked, then teams break off with their own Hubs. Tiger mic\'d 11:45. Wrap around 6:00 (sunset 5:45).'},
  {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Sound call 6:00–6:15 AM. Pros arrive 7:00; each mixer mics their own talent at the start of their first set, 7:30–7:45, with the A2s helping the big sets. Bridgeman arrives 9:15. Tiger, Rory and Nelly are off Day 2; Haeran Ryu and the amateurs are added. Wrap around 6:00. Hotel checkout is today; most of us travel home after wrap.'},
  {d:'Wed Nov 25',k:'Travel',t:'Paid travel day home (half rate). Need a room the night of the 24th? Tell Tim.'}];
 function schedule(){
@@ -365,14 +365,14 @@ function buildCrew(crew){
   const mic=[...MIXERS,...SOCIAL.slice(0,1)];
   const byUnit=id=>CREW.filter(c=>{const u=unitOf(c.role);return u&&u.id===id}).map(c=>c.id);
   const FP=byUnit("foreplay"),BRAVO=byUnit("bravo"),CHAR=byUnit("charlie");
-  /* Day 1 morning (Tim, Nov 18): Tim, Joel and the A2s at Christmas Card; every other mixer + Freddie at the range */
-  const CC=[...(A1?[A1]:[]),...BRAVO,...A2S];/* A2S includes Rick (social) */
-  const RANGEMIX=MIXERS.filter(id=>!BRAVO.includes(id));
+  /* Day 1 morning (Tim, Nov 20): Tim and the A2s (incl. Rick) at Christmas Card; ALL mixers + Freddie at the range with their camera teams */
+  const CC=[...(A1?[A1]:[]),...A2S];/* A2S includes Rick (social) */
+  const RANGEMIX=MIXERS.slice();
   FIXED={
     d1:[
-      {who:CC,n:"Christmas Card (Tim, Joel, Heather, Adriana, Rick)",s:450,e:495,c:"range",w:[]},
+      {who:CC,n:"Christmas Card (Tim, Heather, Adriana, Rick)",s:450,e:495,c:"range",w:[]},
       {who:RANGEMIX,n:"At the range from 7:30: mic Wagner, TM staff, Grant, Ruffels as they arrive; set up to receive",s:450,e:510,c:"prep",w:[]},
-      {who:[...(A1?[A1]:[]),...BRAVO],n:"Mic-up Christmas Card pros at the tent BEFORE CC, for BTS audio (Maurece, Nov 19 6:10 PM). Rory first, before his 7:00 Cold Open MCV",s:405,e:435,c:"prep",w:[]},
+      {who:(A1?[A1]:[]),n:"Mic-up Christmas Card pros at the tent BEFORE CC, for BTS audio (Maurece, Nov 19 6:10 PM). Rory first, before his 7:00 Cold Open MCV",s:405,e:435,c:"prep",w:[]},
       {who:CHAR,n:"Range master: range Scorpio, 16 Wisy RX + comms send to the linked Hubs (11 talent). Then takes his own kit to Charlie",s:510,e:540,c:"range",w:[]},
       {who:A1?[A1]:[],n:"P Series Forged (Collin) · Tim on the range Scorpio kit, if Maurece says it's ours",s:555,e:645,c:"sound",w:["Collin"]},
       {who:FP,n:"Mic-up Bridgeman, Thor (with A2s)",s:525,e:540,c:"prep",w:[]},
