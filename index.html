@@ -299,7 +299,44 @@ button.ml{appearance:none}
 .tc .ln span:first-child{color:var(--muted)}
 .tc .tbc{background:var(--warn-bg);color:var(--warn);padding:0 4px;border-radius:3px;font-weight:700}
 @media (max-width:640px){.tal{grid-template-columns:repeat(2,1fr);gap:8px}.tc .bd{padding:6px 8px 8px}}
-@media print{.tal{grid-template-columns:repeat(4,1fr)}.tc{break-inside:avoid}}
+.tc .tn{font-size:.7rem;color:var(--muted);line-height:1.2;margin-top:1px}
+.tc .hd{display:none}
+.tc.hd{display:none}
+.tc .wh{font:700 .62rem var(--f-mono);color:var(--ink);text-transform:uppercase}
+.tc .wl,.tal-ph,.tal-log{display:none}
+.tal-pr{margin-left:8px;font:600 .75rem var(--f-mono);padding:3px 10px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--ink);cursor:pointer}
+@media print{
+ @page{size:letter landscape;margin:.3in}
+ body.pt header,body.pt nav,body.pt .note,body.pt .mic-ctl{display:none!important}
+ body.pt .wrap{max-width:none;padding:0;margin:0}
+ body.pt{font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .tal-ph{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;font:600 9.5px var(--f-mono);color:#444;border-bottom:2px solid #111;padding-bottom:4px;margin-bottom:6px}
+ .tal-ph b{font:700 17px var(--f-display);color:#111;letter-spacing:.01em}
+ .tal-ph .tal-rig{margin-left:auto}
+ .tal{grid-template-columns:repeat(4,1fr);gap:7px}
+ .tc.hd{display:flex} .tc .hd{display:block}
+ .tc{break-inside:avoid;flex-direction:row;height:2.38in;border-color:#bbb}
+ .tc .ph{aspect-ratio:auto;width:1.1in;flex:0 0 1.1in}
+ .tc .bd{flex:1;min-width:0;display:flex;flex-direction:column;padding:5px 7px;font-size:10px}
+ .tc .nm{font-size:12px;line-height:1.1}
+ .tc .tg{font-size:8px;margin-bottom:2px}
+ .tc .ln{font-size:10px;margin-top:2px;padding-top:2px;justify-content:flex-start}
+ .tc .ln span:first-child{width:28px;flex:0 0 28px}
+ .tc .ln span:last-child{white-space:nowrap}
+ .tc .dy .ln{align-items:baseline}
+ .tc .tn{font-size:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .tc .rfl{margin-top:auto}
+ .tc .rfl .ln{border-top:none;align-items:flex-end;height:.2in}
+ .tc .rfl .ln span:last-child{flex:1;text-align:right}
+ .tc .sv{display:none}
+ .tc .wl{display:block;border-bottom:1px solid #777;height:100%;margin-left:6px}
+ .tal-log{display:block;break-before:page}
+ .tal-log h2{font:700 13px var(--f-display);text-transform:uppercase;letter-spacing:.04em;margin:0 0 4px}
+ .tal-log table{width:100%;border-collapse:collapse}
+ .tal-log th{font:600 9px var(--f-mono);text-align:left;color:#555;border-bottom:1.5px solid #111;padding:2px 4px}
+ .tal-log td{height:.32in;padding:0;border-bottom:1px solid #bbb;border-right:1px solid #e2e2e2}
+ .tal-log td:last-child{border-right:0}
+}
 @media (max-width:640px){nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}nav::-webkit-scrollbar{display:none}nav button{flex:1 1 auto!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;font-size:.74rem!important}}
 </style>
 <div id="app" class="wrap"></div>
@@ -1095,26 +1132,35 @@ function micRig(){
 function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
 function talent(){
  var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
- var list=MICS.filter(function(r){return micDay==='both'?(r.d1||r.d2):r[micDay];});
+ // Print always lists everyone mic'd either day (plus no-mic TM staff on the schedule); screen filters by the day picker.
+ var all=MICS.filter(function(r){return r.d1||r.d2;});
  function rng(v){if(!v)return 'off';return t12(v[0])+'–'+t12(v[1]);}
- function rf(o){return o&&o.f?esc((o.tx?o.tx+' · ':'')+o.f):'—';}
- var h='<p class="note">Who we mic. Times and frequencies come from the Micing tab, so this page updates with it. Tap Micing for notes and the rig build.</p><div class="mic-ctl">'+seg+'</div><div class="tal">'+
- list.map(function(r){var a=MIC_RF[r.n]||{},ini=r.n.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+ function rf(o){return o&&o.f?esc((o.tx?o.tx+' · ':'')+o.f+' MHz'):'<span class="sv">—</span><span class="wl"></span>';}
+ function day(lbl,v,x,cls){var tag=v&&v[2]?'<b class="wh">'+esc(v[2])+'</b> ':'';return '<div class="dy '+cls+'"><div class="ln"><span>'+lbl+'</span><span>'+rng(v)+'</span></div>'+(x||tag?'<div class="tn">'+tag+esc(x||'')+'</div>':'')+'</div>';}
+ var h='<div class="tal-ph"><b>Talent Mic Grid</b> · grid as of '+esc(MIC_ASOF)+(MIC_RF_ASOF?' · freqs as of '+esc(MIC_RF_ASOF):'')+' · printed <span class="tal-pd"></span><span class="tal-rig">MTP61 + DPA 6060 · Viviana chest mount → sports waist strap · int-rec on, TC jammed</span></div>'+
+  '<p class="note">Who we mic. Times and frequencies come from the Micing tab, so this page updates with it. Tap Micing for notes and the rig build. <button class="tal-pr" onclick="window.print()">Print grid</button></p><div class="mic-ctl">'+seg+'</div><div class="tal">'+
+ all.map(function(r){var a=MIC_RF[r.n]||{},ini=r.n.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+  var show=micDay==='both'?true:!!r[micDay];
   var lines='';
-  if(micDay!=='d2')lines+='<div class="ln"><span>Mon</span><span>'+rng(r.d1)+(r.d1&&r.d1[2]?' '+r.d1[2]:'')+'</span></div>';
-  if(micDay!=='d1')lines+='<div class="ln"><span>Tue</span><span>'+rng(r.d2)+'</span></div>';
-  lines+='<div class="ln"><span>PRI</span><span>'+rf(a.p)+'</span></div><div class="ln"><span>BU</span><span>'+rf(a.b)+'</span></div>';
-  return '<div class="tc"><div class="ph"><span class="ini">'+esc(ini)+'</span><img src="talent/'+slug(r.n)+'.jpg" alt="'+esc(r.n)+'" loading="lazy" onerror="this.remove()"></div><div class="bd"><div class="nm">'+esc(r.n)+'</div><div class="tg">'+esc(r.t||'Pro')+'</div>'+lines+'</div></div>';
- }).join('')+'</div>';
+  if(micDay!=='d2')lines+=day('Mon',r.d1,r.d1?r.x1:'','pd1');
+  else lines+=day('Mon',r.d1,r.d1?r.x1:'','pd1 hd');
+  if(micDay!=='d1')lines+=day('Tue',r.d2,r.d2?r.x2:'','pd2');
+  else lines+=day('Tue',r.d2,r.d2?r.x2:'','pd2 hd');
+  lines+='<div class="rfl"><div class="ln"><span>PRI</span><span>'+rf(a.p)+'</span></div><div class="ln"><span>BU</span><span>'+rf(a.b)+'</span></div></div>';
+  return '<div class="tc'+(show?'':' hd')+'"><div class="ph"><span class="ini">'+esc(ini)+'</span><img src="talent/'+slug(r.n)+'.jpg" alt="'+esc(r.n)+'" loading="lazy" onerror="this.remove()"></div><div class="bd"><div class="nm">'+esc(r.n)+'</div><div class="tg">'+esc(r.t||'Pro')+'</div>'+lines+'</div></div>';
+ }).join('')+'</div>'+
+ '<div class="tal-log"><h2>Spare / field mic-ups &amp; frequency changes</h2><table><thead><tr><th style="width:7%">Day</th><th style="width:12%">Mixer</th><th style="width:9%">TX#</th><th style="width:20%">Talent</th><th style="width:15%">Freq (MHz)</th><th style="width:8%">On</th><th style="width:8%">Off</th><th>Notes</th></tr></thead><tbody>'+new Array(17).join('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>')+'</tbody></table></div>';
  return h;
 }
 var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent'].indexOf(t)>=0)tab=t;}catch(e){}
 if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 21, 1:15 PM</div></header>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 21, 1:30 PM</div></header>';
  h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['talent','Talent'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
  h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():tab==='talent'?talent():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
+ document.body.classList.toggle('pt',tab==='talent');
+ var pd=document.querySelector('.tal-pd');if(pd){var n=new Date();pd.textContent=n.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+n.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
  if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
 }
 document.addEventListener('click',function(e){var m=e.target.closest('[data-micday]');if(m){micDay=m.dataset.micday;try{localStorage.setItem('tm26micday',micDay);}catch(x){}render();return;}var b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;try{localStorage.setItem('tm26crewtab',tab);}catch(x){}render();});
