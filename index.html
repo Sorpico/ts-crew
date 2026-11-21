@@ -285,6 +285,22 @@ button.ml{appearance:none}
 .rig li{margin:8px 0}
 .rf .mhz{font-weight:700}.rf .rs{display:none}
 @media (max-width:640px){.rf .rl{display:none}.rf .rs{display:inline}.rf td.x,.rf th.x{display:none}.rf td,.rf th{padding:7px 5px}}
+
+/* Talent tab */
+.tal{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.tc{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.tc .ph{aspect-ratio:4/5;background:var(--tint);position:relative;overflow:hidden}
+.tc .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.tc .ph .ini{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 2.4rem var(--f-display);color:var(--muted)}
+.tc .bd{padding:8px 10px 10px;font-size:.82rem;line-height:1.35}
+.tc .nm{font-weight:700;font-size:.95rem}
+.tc .tg{font:600 .68rem var(--f-mono);text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.tc .ln{display:flex;justify-content:space-between;gap:6px;font-family:var(--f-mono);font-size:.78rem;border-top:1px solid var(--line);padding-top:3px;margin-top:3px}
+.tc .ln span:first-child{color:var(--muted)}
+.tc .tbc{background:var(--warn-bg);color:var(--warn);padding:0 4px;border-radius:3px;font-weight:700}
+@media (max-width:640px){.tal{grid-template-columns:repeat(2,1fr);gap:8px}.tc .bd{padding:6px 8px 8px}}
+@media print{.tal{grid-template-columns:repeat(4,1fr)}.tc{break-inside:avoid}}
+@media (max-width:640px){nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}nav::-webkit-scrollbar{display:none}nav button{flex:1 1 auto!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;font-size:.74rem!important}}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -1074,12 +1090,30 @@ function micRig(){
   'Collect TX, lav and both straps at wrap. Times are in the grid above.'
  ].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
 }
-var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics'].indexOf(t)>=0)tab=t;}catch(e){}
-if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
+
+// ===== TALENT tab: cards built from MICS + MIC_RF. Photos live in /talent/<slug>.jpg (slug = name lowercased, spaces to dashes).
+function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+function talent(){
+ var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var list=MICS.filter(function(r){return micDay==='both'?(r.d1||r.d2):r[micDay];});
+ function rng(v){if(!v)return 'off';return t12(v[0])+'–'+t12(v[1]);}
+ function rf(o){return o&&o.f?esc((o.tx?o.tx+' · ':'')+o.f):'—';}
+ var h='<p class="note">Who we mic. Times and frequencies come from the Micing tab, so this page updates with it. Tap Micing for notes and the rig build.</p><div class="mic-ctl">'+seg+'</div><div class="tal">'+
+ list.map(function(r){var a=MIC_RF[r.n]||{},ini=r.n.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+  var lines='';
+  if(micDay!=='d2')lines+='<div class="ln"><span>Mon</span><span>'+rng(r.d1)+(r.d1&&r.d1[2]?' '+r.d1[2]:'')+'</span></div>';
+  if(micDay!=='d1')lines+='<div class="ln"><span>Tue</span><span>'+rng(r.d2)+'</span></div>';
+  lines+='<div class="ln"><span>PRI</span><span>'+rf(a.p)+'</span></div><div class="ln"><span>BU</span><span>'+rf(a.b)+'</span></div>';
+  return '<div class="tc"><div class="ph"><span class="ini">'+esc(ini)+'</span><img src="talent/'+slug(r.n)+'.jpg" alt="'+esc(r.n)+'" loading="lazy" onerror="this.remove()"></div><div class="bd"><div class="nm">'+esc(r.n)+'</div><div class="tg">'+esc(r.t||'Pro')+'</div>'+lines+'</div></div>';
+ }).join('')+'</div>';
+ return h;
+}
+var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent'].indexOf(t)>=0)tab=t;}catch(e){}
+if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 21, 10:15 AM</div></header>';
- h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
- h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():'<div id="tl-root"></div>')+'</section>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 21, 10:30 AM</div></header>';
+ h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['talent','Talent'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
+ h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():tab==='talent'?talent():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
  if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
 }
