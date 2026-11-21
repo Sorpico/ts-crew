@@ -282,6 +282,7 @@ button.ml{appearance:none}
 .tl-s{display:none}@media (max-width:640px){.tl-l{display:none}.tl-s{display:inline}}
 @media print{nav,.mic-ctl,.mic-next,.mic-key{display:none!important}.mic tr td{opacity:1!important;background:none!important}body{background:#fff}}
 @media (max-width:640px){.kit td[data-l]::before{content:attr(data-l) ": ";color:var(--muted);font-size:.8rem}.kit td.prev:empty{display:none}}
+.rig li{margin:8px 0}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -749,7 +750,7 @@ function sound(){
  ].map(function(r){return '<tr><td class="name">'+esc(r[0])+'</td><td data-l="Unit">'+esc(r[1])+'</td><td data-l="Recorder">'+esc(r[2])+'</td><td data-l="Pool"><b>'+esc(r[3])+'</b></td>'+(r[4]?'<td class="prev" style="white-space:normal;min-width:180px">'+esc(r[4])+'</td>':'<td class="prev"></td>')+'</tr>';}).join('')+'</tbody></table></div>'+
  '<h2>Talent rig</h2>'+ul([
   '<b>Wisycom MTP61 (or MTP60)</b> with a <b>DPA 6060/6061</b> lav, internal record on, TC jammed.',
-  '<b>Ursa chest strap</b> down to a <b>Viviana waist strap</b>. Women\'s straps for Charley, Brooke and Haeran.',
+  '<b>Viviana chest mount</b> with the DPA inside, tip exposed, Rycote hollow sticky + Overcover. Cable loops the mount for strain relief, then down the side flank to a <b>Viviana sports waist strap</b>. Women\'s straps for Charley, Brooke and Haeran. Full build on the Micing tab.',
   'Name the TX file by talent, and log any TX or frequency change on the mic grid.',
   'Rigs stay on under wardrobe through Zambezi sets (MCV, DOC, Year in Review). If Zambezi says no, A2s de-mic and re-mic; the fallback slots are on the schedule.',
   'Barstool talent (Riggs, Frankie, Trent) is not ours. Cover our athletes only.'])+
@@ -1014,12 +1015,12 @@ function micStatus(r,day,now){var v=r[day];if(!v||micToday()!==day)return '';var
 function mics(){
  var now=new Date().getHours()*60+new Date().getMinutes(),today=micToday();
  var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
- var h='<p class="note">Talent mic-up and wrap times. This tab is the live grid; the printed sheet is for TX# and frequencies. Rigs stay on under wardrobe through Zambezi sets (plan A). Grid as of '+MIC_ASOF+'.</p><div class="mic-ctl">'+seg+'</div>';
+ var h='<p class="note"><a href="#rig" onclick="document.getElementById(\'rig\').scrollIntoView({behavior:\'smooth\'});return false;">How we rig talent ↓</a></p><p class="note">Talent mic-up and wrap times. This tab is the live grid; the printed sheet is for TX# and frequencies. Rigs stay on under wardrobe through Zambezi sets (plan A). Grid as of '+MIC_ASOF+'.</p><div class="mic-ctl">'+seg+'</div>';
  if(micDay==='both'){
   var rows=MICS.slice().sort(function(a,b){return key(a,'d1')-key(b,'d1')||key(a,'d2')-key(b,'d2');});
   h+='<div class="tbl mic"><table><thead><tr><th>Talent</th><th class="t">Mon mic</th><th class="t">Mon wrap</th><th class="t">Tue mic</th><th class="t">Tue wrap</th><th>Notes</th></tr></thead><tbody>'+
   rows.map(function(r){return '<tr><td class="n">'+esc(r.n)+(r.t?'<small>'+esc(r.t)+'</small>':'')+'</td>'+cells(r.d1)+cells(r.d2)+'<td class="x">'+[r.x1?'Mon: '+esc(r.x1):'',r.x2?'Tue: '+esc(r.x2):''].filter(Boolean).join('<br>')+'</td></tr>';}).join('')+'</tbody></table></div>';
-  return h;
+  return h+micRig();
  }
  var d=micDay,on=MICS.filter(function(r){return r[d];}).sort(function(a,b){return key(a,d)-key(b,d)||a.n.localeCompare(b.n);}),off=MICS.filter(function(r){return !r[d];});
  var tbc=on.filter(function(r){return r[d][0]==='TBC';}).length;
@@ -1033,15 +1034,33 @@ function mics(){
  on.map(function(r){var v=r[d],xn=r[d==='d1'?'x1':'x2'];return '<tr class="'+micStatus(r,d,now)+'"><td class="n">'+esc(r.n)+(r.t?'<small>'+esc(r.t)+'</small>':'')+(xn?'<span class="xn">'+esc(xn)+'</span>':'')+'</td><td class="t">'+t12(v[0])+(v[2]?'<span class="w">'+v[2]+'</span>':'')+'</td><td class="t">'+t12(v[1])+'</td><td class="x">'+esc(r[d==='d1'?'x1':'x2']||'')+'</td></tr>';}).join('')+'</tbody></table></div>';
  if(off.length)h+='<p class="mic-off"><b>Not mic\'d '+(d==='d1'?'Monday':'Tuesday')+':</b> '+off.map(function(r){return esc(r.n);}).join(', ')+'. Also not on the grid: Nelly (off both days), amateurs (Zambezi only), Barstool talent (Riggs, Frankie, Trent; their op runs audio).</p>';
  if(today===d)h+='<p class="mic-key">Highlighted = mic-up due within 30 min · green dot = wearing a rig now · faded = wrapped. Updates with the clock.</p>';
- return h;
+ return h+micRig();
  function key(r,dd){var v=r[dd];if(!v)return 9999;var a=mm(v[0]);return a==null?9000:a;}
  function cells(v){if(!v)return '<td class="t off">off</td><td class="t off">off</td>';return '<td class="t">'+t12(v[0])+(v[2]?'<span class="w">'+v[2]+'</span>':'')+'</td><td class="t">'+t12(v[1])+'</td>';}
 }
+
+function micRig(){
+ return '<h2 id="rig" style="margin-top:22px">How we rig talent</h2><p class="note">Every athlete gets the same build. If it doesn\'t look like this, redo it before they walk.</p>'+
+ '<ol class="lst rig">'+[
+  '<b>DPA 6060 into the Viviana chest mount.</b> Seat the lav inside the mount with the <b>tip exposed</b>.',
+  '<b>Rycote hollow circle sticky</b> on the tip, then a <b>Rycote Overcover</b> over it.',
+  '<b>Strain relief:</b> lead the cable around the chest mount before it leaves the mount.',
+  '<b>Route down the side flank</b> of the body.',
+  '<b>Viviana sports waist strap</b> holds the TX (MTP61 or MTP60). Women\'s straps for Charley, Brooke and Haeran.',
+  '<b>TX check before they walk:</b> internal record on, TC jammed, file named for the talent, mixer confirms signal.'
+ ].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>'+
+ '<h2>A2 rules</h2><ul class="lst">'+[
+  'Talent stays mic\'d all day. Rigs stay on under wardrobe through Zambezi sets (plan A). If Zambezi says no, the de-mic/re-mic slots are on the Timeline.',
+  'Any TX or frequency swap goes on the printed grid log (page 3): Day, Mixer, TX#, Talent, Freq, On, Off.',
+  'Barstool talent (Riggs, Frankie, Trent) is not ours. Their op runs their audio.',
+  'Collect TX, lav and both straps at wrap. Times are in the grid above.'
+ ].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+}
 var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics'].indexOf(t)>=0)tab=t;}catch(e){}
-if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#mics')tab='mics';
+if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 20, 7:00 PM</div></header>';
- h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['mics','Mics'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 21, 2:00 AM</div></header>';
+ h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
  h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
  if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
