@@ -289,13 +289,33 @@ button.ml{appearance:none}
 var CREW=[{"id": "tim", "name": "Tim Alward", "role": "Lead", "status": "Locked"}, {"id": "andy", "name": "Andy Sankar", "role": "ENG D", "status": "Locked"}, {"id": "michal", "name": "Michal Maksymowicz", "role": "ENG E", "status": "Locked"}, {"id": "joel", "name": "Joel Tower", "role": "ENG B", "status": "Locked"}, {"id": "brandon", "name": "Brandon Dew", "role": "ENG C", "status": "Locked"}, {"id": "joshl", "name": "Josh Laemmle", "role": "ENG F", "status": "Locked"}, {"id": "dave", "name": "David Wade", "role": "ENG A", "status": "Locked"}, {"id": "rick", "name": "Rick Alexander", "role": "Social mixer", "status": "Locked"}, {"id": "adriana", "name": "Adriana Salvo", "role": "Floater 2", "status": "Locked"}, {"id": "heather", "name": "Heather Marshall", "role": "Floater 1", "status": "Locked"}, {"id": "freddie", "name": "Freddie Aponte", "role": "Comms lead", "status": "Locked"}];
 var DAYS=[
  {d:'Sat Nov 21',k:'Travel',t:'Travel day. Hotel rooms start tonight: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd, Palm Beach Gardens. Rooms are under your own name; show ID at check-in. Production tents open at 2 PM; no audio prep today.'},
- {d:'Sun Nov 22',k:'Prep',t:'Prep starts Sunday morning, full crew. Kit build, TX/lav rigs, freq plan, TC jam test, comms pairing and a Hub link/unlink rehearsal at the range, block schedule walkthrough.'},
+ {d:'Sun Nov 22',k:'Prep',t:'Sound crew call 7:30 AM at base camp. All-hands 11:30 in the dining tent, set meetings 12:00–2:30, course walk-throughs 3:00–4:30. Full prep schedule below.'},
  {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Crew call 6:15 AM at the production tent, everyone. Christmas Card talent is mic\'d at the tent 6:45–7:15, before the shoot (BTS audio): Tim and the A2s (Heather, Adriana, Rick), then Christmas Card 7:30–8:15. Freddie heads to the range to set up and link the Hubs. All mixers (Dave, Joel, Brandon, Michal, Andy, Josh) report to the range with their camera teams, there by 7:30 to mic arrivals and set up to receive. Range Warm Up 8:30–9:00 with Brandon on the range Scorpio and Hubs 1–5 linked, then teams break off with their own Hubs. Tiger mic\'d 11:45. Wrap around 6:00 (sunset 5:45).'},
  {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Sound call 6:00–6:15 AM. Pros arrive 7:00; each mixer mics their own talent at the start of their first set, 7:30–7:45, with the A2s helping the big sets. Bridgeman arrives 9:15. Tiger, Rory and Nelly are off Day 2; Haeran Ryu and the amateurs are added. Wrap around 6:00. Hotel checkout is today; most of us travel home after wrap.'},
  {d:'Wed Nov 25',k:'Travel',t:'Paid travel day home (half rate). Need a room the night of the 24th? Tell Tim.'}];
 function schedule(){
  return '<p class="note">Location: APOGEE, 2103 SW Bridge Rd, Hobe Sound, FL 33455. Hotel: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd. Monday crew call 6:15 AM at the production tent, everyone; Tuesday sound call 6:00–6:15 AM at the production tent. Block times can still move; this page is the latest.</p><div class="card">'+
- DAYS.map(function(x){return '<div class="day"><div class="d">'+x.d.split(' ').slice(1).join(' ')+'<span>'+x.d.split(' ')[0]+'</span></div><div><span class="k">'+x.k+'</span><div>'+esc(x.t)+'</div></div></div>';}).join('')+'</div>';
+ DAYS.map(function(x){return '<div class="day"><div class="d">'+x.d.split(' ').slice(1).join(' ')+'<span>'+x.d.split(' ')[0]+'</span></div><div><span class="k">'+x.k+'</span><div>'+esc(x.t)+'</div></div></div>';}).join('')+'</div>'+prep();
+}
+
+function prep(){
+ var R=[['7:30–8:15','All','Unload the U-Haul, set up base camp: tables, power, charging, one station per mixer + an A2 mic-up station'],
+  ['7:45–8:30','Tim','Local RF scan at base camp + range (Wisy, A1, B1, walkie band)'],
+  ['8:15–8:45','Tim + all mixers','Hub IFB bench test on temp frequencies. Every mixer listens on an R1a and confirms talk + program on the IFB, producer PTT unmute/mute on their SRC-B1, and producer talk kept off the main mix and camera hops'],
+  ['8:15–9:15','A2s (Heather, Adriana, Rick)','Label all talent TX (TX# + talent), batteries in, firmware check'],
+  ['8:15–9:30','Freddie','Comms check-in: label Hubs Field 1–5, pair headsets, charge, test the range link'],
+  ['8:30–9:30','Tim','Build the frequency list in Soundbase (talent + spares, A1 hops, Block 470 IFB, B1 PTT, walkies), export to Wisycom Manager'],
+  ['8:45–9:45','Mixers','Kit out at your station, check against the kit standard: mixer, boom, MCR54, SRC-B1, A1 hop TX, 2 spare MTP, 2 spare B1 TX, spare lavs, IFBs, boundary mic, media, batteries, TC cable'],
+  ['9:45–10:30','Tim + mixers','Program the MCR54 in each bag (one group per bag), program and label TX, set metadata on every kit (file naming, scene, talent). Load all 6 producer B1 frequencies on your SRC-B1 as one group'],
+  ['10:30–11:00','Tim + mixers','Master TC set, jam all TX + recorders; Lockits on cameras with camera teams; top mics'],
+  ['11:00–11:30','Tim / A2','Speaker set up and tested in the dining tent for Lauren'],
+  ['11:30–12:00','All','All-hands meeting, dining tent'],
+  ['12:00–2:30','Mixers with their teams; Tim floats','Set meetings'],
+  ['2:30–3:00','Freddie + mixers','Hand out comms to camera teams; finish Lockits, TC check'],
+  ['3:00–4:30','All','Course walk-throughs'],
+  ['4:30–5:30','Tim + crew','Fixes from the walk-throughs, RF walk test, Hub IFB check, everything on charge for Monday']];
+ return '<h2 style="margin-top:22px">Sunday prep · Nov 22</h2><p class="note">Sound crew call 7:30 AM at base camp. Producer packs (R1a + their own B1 PTT TX) get built, labeled and charged Sunday; each producer signs theirs out Monday morning and keeps it all day.</p>'+kv(R)+
+ '<h2>Done before wrap</h2>'+ul(['Every bag identical to the kit standard','Frequency list in Wisycom Manager; every receiver and TX programmed and labeled','Metadata set on every recorder and TX','TC jammed; Lockits mounted; top mics on','8 producer packs built, labeled, charged, R1a presets set','Comms handed out, everything charging']);
 }
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
