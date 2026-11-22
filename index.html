@@ -310,12 +310,13 @@ button.ml{appearance:none}
  body.pt header,body.pt nav,body.pt .note,body.pt .mic-ctl{display:none!important}
  body.pt .wrap{max-width:none;padding:0;margin:0}
  body.pt{font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
- .tal-ph{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;font:600 9.5px var(--f-mono);color:#444;border-bottom:2px solid #111;padding-bottom:4px;margin-bottom:6px}
+ .tal-ph{display:flex;flex-wrap:nowrap;white-space:nowrap;overflow:hidden;gap:4px 12px;align-items:baseline;font:600 8.5px var(--f-mono);color:#444;border-bottom:2px solid #111;padding-bottom:4px;margin-bottom:6px}
  .tal-ph b{font:700 17px var(--f-display);color:#111;letter-spacing:.01em}
  .tal-ph .tal-rig{margin-left:auto}
  .tal{grid-template-columns:repeat(4,1fr);gap:7px}
  .tc.hd{display:flex} .tc .hd{display:block}
- .tc{break-inside:avoid;flex-direction:row;height:2.38in;border-color:#bbb}
+ .tc .mu{display:none}
+ .tc{break-inside:avoid;flex-direction:row;height:2.3in;border-color:#bbb}
  .tc .ph{aspect-ratio:auto;width:1.1in;flex:0 0 1.1in}
  .tc .bd{flex:1;min-width:0;display:flex;flex-direction:column;padding:5px 7px;font-size:10px}
  .tc .nm{font-size:12px;line-height:1.1}
@@ -1155,9 +1156,9 @@ function talent(){
  // Print always lists everyone mic'd either day (plus no-mic TM staff on the schedule); screen filters by the day picker.
  var all=MICS.filter(function(r){return r.d1||r.d2;});
  function rng(v){if(!v)return 'off';return t12(v[0])+'–'+t12(v[1]);}
- function rf(o){return o&&o.f?esc((o.tx?o.tx+' · ':'')+o.f+' MHz'):'<span class="sv">—</span><span class="wl"></span>';}
+ function rf(o){return o&&o.f?esc((o.tx?o.tx+' · ':'')+o.f)+'<span class="mu"> MHz</span>':'<span class="sv">—</span><span class="wl"></span>';}
  function day(lbl,v,x,cls){var tag=v&&v[2]?'<b class="wh">'+esc(v[2])+'</b> ':'';return '<div class="dy '+cls+'"><div class="ln"><span>'+lbl+'</span><span>'+rng(v)+'</span></div>'+(x||tag?'<div class="tn">'+tag+esc(x||'')+'</div>':'')+'</div>';}
- var h='<div class="tal-ph"><b>Talent Mic Grid</b> · grid as of '+esc(MIC_ASOF)+(MIC_RF_ASOF?' · freqs as of '+esc(MIC_RF_ASOF):'')+' · printed <span class="tal-pd"></span><span class="tal-rig">MTP61 + DPA 6060 · Viviana chest mount → sports waist strap · int-rec on, TC jammed</span></div>'+
+ var h='<div class="tal-ph"><b>Talent Mic Grid</b> · grid as of '+esc(MIC_ASOF)+(MIC_RF_ASOF?' · freqs as of '+esc(MIC_RF_ASOF):'')+' · printed <span class="tal-pd"></span><span class="tal-rig">MTP61 + DPA 6060 · Viviana chest → waist · TC jammed</span></div>'+
   '<p class="note">Who we mic. Times and frequencies come from the Micing tab, so this page updates with it. Tap Micing for notes and the rig build. <button class="tal-pr" onclick="window.print()">Print grid</button></p><div class="mic-ctl">'+seg+'</div><div class="tal">'+
  all.map(function(r){var a=MIC_RF[r.n]||{},ini=r.n.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
   var show=micDay==='both'?true:!!r[micDay];
