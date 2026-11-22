@@ -1092,9 +1092,33 @@ function mics(){
 
 
 // ===== FREQUENCY GRID: one entry per talent. Same frequencies both days. tx = TX number/label, f = MHz. Leave '' until assigned.
-var MIC_RF_ASOF='';
+var MIC_RF_ASOF='Nov 22, 6:40 PM · Wisycom GR01';
 var MIC_RF={
  // 'Tiger Woods':{p:{tx:'',f:''},b:{tx:'',f:''},x:''},
+ // Source: Wisycom Manager "Apogee Golf Resort_Default Zone_TALENT FREQS_wisycom", Group GR01. tx = group + channel.
+ // Field channels in GR01 (not talent): CH0-2 SPARE 632.050/632.250/632.550 · CH3-4 Foreplay 632.750/633.175 · CH5-6 Social 633.525/633.725 · CH7-8 YouTube 634.175/635.275 · CH9-10 Delta 635.500/635.875 · CH25-26 Charlie 657.050/657.250 · CH27-28 Bravo 657.625/658.525 · CH29-30 Alpha 658.725/659.150
+ 'Charley Hull':{p:{tx:'GR01 CH11',f:'636.550'},b:{tx:'',f:''},x:''},
+ 'Collin Morikawa':{p:{tx:'GR01 CH12',f:'636.750'},b:{tx:'',f:''},x:''},
+ 'Tommy Fleetwood':{p:{tx:'GR01 CH13',f:'637.100'},b:{tx:'',f:''},x:''},
+ 'Scottie Scheffler':{p:{tx:'GR01 CH14',f:'638.825'},b:{tx:'',f:''},x:''},
+ 'Rory McIlroy':{p:{tx:'GR01 CH15',f:'639.850'},b:{tx:'',f:''},x:''},
+ 'Tiger Woods':{p:{tx:'GR01 CH16',f:'640.100'},b:{tx:'',f:''},x:''},
+ 'Matt Bovee':{p:{tx:'GR01 CH17',f:'641.175'},b:{tx:'',f:''},x:''},
+ 'James Holley':{p:{tx:'GR01 CH18',f:'642.775'},b:{tx:'',f:''},x:''},
+ 'Michael Thorbjornsen':{p:{tx:'GR01 CH19',f:'643.350'},b:{tx:'',f:''},x:''},
+ 'Jacob Bridgeman':{p:{tx:'GR01 CH20',f:'643.725'},b:{tx:'',f:''},x:''},
+ 'Ryan Ruffels':{p:{tx:'GR01 CH21',f:'644.000'},b:{tx:'',f:''},x:''},
+ 'Grant Horvat':{p:{tx:'GR01 CH22',f:'651.725'},b:{tx:'',f:''},x:''},
+ 'Johnson Wagner':{p:{tx:'GR01 CH23',f:'653.625'},b:{tx:'',f:''},x:''},
+ 'Brooke Henderson':{p:{tx:'GR01 CH24',f:'654.025'},b:{tx:'',f:''},x:''},
+ 'Jackson Bragg':{p:{tx:'GR01 CH31',f:'659.350'},b:{tx:'',f:''},x:''},
+ 'Cory Johnson':{p:{tx:'GR01 CH32',f:'660.300'},b:{tx:'',f:''},x:''},
+ 'Jae Lee':{p:{tx:'GR01 CH33',f:'660.750'},b:{tx:'',f:''},x:''},
+ 'Haeran Ryu':{p:{tx:'GR01 CH34',f:'660.950'},b:{tx:'',f:''},x:''},
+ 'Matt Simone':{p:{tx:'GR01 CH35',f:'661.325'},b:{tx:'',f:''},x:''},
+ 'Adrian Rietveld':{p:{tx:'GR01 CH36',f:'661.525'},b:{tx:'',f:''},x:''},
+ 'Keith Sbarbaro':{p:{tx:'GR01 CH37',f:'661.800'},b:{tx:'',f:''},x:''},
+ 'Brian Bazzel':{p:{tx:'GR01 CH38',f:'662.000'},b:{tx:'',f:''},x:''},
 };
 function micRF(){
  var rows=MICS.map(function(r){var a=MIC_RF[r.n]||{};return {r:r,p:a.p||{},b:a.b||{},x:a.x||''};});
