@@ -467,7 +467,6 @@ function buildCrew(crew){
       {who:["adriana"],n:"Mic BROOKE at the tent (CH24 · 654.025, W strap) @ Tent",s:405,e:435,c:"prep",w:[]},
       {who:["adriana"],n:"Mic GRANT (CH22 · 651.725) and RUFFELS (CH21 · 644.000) when they come to the tent ~8:00, before they head to warm-ups @ Tent",s:480,e:510,c:"prep",w:[]},
       {who:CHAR,n:"Range master: range Scorpio, 16 Wisy RX; producer/director talk out on the Alpha kit IFB TX 523.100 to every Hub (11 talent). Then takes his own kit to Charlie",s:510,e:540,c:"range",w:[]},
-      {who:FP,n:"Mic-up Thor (with A2s)",s:525,e:540,c:"prep",w:[]},
       {who:COMMS,n:"Call at the production tent: load Hubs 1-5, Roaming Hub, charged headsets, spare batteries",s:375,e:390,c:"comms",w:[]},
       {who:COMMS,n:"Range set: Hubs 1-5 standalone, NO RemoteHub link (Bravo 2+5 stay paired to each other). Tune every Hub's IFB RX to the Alpha kit TX 523.100 on the range Scorpio. Hub case IFB TX on team freqs: Alpha 479.400, Bravo 479.900, Charlie 481.400, Delta 488.400 @ Range",s:390,e:435,c:"comms",w:[]},
       {who:COMMS,n:"Listen test with the range master: Tyler 569.700 + Lauren 574.500 talk on the Scorpio, out on 523.100. Every Hub hears producer/director; teams talk only inside their own Hub @ Range",s:435,e:450,c:"comms",w:[]},
@@ -487,7 +486,6 @@ function buildCrew(crew){
 const A2EV={
   /* MCV/DOC = Zambezi, not ours. Plan A (Tim, Nov 19): rigs stay on under wardrobe through Zambezi sets, like last year. These de-mic/re-mic slots are the fallback if Zambezi says no */
   d1:[
-    ["Mic-up Thor at arrival (with Andy)",525,540,["Michael"],"mic",1],
     ["Fallback if Zambezi says no: De-mic Rory before Chosen/FIF + TP5 MCVs (Zambezi)",540,555,["Rory"],"chg",1],
     ["Fallback if Zambezi says no: De-mic Scottie before Doc Hold MCV (Zambezi)",555,570,["Scottie"],"chg",1],
     ["Fallback if Zambezi says no: Re-mic Scottie after Doc Hold MCV",630,645,["Scottie"],"chg",1],
@@ -563,7 +561,7 @@ const UBLK={
   d1:{
     alpha:[[510, 540, "Range Warm Up @ Range"], [615, 645, "Grant Fairway Clinic @ #3 FWY"], [705, 750, "Lie Detectors (Charley, Brooke) @ #17 GRN"], [750, 780, "Tiger Talks - Wedge @ #2 GRN"], [780, 810, "Tiger Talks - Driver @ #3 TEE"], [915, 960, "Flight Club (Tiger, Scottie, Wagner) @ #13 TEE"]],
     bravo:[[510, 540, "Range Warm Up @ Range"], [555, 600, "Flight Club (Charley, Brooke, Wagner) @ #13 TEE"], [735, 810, "Eras Tour - Ball @ #9 FWY"], [825, 900, "Eras Tour - Driver @ #3 TEE"], [915, 975, "Collin / Grant TP5 Skills (Mapes, Jared, Matt W) @ #3 TEE"]],
-    charlie:[[555, 600, "Retail - Holley (Bridgeman, Thor) @ #1 GRN"], [615, 645, "Retail - Wagner (Bridgeman) @ #1 TEE"], [675, 735, "TCP - Golf Ball (Wagner, Bridgeman) @ #1 TEE"], [765, 810, "Lie Detectors (Tommy, Collin) @ #17 GRN"], [825, 960, "Canada (Brooke; Wagner 1:45–3:00, Bovee 3:15) @ #12"], [975, 1050, "TCP - Driver (Wagner, Simone) @ #1 TEE"]],
+    charlie:[[555, 600, "Retail - Holley (Bridgeman, Thor) · MIC THOR at the start of this set (CH19 · 643.350) @ #1 GRN"], [615, 645, "Retail - Wagner (Bridgeman) @ #1 TEE"], [675, 735, "TCP - Golf Ball (Wagner, Bridgeman) @ #1 TEE"], [765, 810, "Lie Detectors (Tommy, Collin) @ #17 GRN"], [825, 960, "Canada (Brooke; Wagner 1:45–3:00, Bovee 3:15) @ #12"], [975, 1050, "TCP - Driver (Wagner, Simone) @ #1 TEE"]],
     delta:[[510, 540, "Range Warm Up @ Range"], [555, 600, "DRS First Look @ #3 TEE"], [645, 675, "Lie Detectors - Irons (Scottie, Tommy) @ #10 FWY"], [690, 735, "Tommy's Fairway Clinic @ #3 FWY"], [825, 885, "P-Series First Look @ #9 FWY"], [915, 1050, "Bag Swap Match @ holes 8-9-10-11-17-18-13-14-3"]],
     foreplay:[[630, 675, "DRS First Look (Barstool; first set needing audio) @ Range"], [690, 735, "Ball Fitting w/ Simone @ Range"], [750, 825, "Fore Play - Chase the Ace @ #13 TEE"]],
     youtube:[[555, 645, "Full Bag + Ball Fitting w/ Simone @ Range"], [660, 705, "Grant vs. Ryan Challenges (Ruffels crew) @ #2 TEE"], [735, 765, "Ruffels w/ Collin (audio only) @ #10-11"], [765, 810, "Ruffels w/ Charley (audio only) @ holes 15-10-11"], [930, 975, "Ruffels w/ Thor · confirm: Thor's column only @ #15/#16 (#12 if Canada is gone)"], [990, 1080, "Perfect 9 (Ruffels crew, Brady, Naro) @ holes 8-9-10-11-17-18-13-14-3"]],
@@ -828,7 +826,7 @@ function sound(){
   'Rigs stay on under wardrobe through Zambezi sets (MCV, DOC, Year in Review). If Zambezi says no, A2s de-mic and re-mic; the fallback slots are on the schedule.',
   'Barstool talent (Riggs, Frankie, Trent) is not ours. Cover our athletes only.'])+
  '<h2>Mic-up</h2>'+ul([
-  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival, Bridgeman and Thor at 8:45, Tiger at 11:45.',
+  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival. Thor: Brandon (Charlie) mics him at the start of Retail - Holley 9:15, #1 GRN. Tiger at 11:45.',
   '<b>Tuesday:</b> each mixer mics their own team at the start of the first set, 7:30–7:45. A2s help DOT vs. NOT and the CA/EU Bag Swap. Extra mic for fitter Jae at Korea (Alpha).',
   'Athletes stay mic\'d all day. Mic once, collect at wrap.'])+
  '<h2>Main field kit (every mixer)</h2>'+ul([
@@ -1070,7 +1068,7 @@ var MICS=[
  {n:'Grant Horvat',d1:['8:00','18:00','tent'],d2:['7:30','16:45'],x1:'Adriana mics at the tent ~8:00, before warm-ups',x2:'Rig stays on through Chosen MCV 1:15 (Zambezi). Social 3:15, Fore Play 4:00–4:45'},
  {n:'Ryan Ruffels',d1:['8:00','18:00','tent'],d2:['7:30','16:45'],x1:'Adriana mics at the tent ~8:00, before warm-ups',x2:'Social 2:15, w/ Tommy 3:00 (Michal), Fore Play 4:00–4:45'},
  {n:'Jacob Bridgeman',d1:['7:45','13:45','range'],d2:['9:45','18:00'],x1:'Now arrives 7:45 and is in Range Warm Up; Retail w/ Wagner 10:15. PopStroke 2:45 has no audio',x2:'Arrives 9:15. Social 11:00 (Rick). Runs to TP5 Speed Testing 5:30–6:00'},
- {n:'Michael Thorbjornsen',t:'Thor',d1:['8:45','18:00'],d2:['7:30','18:00'],x2:'Runs to TP5 Speed Testing'},
+ {n:'Michael Thorbjornsen',t:'Thor',d1:['9:15','18:00'],x1:'Brandon (Team Charlie) mics him at the start of Retail - Holley 9:15, #1 GRN',d2:['7:30','18:00'],x2:'Runs to TP5 Speed Testing'},
  {n:'Haeran Ryu',t:'W strap',d1:null,d2:['7:30','17:15']},
  {n:'Jae Lee',t:'Fitter, Korea',d1:null,d2:['7:30','17:15'],x2:'Extra mic from Alpha'},
  {n:'James Holley',t:'TM',d1:['9:15','10:00'],d2:['13:30','14:15'],x1:'Mixer spare. Retail (Charlie)',x2:'Mixer spare. CG vs. MOI'},
