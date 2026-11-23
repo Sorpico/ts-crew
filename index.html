@@ -861,12 +861,8 @@ function hubHandout(){
   ['Delta','Hub 4','488.400','523.100','534.800','8','Christian Carnahan · mixer Michal'],
   ['Spare','Roaming Hub (stays with Freddie)','489.100','523.100','team it replaces','loose','Freddie']];
  return '<div class="hh">'+K.map(function(k){var id='hh-'+k[0].toLowerCase();var it=[
-   k[1]+': power on, <b>standalone, no RemoteHub link</b>'+(k[0]==='Bravo'?' (2 + 5 paired to each other only)':''),
    'Hollyland TX (Lectro LT in the case) → <span class="gc">'+k[2]+'</span>, A1 block',
    'IFB RX (in the case, into the Hub) → <span class="gc">'+k[3]+'</span> (Alpha kit, for the range)',
-   'Headset talkback works on this Hub (the IFB listen check happens at the range, once the range Scorpio is on 523.100)',
-   (k[5]==='loose'?'Loose headsets + batteries for swaps':k[5]+' headsets paired, named, charged')+'; spare batteries in the case',
-   'Label on the case: team, TX '+k[2]+', RX '+k[3]+' → '+k[4],
    'Handed to: '+k[6]];
   return '<div class="hh-k"><div class="hh-h"><b>'+k[0]+'</b><small> · after the range break, IFB RX → <span class="gc">'+k[4]+'</span></small></div>'+it.map(function(t,i){return '<label class="hh-i"><input type="checkbox" data-hh="'+id+'-'+i+'"> <span>'+t+'</span></label>';}).join('')+'</div>';}).join('')+'</div>';
 }
