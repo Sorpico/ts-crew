@@ -339,7 +339,7 @@ button.ml{appearance:none}
  .tal-log td:last-child{border-right:0}
 }
 @media (max-width:640px){nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}nav::-webkit-scrollbar{display:none}nav button{flex:1 1 auto!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;font-size:.74rem!important}}
-.rfl{display:flex;flex-direction:column;gap:2px;margin-top:3px;font-size:.88em}.rfl span{color:var(--ink,#222)}.rfl i{font-style:normal;color:var(--muted,#666);font-variant-numeric:tabular-nums}.md-rf{font-size:.9rem;background:rgba(31,107,69,.08);border-radius:8px;padding:8px 10px}.md-pick{display:flex;gap:10px;align-items:center;margin:6px 0 12px}.md-pick label{font-weight:600}.md-pick select{font:inherit;font-size:1rem;padding:8px 10px;border-radius:8px;border:1px solid var(--line,#ccc);background:var(--bg,#fff);color:inherit;min-width:220px;max-width:100%}.md-tb{width:100%;border-collapse:collapse;margin-bottom:8px}.md-tb td{padding:8px 6px;border-bottom:1px solid var(--line,#e3e3e3);vertical-align:top}.md-t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;width:1%;padding-right:12px!important}.md-w{font-weight:600}.md-loc{margin-top:2px;font-weight:700;color:var(--accent,#1f6b45)}.md-tal{color:var(--muted,#666);font-size:.9em;margin-top:2px}.md-k{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#888);margin-top:3px}.md-lunch td{background:rgba(200,170,80,.12)}.md-map{width:100%;height:auto;border-radius:8px;border:1px solid var(--line,#ddd)}
+.rfl{display:flex;flex-direction:column;gap:2px;margin-top:3px;font-size:.88em}.rfl span{color:var(--ink,#222)}.rfl i{font-style:normal;color:var(--muted,#666);font-variant-numeric:tabular-nums}.md-rf{font-size:.9rem;background:rgba(31,107,69,.08);border-radius:8px;padding:8px 10px}.bu-sel{font:inherit;font-size:.78rem;padding:2px 4px;border-radius:6px;border:1px solid var(--rule,#ccc);background:var(--bg,#fff);color:inherit;max-width:100%}@media print{.bu-sel{border:0;-webkit-appearance:none;appearance:none;background:none;padding:0}}.md-pick{display:flex;gap:10px;align-items:center;margin:6px 0 12px}.md-pick label{font-weight:600}.md-pick select{font:inherit;font-size:1rem;padding:8px 10px;border-radius:8px;border:1px solid var(--line,#ccc);background:var(--bg,#fff);color:inherit;min-width:220px;max-width:100%}.md-tb{width:100%;border-collapse:collapse;margin-bottom:8px}.md-tb td{padding:8px 6px;border-bottom:1px solid var(--line,#e3e3e3);vertical-align:top}.md-t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;width:1%;padding-right:12px!important}.md-w{font-weight:600}.md-loc{margin-top:2px;font-weight:700;color:var(--accent,#1f6b45)}.md-tal{color:var(--muted,#666);font-size:.9em;margin-top:2px}.md-k{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#888);margin-top:3px}.md-lunch td{background:rgba(200,170,80,.12)}.md-map{width:100%;height:auto;border-radius:8px;border:1px solid var(--line,#ddd)}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -1157,6 +1157,13 @@ function micRig(){
 
 // ===== TALENT tab: cards built from MICS + MIC_RF. Photos live in /talent/<slug>.jpg (slug = name lowercased, spaces to dashes).
 function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+/* Backup TX picker (Talent tab). Saved on this device only (localStorage). */
+var BUTX=[['Alpha 1','CH29','658.725'],['Alpha 2','CH30','659.150'],['Bravo 1','CH27','657.625'],['Bravo 2','CH28','658.525'],['Charlie 1','CH25','657.050'],['Charlie 2','CH26','657.250'],['Delta 1','CH9','635.500'],['Delta 2','CH10','635.875']];
+var BUSEL={};try{BUSEL=JSON.parse(localStorage.getItem('tm26bu')||'{}')||{};}catch(e){}
+function buFor(n){var v=BUSEL[n];if(!v)return null;var t=BUTX.filter(function(x){return x[0]===v;})[0];return t?{tx:t[0]+' · GR01 '+t[1],f:t[2]}:null;}
+function buSelect(n){var v=BUSEL[n]||'';return '<select class="bu-sel" data-bu="'+esc(n)+'" aria-label="Backup TX for '+esc(n)+'"><option value="">— pick backup TX —</option>'+BUTX.map(function(t){return '<option value="'+t[0]+'"'+(v===t[0]?' selected':'')+'>'+t[0]+' · '+t[2]+'</option>';}).join('')+'</select>';}
+document.addEventListener('change',function(e){var s=e.target.closest&&e.target.closest('.bu-sel');if(!s)return;var n=s.getAttribute('data-bu');if(s.value)BUSEL[n]=s.value;else delete BUSEL[n];try{localStorage.setItem('tm26bu',JSON.stringify(BUSEL));}catch(x){}});
+
 function talent(){
  var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
  // Print always lists everyone mic'd either day (plus no-mic TM staff on the schedule); screen filters by the day picker.
@@ -1173,7 +1180,7 @@ function talent(){
   else lines+=day('Mon',r.d1,r.d1?r.x1:'','pd1 hd');
   if(micDay!=='d1')lines+=day('Tue',r.d2,r.d2?r.x2:'','pd2');
   else lines+=day('Tue',r.d2,r.d2?r.x2:'','pd2 hd');
-  lines+='<div class="rfl"><div class="ln"><span>PRI</span><span>'+rf(a.p)+'</span></div><div class="ln"><span>BU</span><span>'+rf(a.b)+'</span></div></div>';
+  lines+='<div class="rfl"><div class="ln"><span>PRI</span><span>'+rf(a.p)+'</span></div><div class="ln"><span>BU</span><span>'+(a.b&&a.b.f?rf(a.b):buSelect(r.n))+'</span></div></div>';
   return '<div class="tc'+(show?'':' hd')+'"><div class="ph"><span class="ini">'+esc(ini)+'</span><img src="talent/'+slug(r.n)+'.jpg" alt="'+esc(r.n)+'" loading="lazy" onerror="this.remove()"></div><div class="bd"><div class="nm">'+esc(r.n)+'</div><div class="tg">'+esc(r.t||'Pro')+'</div>'+lines+'</div></div>';
  }).join('')+'</div>'+
  '<div class="tal-log"><h2>Spare / field mic-ups &amp; frequency changes</h2><table><thead><tr><th style="width:7%">Day</th><th style="width:12%">Mixer</th><th style="width:9%">TX#</th><th style="width:20%">Talent</th><th style="width:15%">Freq (MHz)</th><th style="width:8%">On</th><th style="width:8%">Off</th><th>Notes</th></tr></thead><tbody>'+new Array(17).join('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>')+'</tbody></table></div>';
@@ -1184,7 +1191,7 @@ function talent(){
 var RFKEY={Tiger:'Tiger Woods',Rory:'Rory McIlroy',Scottie:'Scottie Scheffler',Tommy:'Tommy Fleetwood',Collin:'Collin Morikawa',Charley:'Charley Hull',Brooke:'Brooke Henderson',Jacob:'Jacob Bridgeman',Michael:'Michael Thorbjornsen',Grant:'Grant Horvat',Ryan:'Ryan Ruffels',Johnson:'Johnson Wagner',Brian:'Brian Bazzel',Keith:'Keith Sbarbaro',Adrian:'Adrian Rietveld',Matt:'Matt Simone',James:'James Holley',Jackson:'Jackson Bragg',Cory:'Cory Johnson',Bovee:'Matt Bovee',Haeran:'Haeran Ryu',Jae:'Jae Lee'};
 var UNITRF={dave:['Alpha','CH29–30','658.725 / 659.150'],joel:['Bravo','CH27–28','657.625 / 658.525'],brandon:['Charlie','CH25–26','657.050 / 657.250'],michal:['Delta','CH9–10','635.500 / 635.875'],andy:['Fore Play','CH3–4','632.750 / 633.175'],joshl:['YouTube','CH7–8','634.175 / 635.275'],rick:['Social','CH5–6','633.525 / 633.725']};
 function rfHtml(w){
- var L=(w||[]).map(function(k){var n=RFKEY[k];if(!n)return null;var a=(typeof MIC_RF!=='undefined'&&MIC_RF[n])||{};return {n:n,p:a.p||{},b:a.b||{}};}).filter(Boolean);
+ var L=(w||[]).map(function(k){var n=RFKEY[k];if(!n)return null;var a=(typeof MIC_RF!=='undefined'&&MIC_RF[n])||{};var bb=(a.b&&a.b.f)?a.b:(buFor(n)||{});return {n:n,p:a.p||{},b:bb};}).filter(Boolean);
  if(!L.length)return '';
  return '<div class="rfl">'+L.map(function(x){return '<span><b>'+esc(x.n)+'</b> '+(x.p.f?'<i>GR01 '+esc(x.p.tx)+'</i> '+esc(x.p.f):'<i>freq TBD</i>')+(x.b.f?' <i>· BU '+esc(x.b.tx)+'</i> '+esc(x.b.f):'')+'</span>';}).join('')+'</div>';
 }
