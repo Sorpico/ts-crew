@@ -561,7 +561,7 @@ const UBLK={
   d1:{
     alpha:[[510, 540, "Range Warm Up @ Range"], [615, 645, "Grant Fairway Clinic @ #3 FWY"], [705, 750, "Lie Detectors (Charley, Brooke) @ #17 GRN"], [750, 780, "Tiger Talks - Wedge @ #2 GRN"], [780, 810, "Tiger Talks - Driver @ #3 TEE"], [915, 960, "Flight Club (Tiger, Scottie, Wagner) @ #13 TEE"]],
     bravo:[[510, 540, "Range Warm Up @ Range"], [555, 600, "Flight Club (Charley, Brooke, Wagner) @ #13 TEE"], [735, 810, "Eras Tour - Ball @ #9 FWY"], [825, 900, "Eras Tour - Driver @ #3 TEE"], [915, 975, "Collin / Grant TP5 Skills (Mapes, Jared, Matt W) @ #3 TEE"]],
-    charlie:[[555, 600, "Retail - Holley (Bridgeman, Thor) · MIC THOR at the start of this set (CH19 · 643.350) @ #1 GRN"], [615, 645, "Retail - Wagner (Bridgeman) @ #1 TEE"], [675, 735, "TCP - Golf Ball (Wagner, Bridgeman) @ #1 TEE"], [765, 810, "Lie Detectors (Tommy, Collin) @ #17 GRN"], [825, 960, "Canada (Brooke; Wagner 1:45–3:00, Bovee 3:15) @ #12"], [975, 1050, "TCP - Driver (Wagner, Simone) @ #1 TEE"]],
+    charlie:[[555, 600, "Retail - Holley (Bridgeman, Thor, Holley) · MIC THOR (CH19 · 643.350) + JAMES HOLLEY (CH18 · 642.775) at the start of this set; de-mic Holley at the end @ #1 GRN"], [615, 645, "Retail - Wagner (Bridgeman) @ #1 TEE"], [675, 735, "TCP - Golf Ball (Wagner, Bridgeman) @ #1 TEE"], [765, 810, "Lie Detectors (Tommy, Collin) @ #17 GRN"], [825, 960, "Canada (Brooke; Wagner 1:45–3:00, Bovee 3:15) @ #12"], [975, 1050, "TCP - Driver (Wagner, Simone) @ #1 TEE"]],
     delta:[[510, 540, "Range Warm Up @ Range"], [555, 600, "DRS First Look @ #3 TEE"], [645, 675, "Lie Detectors - Irons (Scottie, Tommy) @ #10 FWY"], [690, 735, "Tommy's Fairway Clinic @ #3 FWY"], [825, 885, "P-Series First Look @ #9 FWY"], [915, 1050, "Bag Swap Match @ holes 8-9-10-11-17-18-13-14-3"]],
     foreplay:[[630, 675, "DRS First Look (Barstool; first set needing audio) @ Range"], [690, 735, "Ball Fitting w/ Simone @ Range"], [750, 825, "Fore Play - Chase the Ace @ #13 TEE"]],
     youtube:[[555, 645, "Full Bag + Ball Fitting w/ Simone @ Range"], [660, 705, "Grant vs. Ryan Challenges (Ruffels crew) @ #2 TEE"], [735, 765, "Ruffels w/ Collin (audio only) @ #10-11"], [765, 810, "Ruffels w/ Charley (audio only) @ holes 15-10-11"], [930, 975, "Ruffels w/ Thor · confirm: Thor's column only @ #15/#16 (#12 if Canada is gone)"], [990, 1080, "Perfect 9 (Ruffels crew, Brady, Naro) @ holes 8-9-10-11-17-18-13-14-3"]],
@@ -826,7 +826,7 @@ function sound(){
   'Rigs stay on under wardrobe through Zambezi sets (MCV, DOC, Year in Review). If Zambezi says no, A2s de-mic and re-mic; the fallback slots are on the schedule.',
   'Barstool talent (Riggs, Frankie, Trent) is not ours. Cover our athletes only.'])+
  '<h2>Mic-up</h2>'+ul([
-  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival. Thor: Brandon (Charlie) mics him at the start of Retail - Holley 9:15, #1 GRN. Tiger at 11:45.',
+  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival. Thor + James Holley: Brandon (Charlie) mics them at the start of Retail - Holley 9:15, #1 GRN. Tiger at 11:45.',
   '<b>Tuesday:</b> each mixer mics their own team at the start of the first set, 7:30–7:45. A2s help DOT vs. NOT and the CA/EU Bag Swap. Extra mic for fitter Jae at Korea (Alpha).',
   'Athletes stay mic\'d all day. Mic once, collect at wrap.'])+
  '<h2>Main field kit (every mixer)</h2>'+ul([
@@ -1071,7 +1071,7 @@ var MICS=[
  {n:'Michael Thorbjornsen',t:'Thor',d1:['9:15','18:00'],x1:'Brandon (Team Charlie) mics him at the start of Retail - Holley 9:15, #1 GRN',d2:['7:30','18:00'],x2:'Runs to TP5 Speed Testing'},
  {n:'Haeran Ryu',t:'W strap',d1:null,d2:['7:30','17:15']},
  {n:'Jae Lee',t:'Fitter, Korea',d1:null,d2:['7:30','17:15'],x2:'Extra mic from Alpha'},
- {n:'James Holley',t:'TM',d1:['9:15','10:00'],d2:['13:30','14:15'],x1:'Mixer spare. Retail (Charlie)',x2:'Mixer spare. CG vs. MOI'},
+ {n:'James Holley',t:'TM',d1:['9:15','10:00'],d2:['13:30','14:15'],x1:'Brandon (Team Charlie) mics him at the start of Retail - Holley 9:15, #1 GRN; de-mic at 10:00',x2:'Mixer spare. CG vs. MOI'},
  {n:'Matt Bovee',t:'TM',d1:['13:30','16:00'],d2:null,x1:'From a mixer spare. P-Series 1:45 @ #9 FWY (Michal), Canada 3:15 @ #12 (Brandon)'},
  {n:'Jackson Bragg',t:'TM',d1:['10:15','11:15'],d2:['14:15','18:00'],x1:'TM final: DRS First Look 10:30 @ Range (Andy); TP5 TTB 11:30 is Zambezi',x2:'TP5 Speed Testing 2:30 + 5:30 (Josh). DOC & Family 11:45 is Zambezi'},
  {n:'Todd Chew',t:'TM',d1:null,d2:null,x1:'Off the Day 1 sheet; Day 2 only Zambezi (DOC & Family): no mic'},
