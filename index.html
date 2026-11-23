@@ -1088,7 +1088,7 @@ function wire(){
 }
 function mount(el,crew){
   root=el;CREW_IN=crew;
-  var sd=shootDay();if(sd&&st.cur==null){st.day=sd;st.cur=nowMin();}
+  var sd=shootDay();if(sd&&!mount._auto){mount._auto=1;st.day=sd;st.cur=nowMin();}
   model();
   if(st.me&&!M.crew.some(function(c){return c.id===st.me;}))st.me='';
   el.innerHTML=html();
