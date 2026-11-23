@@ -1331,7 +1331,7 @@ function myday(){
   }).join('');
   return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
  };
- if(MAPS[c.id])h+='<h2>My route <small class="mr-d">Monday</small></h2><div class="mr"><div class="mr-vp" id="mr-vp"><img id="mr-img" src="maps/'+c.id+'-mon.jpg?v=2" alt="Monday route map for '+esc(c.name)+'" draggable="false"></div><div class="mr-ctl"><button data-mrz="-" aria-label="Zoom out">−</button><button data-mrz="0">Fit</button><button data-mrz="+" aria-label="Zoom in">+</button></div></div><p class="note">Pinch, double-tap or use + / − to zoom; drag to move around. Solid line follows the red cart routes; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
+ if(MAPS[c.id])h+='<h2>My route <small class="mr-d">Monday</small></h2><img class="md-map" src="maps/'+c.id+'-mon.jpg?v=2" alt="Monday route map for '+esc(c.name)+'"><p class="note">Solid line follows the red cart routes; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
  if(c.id==='freddie')h+='<h2>Kit tuning: before and after the range break</h2>'+kitTune();
  var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b class="gc">'+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set (same both days).</p>';
  h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab). Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
@@ -1348,7 +1348,7 @@ function render(){
  document.getElementById('app').innerHTML=h;
  document.body.classList.toggle('pt',tab==='talent');
  var pd=document.querySelector('.tal-pd');if(pd){var n=new Date();pd.textContent=n.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+n.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
- hhRestore();mrInit();
+ hhRestore();
  if(tab==='timeline'){MTL.mount(document.getElementById('tl-root'),CREW);var pfl=document.getElementById('prod-flow');if(pfl)pfl.innerHTML=prodFlow();}
  var sel=document.getElementById('md-sel');if(sel)sel.addEventListener('change',function(){me=sel.value;try{localStorage.setItem('tm26me',me);}catch(x){}render();});
 }
