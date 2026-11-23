@@ -339,7 +339,7 @@ button.ml{appearance:none}
  .tal-log td:last-child{border-right:0}
 }
 @media (max-width:640px){nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}nav::-webkit-scrollbar{display:none}nav button{flex:1 1 auto!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;font-size:.74rem!important}}
-.md-pick{display:flex;gap:10px;align-items:center;margin:6px 0 12px}.md-pick label{font-weight:600}.md-pick select{font:inherit;font-size:1rem;padding:8px 10px;border-radius:8px;border:1px solid var(--line,#ccc);background:var(--bg,#fff);color:inherit;min-width:220px;max-width:100%}.md-tb{width:100%;border-collapse:collapse;margin-bottom:8px}.md-tb td{padding:8px 6px;border-bottom:1px solid var(--line,#e3e3e3);vertical-align:top}.md-t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;width:1%;padding-right:12px!important}.md-w{font-weight:600}.md-loc{margin-top:2px;font-weight:700;color:var(--accent,#1f6b45)}.md-tal{color:var(--muted,#666);font-size:.9em;margin-top:2px}.md-k{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#888);margin-top:3px}.md-lunch td{background:rgba(200,170,80,.12)}.md-map{width:100%;height:auto;border-radius:8px;border:1px solid var(--line,#ddd)}
+.rfl{display:flex;flex-direction:column;gap:2px;margin-top:3px;font-size:.88em}.rfl span{color:var(--ink,#222)}.rfl i{font-style:normal;color:var(--muted,#666);font-variant-numeric:tabular-nums}.md-rf{font-size:.9rem;background:rgba(31,107,69,.08);border-radius:8px;padding:8px 10px}.md-pick{display:flex;gap:10px;align-items:center;margin:6px 0 12px}.md-pick label{font-weight:600}.md-pick select{font:inherit;font-size:1rem;padding:8px 10px;border-radius:8px;border:1px solid var(--line,#ccc);background:var(--bg,#fff);color:inherit;min-width:220px;max-width:100%}.md-tb{width:100%;border-collapse:collapse;margin-bottom:8px}.md-tb td{padding:8px 6px;border-bottom:1px solid var(--line,#e3e3e3);vertical-align:top}.md-t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;width:1%;padding-right:12px!important}.md-w{font-weight:600}.md-loc{margin-top:2px;font-weight:700;color:var(--accent,#1f6b45)}.md-tal{color:var(--muted,#666);font-size:.9em;margin-top:2px}.md-k{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#888);margin-top:3px}.md-lunch td{background:rgba(200,170,80,.12)}.md-map{width:100%;height:auto;border-radius:8px;border:1px solid var(--line,#ddd)}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -993,7 +993,7 @@ function findRow(id){return (M.rows||[]).find(function(r){return r.id===id;});}
 function sheet(r,i){
   var b=r.bars[i],el=root.querySelector('#mt-sheet');if(!b)return;
   var who=M.who(b.w||[]).join(', ');var cov=M.byBar.get(b);
-  el.innerHTML='<div class="sh-in"><button class="sh-x" data-close aria-label="Close">×</button><span class="pill c-'+b.c+'">'+esc(b.hs?'Comms · headsets':CAT[b.c]||(b.c==='a2'?'A2':b.c==='comms'?'Comms':b.c==='unc'?'Not covered':b.c))+'</span><h3>'+esc(b.n)+'</h3><p class="sh-t tab-num">'+fmt(b.s)+'–'+fmt(b.e)+' · '+(b.e-b.s)+' min</p>'+(who?'<p><b>Talent</b><br>'+esc(who)+'</p>':'')+(r.hsRow?'<p><b>Headsets live</b><br>'+esc(r.full)+'</p>':cov?'<p><b>Sound</b><br>'+esc(cov.join(', '))+'</p>':(st.view==='mix'&&r.full&&!r.unc?'<p><b>Crew</b><br>'+esc(r.full)+'</p>':''))+'</div>';
+  el.innerHTML='<div class="sh-in"><button class="sh-x" data-close aria-label="Close">×</button><span class="pill c-'+b.c+'">'+esc(b.hs?'Comms · headsets':CAT[b.c]||(b.c==='a2'?'A2':b.c==='comms'?'Comms':b.c==='unc'?'Not covered':b.c))+'</span><h3>'+esc(b.n)+'</h3><p class="sh-t tab-num">'+fmt(b.s)+'–'+fmt(b.e)+' · '+(b.e-b.s)+' min</p>'+(who?'<p><b>Talent · TX · MHz</b><br>'+(rfHtml(b.w)||esc(who))+'</p>':'')+(r.hsRow?'<p><b>Headsets live</b><br>'+esc(r.full)+'</p>':cov?'<p><b>Sound</b><br>'+esc(cov.join(', '))+'</p>':(st.view==='mix'&&r.full&&!r.unc?'<p><b>Crew</b><br>'+esc(r.full)+'</p>':''))+'</div>';
   el.hidden=false;setCur(b.s);
 }
 var pinch=null;
@@ -1180,6 +1180,15 @@ function talent(){
  return h;
 }
 
+/* Talent TX / frequency lookup for My Day + Timeline (data: MIC_RF, Wisycom GR01) */
+var RFKEY={Tiger:'Tiger Woods',Rory:'Rory McIlroy',Scottie:'Scottie Scheffler',Tommy:'Tommy Fleetwood',Collin:'Collin Morikawa',Charley:'Charley Hull',Brooke:'Brooke Henderson',Jacob:'Jacob Bridgeman',Michael:'Michael Thorbjornsen',Grant:'Grant Horvat',Ryan:'Ryan Ruffels',Johnson:'Johnson Wagner',Brian:'Brian Bazzel',Keith:'Keith Sbarbaro',Adrian:'Adrian Rietveld',Matt:'Matt Simone',James:'James Holley',Jackson:'Jackson Bragg',Cory:'Cory Johnson',Bovee:'Matt Bovee',Haeran:'Haeran Ryu',Jae:'Jae Lee'};
+var UNITRF={dave:['Alpha','CH29–30','658.725 / 659.150'],joel:['Bravo','CH27–28','657.625 / 658.525'],brandon:['Charlie','CH25–26','657.050 / 657.250'],michal:['Delta','CH9–10','635.500 / 635.875'],andy:['Fore Play','CH3–4','632.750 / 633.175'],joshl:['YouTube','CH7–8','634.175 / 635.275'],rick:['Social','CH5–6','633.525 / 633.725']};
+function rfHtml(w){
+ var L=(w||[]).map(function(k){var n=RFKEY[k];if(!n)return null;var a=(typeof MIC_RF!=='undefined'&&MIC_RF[n])||{};return {n:n,p:a.p||{},b:a.b||{}};}).filter(Boolean);
+ if(!L.length)return '';
+ return '<div class="rfl">'+L.map(function(x){return '<span><b>'+esc(x.n)+'</b> '+(x.p.f?'<i>GR01 '+esc(x.p.tx)+'</i> '+esc(x.p.f):'<i>freq TBD</i>')+(x.b.f?' <i>· BU '+esc(x.b.tx)+'</i> '+esc(x.b.f):'')+'</span>';}).join('')+'</div>';
+}
+
 /* My Day: pick your name, see both days with locations + Monday map */
 var MAPS={dave:1,joel:1,brandon:1,michal:1,andy:1,joshl:1,rick:1};
 var me='';try{me=localStorage.getItem('tm26me')||'';}catch(e){}
@@ -1195,13 +1204,14 @@ function myday(){
  var day=function(lbl,L){
   var rows=L.filter(function(x){return !/^Fallback/.test(x.n);}).sort(function(a,b){return a.s-b.s||a.e-b.e;}).map(function(x){
    var parts=x.n.split(' @ ');var what=parts[0],where=parts[1]||'';
-   return '<tr class="md-'+x.c+'"><td class="md-t">'+f(x.s)+'–'+f(x.e)+'</td><td><div class="md-w">'+esc(what)+'</div>'+(where?'<div class="md-loc">📍 '+esc(where)+'</div>':'')+(x.w&&x.w.length&&!x.fixed?'<div class="md-tal">'+esc(who(x.w).join(', '))+'</div>':'')+'<div class="md-k">'+(K[x.c]||x.c)+'</div></td></tr>';
+   return '<tr class="md-'+x.c+'"><td class="md-t">'+f(x.s)+'–'+f(x.e)+'</td><td><div class="md-w">'+esc(what)+'</div>'+(where?'<div class="md-loc">📍 '+esc(where)+'</div>':'')+(x.w&&x.w.length&&!x.fixed?(rfHtml(x.w)||'<div class="md-tal">'+esc(who(x.w).join(', '))+'</div>'):'')+'<div class="md-k">'+(K[x.c]||x.c)+'</div></td></tr>';
   }).join('');
   return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
  };
- h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Monday locations are from TaylorMade’s final Day 1 schedule. Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
+ var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b>GR01 '+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set (Wisycom GR01, same both days).</p>';
+ h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab). Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
  h+=day('Monday, Nov 23',M1.lanes[c.id]||[]);
- if(MAPS[c.id])h+='<h2>Monday route</h2><a href="maps/'+c.id+'-mon.jpg" target="_blank" rel="noopener"><img class="md-map" src="maps/'+c.id+'-mon.jpg" alt="Monday route map for '+esc(c.name)+'"></a><p class="note">Markers sit on the hole number; tap to open full size.</p>';
+ if(MAPS[c.id])h+='<h2>Monday route</h2><a href="maps/'+c.id+'-mon.jpg" target="_blank" rel="noopener"><img class="md-map" src="maps/'+c.id+'-mon.jpg" alt="Monday route map for '+esc(c.name)+'"></a><p class="note">Solid line follows the red cart routes; dashed is the last bit in to the spot. Markers sit on the hole number; tap to open full size.</p>';
  h+=day('Tuesday, Nov 24',M2.lanes[c.id]||[]);
  return h;
 }
