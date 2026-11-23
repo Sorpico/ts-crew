@@ -1159,7 +1159,7 @@ function micRig(){
 // ===== TALENT tab: cards built from MICS + MIC_RF. Photos live in /talent/<slug>.jpg (slug = name lowercased, spaces to dashes).
 function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
 /* Backup TX picker (Talent tab). Saved on this device only (localStorage). */
-var BUTX=[['Alpha 1','CH29','658.725'],['Alpha 2','CH30','659.150'],['Bravo 1','CH27','657.625'],['Bravo 2','CH28','658.525'],['Charlie 1','CH25','657.050'],['Charlie 2','CH26','657.250'],['Delta 1','CH9','635.500'],['Delta 2','CH10','635.875']];
+var BUTX=[['Alpha 1','CH30','659.150'],['Alpha 2','CH29','658.725'],['Bravo 1','CH28','658.525'],['Bravo 2','CH27','657.625'],['Charlie 1','CH26','657.250'],['Charlie 2','CH25','657.050'],['Delta 1','CH10','635.875'],['Delta 2','CH9','635.500']]; // unit 1/2 per SoundBase NEW** report 11/22 3:30 PM
 var BUSEL={};try{BUSEL=JSON.parse(localStorage.getItem('tm26bu')||'{}')||{};}catch(e){}
 function buFor(n){var v=BUSEL[n];if(!v)return null;var t=BUTX.filter(function(x){return x[0]===v;})[0];return t?{tx:t[0]+' · '+t[1],f:t[2]}:null;}
 function buSelect(n){var v=BUSEL[n]||'';var used={};Object.keys(BUSEL).forEach(function(k){if(k!==n)used[BUSEL[k]]=k.split(' ')[0];});return '<select class="bu-sel'+(v?' on':'')+'" data-bu="'+esc(n)+'" aria-label="TX worn by '+esc(n)+'"><option value="">Primary</option>'+BUTX.map(function(t){return '<option value="'+t[0]+'"'+(v===t[0]?' selected':'')+'>'+t[0]+' · '+t[1]+' · '+t[2]+(used[t[0]]?' (on '+esc(used[t[0]])+')':'')+'</option>';}).join('')+'</select>';}
