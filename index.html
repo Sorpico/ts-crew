@@ -349,7 +349,7 @@ var CREW=[{"id": "tim", "name": "Tim Alward", "role": "Lead", "status": "Locked"
 var DAYS=[
  {d:'Sat Nov 21',k:'Travel',t:'Travel day. Hotel rooms start tonight: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd, Palm Beach Gardens. Rooms are under your own name; show ID at check-in. Travel day for most of the crew. Prelim prep 2:00–6:00 PM at the production tents for Tim, Freddie, Dave, Andy and Brandon only. Schedule below.'},
  {d:'Sun Nov 22',k:'Prep',t:'Sound crew call 7:30 AM at base camp. Finish kit-out, programming, TC and the Hub IFB check before the 11:30 all-hands in the dining tent; set meetings 12:00–2:30, course walk-throughs 3:00–4:30. Full prep schedule below.'},
- {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Crew call 6:15 AM at the production tent, everyone. Christmas Card pros are mic\'d at the tent 6:45–7:15, before the shoot (BTS audio): Joel mics Rory (first, before his 7:00 Cold Open), Brandon Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Tim runs the station. Mixers then head to the range by 7:30. Then Christmas Card 7:30–8:15. Freddie heads to the range to set up and link the Hubs. All mixers (Dave, Joel, Brandon, Michal, Andy, Josh) report to the range with their camera teams, there by 7:30 to mic arrivals and set up to receive. Range Warm Up 8:30–9:00 with Brandon on the range Scorpio and Hubs 1–5 linked, then teams break off with their own Hubs. Tiger mic\'d 11:45. Wrap around 6:00 (sunset 5:45).'},
+ {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Crew call 6:15 AM at the production tent, everyone. Christmas Card pros are mic\'d at the tent 6:45–7:15, before the shoot (BTS audio): Joel mics Rory when he gets to the tent, Brandon Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Tim runs the station. Adriana also mics Grant and Ruffels at the tent ~8:00 before warm-ups. Mixers then head to the range by 7:30. Then Christmas Card 7:30–8:15. Freddie heads to the range to set up and link the Hubs. All mixers (Dave, Joel, Brandon, Michal, Andy, Josh) report to the range with their camera teams, there by 7:30 to mic arrivals and set up to receive. Range Warm Up 8:30–9:00 with Brandon on the range Scorpio and Hubs 1–5 linked, then teams break off with their own Hubs. Tiger mic\'d 11:45. Wrap around 6:00 (sunset 5:45).'},
  {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Sound call 6:00–6:15 AM. Pros arrive 7:00; each mixer mics their own talent at the start of their first set, 7:30–7:45, with the A2s helping the big sets. Bridgeman arrives 9:15. Tiger, Rory and Nelly are off Day 2; Haeran Ryu and the amateurs are added. Wrap around 6:00. Hotel checkout is today; most of us travel home after wrap.'},
  {d:'Wed Nov 25',k:'Travel',t:'Paid travel day home (half rate). Need a room the night of the 24th? Tell Tim.'}];
 function schedule(){
@@ -456,14 +456,15 @@ function buildCrew(crew){
   FIXED={
     d1:[
       {who:CC,n:"Christmas Card (Tim, Heather, Adriana, Rick)",s:450,e:495,c:"range",w:[]},
-      {who:RANGEMIX,n:"At the range from 7:30: mic Wagner, TM staff, Grant, Ruffels, Bridgeman as they arrive; set up to receive",s:450,e:510,c:"prep",w:[]},
-      {who:(A1?[A1]:[]),n:"Run the mic-up station at the tent for the 6 Christmas Card pros (BTS audio): rigs, RF + TC check on each. Joel: Rory (first), Brandon: Scottie, Andy: Tommy, Dave: Collin, Heather: Charley, Adriana: Brooke @ Tent",s:405,e:435,c:"prep",w:[]},
-      {who:["joel"],n:"Mic RORY at the tent FIRST (CH15 · 639.850), done before his 7:00 Cold Open. Then to the range with Bravo @ Tent",s:405,e:420,c:"prep",w:[]},
+      {who:RANGEMIX,n:"At the range from 7:30: mic Wagner, TM staff, Bridgeman as they arrive (Grant + Ruffels come mic'd from the tent); set up to receive",s:450,e:510,c:"prep",w:[]},
+      {who:(A1?[A1]:[]),n:"Run the mic-up station at the tent for the 6 Christmas Card pros (BTS audio): rigs, RF + TC check on each. Joel: Rory (when he gets to the tent), Brandon: Scottie, Andy: Tommy, Dave: Collin, Heather: Charley, Adriana: Brooke. Adriana: Grant + Ruffels ~8:00 @ Tent",s:405,e:435,c:"prep",w:[]},
+      {who:["joel"],n:"Mic RORY at the tent when he gets there (CH15 · 639.850), after his Cold Open, before Christmas Card 7:30. Then to the range with Bravo @ Tent",s:435,e:450,c:"prep",w:[]},
       {who:["brandon"],n:"Mic SCOTTIE at the tent (CH14 · 638.825), then to the range @ Tent",s:405,e:435,c:"prep",w:[]},
       {who:["andy"],n:"Mic TOMMY at the tent (CH13 · 637.100), then to the range @ Tent",s:405,e:435,c:"prep",w:[]},
       {who:["dave"],n:"Mic COLLIN at the tent (CH12 · 636.750), then to the range with Alpha @ Tent",s:405,e:435,c:"prep",w:[]},
       {who:["heather"],n:"Mic CHARLEY at the tent (CH11 · 636.550, W strap) @ Tent",s:405,e:435,c:"prep",w:[]},
       {who:["adriana"],n:"Mic BROOKE at the tent (CH24 · 654.025, W strap) @ Tent",s:405,e:435,c:"prep",w:[]},
+      {who:["adriana"],n:"Mic GRANT (CH22 · 651.725) and RUFFELS (CH21 · 644.000) when they come to the tent ~8:00, before they head to warm-ups @ Tent",s:480,e:510,c:"prep",w:[]},
       {who:CHAR,n:"Range master: range Scorpio, 16 Wisy RX; producer/director talk out on the Alpha kit IFB TX 523.100 to every Hub (11 talent). Then takes his own kit to Charlie",s:510,e:540,c:"range",w:[]},
       {who:FP,n:"Mic-up Thor (with A2s)",s:525,e:540,c:"prep",w:[]},
       {who:COMMS,n:"Call at the production tent: load Hubs 1-5, Roaming Hub, charged headsets, spare batteries",s:375,e:390,c:"comms",w:[]},
@@ -826,7 +827,7 @@ function sound(){
   'Rigs stay on under wardrobe through Zambezi sets (MCV, DOC, Year in Review). If Zambezi says no, A2s de-mic and re-mic; the fallback slots are on the schedule.',
   'Barstool talent (Riggs, Frankie, Trent) is not ours. Cover our athletes only.'])+
  '<h2>Mic-up</h2>'+ul([
-  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (first), Brandon Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke. Everyone else at the range on arrival, Bridgeman and Thor at 8:45, Tiger at 11:45.',
+  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Brandon Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival, Bridgeman and Thor at 8:45, Tiger at 11:45.',
   '<b>Tuesday:</b> each mixer mics their own team at the start of the first set, 7:30–7:45. A2s help DOT vs. NOT and the CA/EU Bag Swap. Extra mic for fitter Jae at Korea (Alpha).',
   'Athletes stay mic\'d all day. Mic once, collect at wrap.'])+
  '<h2>Main field kit (every mixer)</h2>'+ul([
@@ -1058,15 +1059,15 @@ return {mount:mount};
 var MIC_ASOF='Nov 22, 9:45 PM (TM final Day 1)';
 var MICS=[
  {n:'Tiger Woods',d1:['11:45','16:30'],d2:null,x1:'Last set: social 4:15'},
- {n:'Rory McIlroy',d1:['6:45','15:30','tent'],d2:null,x1:'Joel mics him FIRST at the tent, before his 7:00 Cold Open. Last audio set: Eras Driver to 3:00'},
+ {n:'Rory McIlroy',d1:['7:15','15:30','tent'],d2:null,x1:'Joel mics him when he gets to the tent (after his Cold Open, before Christmas Card). Last audio set: Eras Driver to 3:00'},
  {n:'Scottie Scheffler',d1:['6:45','16:00','tent'],d2:['7:30','13:00'],x1:'Brandon mics at the tent. Wrap before Chosen + FIF MCV 4:15 (Zambezi, last set)'},
  {n:'Tommy Fleetwood',d1:['6:45','17:30','tent'],d2:['9:00','16:15'],x1:'Andy mics at the tent.',x2:'First set is Zambezi MCVs 7:45–9:00; mic after'},
  {n:'Collin Morikawa',d1:['6:45','16:30','tent'],d2:['7:30','14:00'],x1:'Dave mics at the tent. Year in Review 4:30 is Zambezi: wrap after TP5 Skills'},
  {n:'Charley Hull',t:'W strap',d1:['6:45','17:30','tent'],d2:['7:30','16:30'],x1:'Heather mics at the tent. Last: Bag Swap to 5:30',x2:'Last: Adrian Tour Truck 4:00–4:30 (Brandon)'},
  {n:'Brooke Henderson',t:'W strap',d1:['6:45','16:00','tent'],d2:['7:30','15:45'],x1:'Adriana mics at the tent.'},
  {n:'Johnson Wagner',d1:['7:45','17:30','range'],d2:['7:30','14:45'],x1:'On arrival'},
- {n:'Grant Horvat',d1:['7:45','18:00','range'],d2:['7:30','16:45'],x1:'On arrival',x2:'Rig stays on through Chosen MCV 1:15 (Zambezi). Social 3:15, Fore Play 4:00–4:45'},
- {n:'Ryan Ruffels',d1:['7:45','18:00','range'],d2:['7:30','16:45'],x1:'On arrival',x2:'Social 2:15, w/ Tommy 3:00 (Michal), Fore Play 4:00–4:45'},
+ {n:'Grant Horvat',d1:['8:00','18:00','tent'],d2:['7:30','16:45'],x1:'Adriana mics at the tent ~8:00, before warm-ups',x2:'Rig stays on through Chosen MCV 1:15 (Zambezi). Social 3:15, Fore Play 4:00–4:45'},
+ {n:'Ryan Ruffels',d1:['8:00','18:00','tent'],d2:['7:30','16:45'],x1:'Adriana mics at the tent ~8:00, before warm-ups',x2:'Social 2:15, w/ Tommy 3:00 (Michal), Fore Play 4:00–4:45'},
  {n:'Jacob Bridgeman',d1:['7:45','13:45','range'],d2:['9:45','18:00'],x1:'Now arrives 7:45 and is in Range Warm Up; Retail w/ Wagner 10:15. PopStroke 2:45 has no audio',x2:'Arrives 9:15. Social 11:00 (Rick). Runs to TP5 Speed Testing 5:30–6:00'},
  {n:'Michael Thorbjornsen',t:'Thor',d1:['8:45','18:00'],d2:['7:30','18:00'],x2:'Runs to TP5 Speed Testing'},
  {n:'Haeran Ryu',t:'W strap',d1:null,d2:['7:30','17:15']},
@@ -1081,7 +1082,7 @@ var MICS=[
  {n:'Adrian Rietveld',t:'TM',d1:['7:45','16:15','range'],d2:['13:00','16:30'],x2:'Mini Camp 1:15, Adrian Tour Truck 4:00–4:30'},
  {n:'Matt Simone',t:'TM',d1:['7:45','17:30','range'],d2:['8:15','18:00'],x1:'Last: TCP Driver to 5:30',x2:'TCP Irons 8:30; rig stays on through TP5 DOC (Zambezi); TP5 Speed Testing 2:30 + 5:30'}
 ];
-var MIC_RULES={d1:'Christmas Card pros mic\'d at the tent 6:45–7:15 (BTS audio): Joel Rory (first), Brandon Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke. Everyone else at their first set or on arrival at the range.',d2:'Talent mic\'d at the start of their first set, 7:30–7:45. Each mixer mics their own team; A2s help the big sets.'};
+var MIC_RULES={d1:'Christmas Card pros mic\'d at the tent 6:45–7:15 (BTS audio): Joel Rory (when he gets to the tent), Brandon Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at their first set or on arrival at the range.',d2:'Talent mic\'d at the start of their first set, 7:30–7:45. Each mixer mics their own team; A2s help the big sets.'};
 var MIC_SHORT={'Johnson Wagner':'Wagner','Michael Thorbjornsen':'Thor','Jacob Bridgeman':'Bridgeman','Ryan Ruffels':'Ruffels','James Holley':'Holley','Matt Bovee':'Bovee','Jackson Bragg':'Bragg','Todd Chew':'Chew','Cory Johnson':'Cory J','Brian Bazzel':'Bazzel','Keith Sbarbaro':'Sbarbaro','Adrian Rietveld':'Rietveld','Matt Simone':'Simone'};
 function sn(r){return MIC_SHORT[r.n]||r.n.split(' ')[0];}
 var micDay=(function(){var d=new Date();if(d.getFullYear()===2026&&d.getMonth()===10){if(d.getDate()===23)return 'd1';if(d.getDate()===24)return 'd2';}try{var v=localStorage.getItem('tm26micday');if(v==='d1'||v==='d2'||v==='both')return v;}catch(e){}return 'd1';})();
