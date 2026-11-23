@@ -174,7 +174,7 @@ select.status{font-weight:600;border-radius:999px;padding:2px 6px}
 .mt-legend{font-size:.8rem}
 .mt-sc{overflow:auto;max-height:72vh;max-height:72dvh;background:var(--panel);border:1px solid var(--rule);border-radius:10px;touch-action:pan-x pan-y;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;position:relative}
 .mt-chart{--pph:84;--lw:104px;position:relative;width:calc(var(--lw) + 13 * var(--pph) * 1px);user-select:none;-webkit-user-select:none}
-.mr{display:flex;min-height:46px}
+.mr{display:flex;min-height:46px}.solo .ml{display:none}
 .ml{position:sticky;left:0;z-index:3;flex:none;width:var(--lw);box-sizing:border-box;background:var(--panel);border:0;border-right:1px solid var(--rule);border-bottom:1px solid var(--grid);padding:4px 22px 4px 10px;text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;justify-content:center;cursor:pointer;position:sticky}
 button.ml{appearance:none}
 .ml-n{font-weight:600;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15}
@@ -921,7 +921,8 @@ var CAT={range:'Group / range',sound:'Sound setups',offsite:'Off-site',mcv:'MCV 
 var ORDER=['range','sound','offsite','mcv','other'];
 function shootDay(){var d=new Date();if(d.getFullYear()!==2026||d.getMonth()!==10)return null;return d.getDate()===23?'d1':d.getDate()===24?'d2':null;}
 function nowMin(){var d=new Date();return d.getHours()*60+d.getMinutes();}
-function lw(){return window.innerWidth<640?104:180;}
+function solo(){return st.view==='mix'&&!!st.me&&M&&M.crew.some(function(c){return c.id===st.me;});}
+function lw(){return solo()?0:(window.innerWidth<640?104:180);}
 function short(c){if(c.desc&&c.desc.indexOf('Unit ')===0)return c.desc.slice(5).split(' · ')[0];return c.kind==='mixer'?c.role.replace('ENG ','Mixer '):c.kind==='social'?'Social mixer':c.kind==='a2'?'A2':c.kind==='comms'?'Comms':'A1';}
 function first(n){return n.split(' ')[0];}
 
@@ -934,7 +935,7 @@ function rows(){
   var out=[];
   if(st.view==='mix'){
     var list=M.crew.slice();
-    if(st.me){var me=list.find(function(c){return c.id===st.me;});if(me){out.push({g:'You'});pushLane(out,me,true);list=list.filter(function(c){return c!==me;});}}
+    if(st.me){var me=list.find(function(c){return c.id===st.me;});if(me){pushLane(out,me,true);return out;}}
     var last='';
     list.forEach(function(c){if(c.kind!==last){out.push({g:GRP[c.kind]});last=c.kind;}pushLane(out,c,false);});
     if(M.mos&&M.mos.length)out.push({g:'No sound'},{id:'mos',lab:'Echo',sub:'Rotation Station · MOS?',full:'Echo · Rotation Station, no mixer (confirm MOS)',bars:M.mos});
@@ -988,7 +989,7 @@ function html(){
   '</div>';
 }
 function drawChart(){
-  var R=rows();M.rows=R;
+  var R=rows();M.rows=R;var _c=document.getElementById('mt-chart');if(_c)_c.classList.toggle('solo',solo());
   var h='<div class="mr mr-ax"><div class="ml"><span>'+(st.view==='mix'?'Crew':'Setup')+'</span></div><div class="mt">';
   for(var m=T0;m<=T1;m+=15){var k=m%60===0?'h':m%30===0?'hh':'q';h+='<div class="tk tk-'+k+'" style="--s:'+m+'"><span>'+(k==='h'?'<b>'+String(m/60).padStart(2,'0')+'</b><i>:00</i>':':'+String(m%60).padStart(2,'0'))+'</span></div>';}
   h+='</div></div>';
