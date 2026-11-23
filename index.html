@@ -439,7 +439,7 @@ function buildCrew(crew){
     .sort((a,b)=>rank[a.kind]-rank[b.kind]||a.role.localeCompare(b.role));
   MIXERS=CREW.filter(c=>c.kind==="mixer").map(c=>c.id);
   SOCIAL=CREW.filter(c=>c.kind==="social").map(c=>c.id);
-  A2S=CREW.filter(c=>c.kind==="a2"||c.kind==="social").map(c=>c.id);
+  A2S=CREW.filter(c=>c.kind==="a2").map(c=>c.id);/* Rick always stays with social (Tim, Nov 23) */
   COMMS=CREW.filter(c=>c.kind==="comms").map(c=>c.id);
   A1=(CREW.find(c=>c.kind==="a1")||{}).id||null;
   TEAMS=MIXERS.length||1;
@@ -451,7 +451,7 @@ function buildCrew(crew){
   const byUnit=id=>CREW.filter(c=>{const u=unitOf(c.role);return u&&u.id===id}).map(c=>c.id);
   const FP=byUnit("foreplay"),BRAVO=byUnit("bravo"),CHAR=byUnit("charlie");
   /* Day 1 morning (Tim, Nov 20): Tim and the A2s (incl. Rick) at Christmas Card; ALL mixers + Freddie at the range with their camera teams */
-  const CC=[...(A1?[A1]:[]),...A2S];/* A2S includes Rick (social) */
+  const CC=[...(A1?[A1]:[]),...A2S,...SOCIAL];/* A2S includes Rick (social) */
   const RANGEMIX=MIXERS.slice();
   FIXED={
     d1:[
@@ -551,7 +551,7 @@ const UNITS=[
   {id:"delta",name:"Delta",role:"ENG E",hub:"Hub 4 + 8S kit",hs:"8 headsets",crewN:4,what:"Day 1 (Scratch, Nov 19): Range, DRS 9:15, Lie Detectors Irons 10:45 (Scottie, Tommy) and 11:45 (Charley, Brooke), P-Series First Look 1:45, Bag Swap 3:15–5:30. Socials moved to Scratch\'s new Social Sessions column. Day 2 DOT vs. NOT, Bag Swap",cams:"Christian Carnahan, Cam Schultz, Justin Charles, Gil (positions not filled in yet)"},
   {id:"foreplay",name:"Fore Play",role:"ENG D",hub:"No comms, TC only",hs:"—",nocomms:true,what:"Dedicated mixer (Maurece, Nov 11): 3-Ball Match, P-Series, Greenskeepers, Fix It, DRS. PopStroke off-site has no audio",cams:"Fore Play's own cameras · counts TBD, we feed TC"},
   {id:"social",name:"Social",role:"Social mixer",hub:"No comms (audio only)",hs:"—",nocomms:true,what:"Audio-only Social Sessions column on Scratch's sheet, both days (Tim locked Rick, Nov 19). Shot on iPhone; record on the extra 888 and slate each session for sync. A2 work around the sessions",cams:"iPhone (TM / creators) · we slate for sync"},
-  {id:"youtube",name:"YouTube",role:"ENG F",hub:"No comms, TC only",hs:"—",nocomms:true,what:"Audio-only YouTube / Ruffels column (Josh Laemmle). Day 1: Full Bag fitting, GH vs. RR Impossible Shots, Hull/Henderson, Ruffels w/ Thor, Perfect 9. Day 2: also takes the unassigned audio sets (James/Spider, Canada 12:30, CG vs. MOI, TP5 Speed Testing x2) plus Ruffels w/ Tommy (Tim, Nov 19)",cams:"Creator cameras · counts TBD, we feed TC"}
+  {id:"youtube",name:"YouTube",role:"ENG F",hub:"No comms, TC only",hs:"—",nocomms:true,what:"Audio-only YouTube / Ruffels column (Josh Laemmle). Day 1: Full Bag fitting, GH vs. RR Impossible Shots, Hull/Henderson, Ruffels w/ Thor, Perfect 9. Day 2: 2v2 SKY match, Ruffels w/ Tommy. Josh always stays with YouTube (Tim, Nov 23); CG vs. MOI and TP5 Speed Testing x2 go to Michal",cams:"Creator cameras · counts TBD, we feed TC"}
 ];
 /* Audio Scratch wants that no unit mixer can take (Maurece, Nov 11). Shown in red as extra-mixer lanes. */
 const EXTRA={
@@ -574,9 +574,9 @@ const UBLK={
     alpha:[[465,570,"Korea (Haeran + fitter Jae, extra mic) @ #12"],[705,750,"Flight Club (Charley, Haeran, Rietveld) @ #13 TEE"],[795,840,"Flight Club (Collin, Thor, Wagner) @ #13 TEE"],[960,1035,"Korea (Haeran + fitter Jae) @ #1"]],
     bravo:[[465,570,"1 Club / Bag Swap Match - CA/EU (Brady, Mapes, Jared) @ holes 18-13-14-17-3-8-9-10-11"],[585,600,"Canada (Brooke; Brady, Mapes, Jared) @ #9"],[795,840,"Mini Camp v2 @ #3 TEE / FWY"],[975,1035,"Team TM vs. Impossible Shots @ #2"]],
     charlie:[[465,495,"Retail - SS (Wagner) @ #1 TEE"],[510,600,"TCP - Irons @ #1 FWY"],[615,645,"Retail - BH (Wagner) @ #1 TEE"],[660,690,"Retail - CM (Wagner) @ #1 TEE"],[750,780,"Retail - JB (Wagner) @ #1 TEE"],[855,885,"Retail - TF (Wagner) @ #4 TEE"],[960,990,"Adrian Tour Truck (Charley, Rietveld) · no team listed, Brandon covers @ Tour Truck"]],
-    delta:[[465,585,"DOT vs. NOT (+ Naro) @ holes 3-8-9-10-11-17-18-13-14"],[600,645,"Bag Swap Match @ holes 14-17-3"],[645,690,"James / Spider (Haeran, Holley) · Michal covers, straight from Bag Swap (Rick keeps the social) @ #15"],[750,795,"Canada (Brooke, Bazzel; Austin, Aiden, Brady) · Michal covers @ #12"],[900,930,"Ruffels w/ Tommy · Michal covers (Josh is on TP5 Speed Testing) @ holes 4-5-6"]],
+    delta:[[465,585,"DOT vs. NOT (+ Naro) @ holes 3-8-9-10-11-17-18-13-14"],[600,645,"Bag Swap Match @ holes 14-17-3"],[645,690,"James / Spider (Haeran, Holley) · Michal covers, straight from Bag Swap (Rick keeps the social) @ #15"],[750,795,"Canada (Brooke, Bazzel; Austin, Aiden, Brady) · Michal covers @ #12"],[810,855,"CG vs. MOI putter fitting (Bridgeman, Holley) · Michal covers (Josh stays with YouTube) @ #1 GRN"],[870,930,"TP5 Speed Testing (Bridgeman, Thor, Simone, Bragg, Cory Johnson) · Michal covers @ Range"],[1050,1080,"TP5 Speed Testing (Bridgeman, Thor, Simone, Bragg, Cory Johnson) · Michal covers @ Range"]],
     foreplay:[[510,540,"Fore Play w/ Scheffler @ #15"],[600,645,"2v2v2 w/ FP Gamers @ holes 18-13-14"],[660,780,"Fore Play w/ Thor @ holes 3-8-9-10-11-17-18-13-14"],[810,945,"LPGA (Fore Play) @ holes 16-15-10-11-12-13-14-17-18"],[960,1005,"Fore Play: Grant / Ruffels @ #14 TEE (TBD)"]],
-    youtube:[[660,780,"2v2 Match / SKY + team (Scottie, Tommy, Grant, Ruffels) · Scratch YouTube column @ holes 18-13-14-17-3-8-9-10-11"],[810,855,"CG vs. MOI putter fitting (Bridgeman, Holley) @ #1 GRN"],[870,930,"TP5 Speed Testing (Bridgeman, Thor, Simone, Bragg, Cory Johnson) @ Range"],[1050,1080,"TP5 Speed Testing (Bridgeman, Thor, Simone, Bragg, Cory Johnson) @ Range"]],
+    youtube:[[660,780,"2v2 Match / SKY + team (Scottie, Tommy, Grant, Ruffels) · Scratch YouTube column @ holes 18-13-14-17-3-8-9-10-11"],[900,930,"Ruffels w/ Tommy (YouTube / Ruffels crew) @ holes 4-5-6"]],
     social:[[555,585,"Social Sessions (Tommy) @ #10/11"], [600,645,"Social Sessions (Grant, Ruffels) @ #10/11"], [660,690,"Social Sessions (Bridgeman) · athlete column only @ #11"], [765, 795, "Social Sessions - EU (Charley)"], [855,885,"Social Sessions (Ruffels) · athlete column only @ #1-4"], [915,945,"Social Sessions (Grant) · athlete column only @ #1-4"]],
     echo:[[555,570,"Rotation Station"],[945,960,"Rotation Station"]]
   }
