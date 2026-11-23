@@ -339,6 +339,7 @@ button.ml{appearance:none}
  .tal-log td:last-child{border-right:0}
 }
 @media (max-width:640px){nav{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}nav::-webkit-scrollbar{display:none}nav button{flex:1 1 auto!important;padding-left:3px!important;padding-right:3px!important;letter-spacing:0!important;font-size:.74rem!important}}
+.md-pick{display:flex;gap:10px;align-items:center;margin:6px 0 12px}.md-pick label{font-weight:600}.md-pick select{font:inherit;font-size:1rem;padding:8px 10px;border-radius:8px;border:1px solid var(--line,#ccc);background:var(--bg,#fff);color:inherit;min-width:220px;max-width:100%}.md-tb{width:100%;border-collapse:collapse;margin-bottom:8px}.md-tb td{padding:8px 6px;border-bottom:1px solid var(--line,#e3e3e3);vertical-align:top}.md-t{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;width:1%;padding-right:12px!important}.md-w{font-weight:600}.md-loc{margin-top:2px;font-weight:700;color:var(--accent,#1f6b45)}.md-tal{color:var(--muted,#666);font-size:.9em;margin-top:2px}.md-k{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted,#888);margin-top:3px}.md-lunch td{background:rgba(200,170,80,.12)}.md-map{width:100%;height:auto;border-radius:8px;border:1px solid var(--line,#ddd)}
 </style>
 <div id="app" class="wrap"></div>
 <script>
@@ -1178,16 +1179,43 @@ function talent(){
  '<div class="tal-log"><h2>Spare / field mic-ups &amp; frequency changes</h2><table><thead><tr><th style="width:7%">Day</th><th style="width:12%">Mixer</th><th style="width:9%">TX#</th><th style="width:20%">Talent</th><th style="width:15%">Freq (MHz)</th><th style="width:8%">On</th><th style="width:8%">Off</th><th>Notes</th></tr></thead><tbody>'+new Array(17).join('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>')+'</tbody></table></div>';
  return h;
 }
-var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent'].indexOf(t)>=0)tab=t;}catch(e){}
-if(location.hash==='#cameras')tab='cams';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
+
+/* My Day: pick your name, see both days with locations + Monday map */
+var MAPS={dave:1,joel:1,brandon:1,michal:1,andy:1,joshl:1,rick:1};
+var me='';try{me=localStorage.getItem('tm26me')||'';}catch(e){}
+(function(){var m=location.hash.match(/^#me=(\w+)/);if(m)me=m[1];})();
+function myday(){
+ var M1=Board.model(CREW,'d1'),M2=Board.model(CREW,'d2');var who=M1.who;
+ var opts='<option value="">Choose your name…</option>'+M1.crew.map(function(c){return '<option value="'+c.id+'"'+(c.id===me?' selected':'')+'>'+esc(c.name)+'</option>';}).join('');
+ var h='<div class="md-pick"><label for="md-sel">Who are you?</label><select id="md-sel">'+opts+'</select></div>';
+ var c=M1.crew.filter(function(x){return x.id===me;})[0];
+ if(!c)return h+'<p class="note">Pick your name to see your Monday and Tuesday, where to be, and your Monday route map. Your phone remembers it next time.</p>';
+ var f=function(m){var hh=Math.floor(m/60),mm=m%60;return (hh>12?hh-12:hh)+':'+String(mm).padStart(2,'0');};
+ var K={sound:'Set',range:'Range',prep:'Prep',lunch:'Lunch',a2:'A2',comms:'Comms',offsite:'Set'};
+ var day=function(lbl,L){
+  var rows=L.filter(function(x){return !/^Fallback/.test(x.n);}).sort(function(a,b){return a.s-b.s||a.e-b.e;}).map(function(x){
+   var parts=x.n.split(' @ ');var what=parts[0],where=parts[1]||'';
+   return '<tr class="md-'+x.c+'"><td class="md-t">'+f(x.s)+'–'+f(x.e)+'</td><td><div class="md-w">'+esc(what)+'</div>'+(where?'<div class="md-loc">📍 '+esc(where)+'</div>':'')+(x.w&&x.w.length&&!x.fixed?'<div class="md-tal">'+esc(who(x.w).join(', '))+'</div>':'')+'<div class="md-k">'+(K[x.c]||x.c)+'</div></td></tr>';
+  }).join('');
+  return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
+ };
+ h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Monday locations are from TaylorMade’s final Day 1 schedule. Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
+ h+=day('Monday, Nov 23',M1.lanes[c.id]||[]);
+ if(MAPS[c.id])h+='<h2>Monday route</h2><a href="maps/'+c.id+'-mon.jpg" target="_blank" rel="noopener"><img class="md-map" src="maps/'+c.id+'-mon.jpg" alt="Monday route map for '+esc(c.name)+'"></a><p class="note">Markers sit on the hole number; tap to open full size.</p>';
+ h+=day('Tuesday, Nov 24',M2.lanes[c.id]||[]);
+ return h;
+}
+var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent','myday'].indexOf(t)>=0)tab=t;}catch(e){}
+if(location.hash==='#cameras')tab='cams';if(/^#me/.test(location.hash)||location.hash==='#myday')tab='myday';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Locked Nov 19 · Updated Nov 21, 1:30 PM</div></header>';
- h+='<nav role="tablist">'+[['schedule','Schedule'],['timeline','Timeline'],['talent','Talent'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
- h+='<section>'+(tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():tab==='talent'?talent():'<div id="tl-root"></div>')+'</section>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Updated Nov 22, 9:45 PM</div></header>';
+ h+='<nav role="tablist">'+[['myday','My Day'],['schedule','Schedule'],['timeline','Timeline'],['talent','Talent'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
+ h+='<section>'+(tab==='myday'?myday():tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():tab==='talent'?talent():'<div id="tl-root"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
  document.body.classList.toggle('pt',tab==='talent');
  var pd=document.querySelector('.tal-pd');if(pd){var n=new Date();pd.textContent=n.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+n.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
  if(tab==='timeline')MTL.mount(document.getElementById('tl-root'),CREW);
+ var sel=document.getElementById('md-sel');if(sel)sel.addEventListener('change',function(){me=sel.value;try{localStorage.setItem('tm26me',me);}catch(x){}render();});
 }
 document.addEventListener('click',function(e){var m=e.target.closest('[data-micday]');if(m){micDay=m.dataset.micday;try{localStorage.setItem('tm26micday',micDay);}catch(x){}render();return;}var b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;try{localStorage.setItem('tm26crewtab',tab);}catch(x){}render();});
 render();
