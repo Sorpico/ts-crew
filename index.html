@@ -883,7 +883,7 @@ function comms(){
  ul(['Camera department only. Sound, grips and PAs are not on Hollyland.',
   '<b>Mixers:</b> send program to your team\'s Hub (3.5 mm PGM input) and keep it under talkback.',
   'Headsets charge at the production tent. Freddie runs charging and swaps.'])+
- '<h2>Kit tuning (Freddie)</h2>'+kitTune()+'<h2>Hub handout list (Mon, at the tent)</h2><p class="note">Tune and check each kit before it goes to the camera team. Ticks save on this phone.</p>'+hubHandout()+
+ '<h2>Kit tuning (Freddie)</h2>'+kitTune()+
  '<h2>Producer / director in-ears</h2>'+
  '<p class="note">For the 6 TaylorMade producer/directors: Tyler Brett, Lauren Nisavic, Mike Barbuti, Steve Breazeale, Mike Esse, Austin Jack.</p>'+
  ul(['<b>Listen:</b> Lectro R1a in-ear. Each team\'s Hub feeds its own Lectro IFB TX (Block 470). R1a presets: Range, Alpha, Bravo, Charlie, Delta.',
@@ -1314,7 +1314,7 @@ function myday(){
   }).join('');
   return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
  };
- if(c.id==='freddie')h+='<h2>Hub handout list (Mon, at the tent 6:30–7:15)</h2><p class="note">Tune and check each kit before it goes to the camera team. Ticks save on this phone.</p>'+hubHandout()+'<h2>Kit tuning: before and after the range break</h2>'+kitTune();
+ if(c.id==='freddie')h+='<h2>Kit tuning: before and after the range break</h2>'+kitTune();
  var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b class="gc">'+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set (same both days).</p>';
  h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab). Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
  h+=day('Monday, Nov 23',M1.lanes[c.id]||[],'d1');
