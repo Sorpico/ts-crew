@@ -943,7 +943,10 @@ function rows(){
     if(M.a2short&&M.a2short.length)out.push({g:'Short on A2s'},{id:'a2s',lab:'Needs an A2',sub:'',bars:M.a2short.map(function(b){return Object.assign({},b,{c:'unc'});}),unc:true});
   } else {
     ORDER.forEach(function(cat){
-      var inCat=M.bars.filter(function(b){return b.c===cat;});if(!inCat.length)return;
+      var meC=st.me&&M.crew.find(function(c){return c.id===st.me;});
+      var myL=meC?(M.lanes[meC.id]||[]):null;var k12=function(n){return String(n||'').split(' @ ')[0].split(' (')[0].toLowerCase().slice(0,12);};
+      var mine=function(b){return myL.some(function(x){if(Math.min(x.e,b.e)-Math.max(x.s,b.s)<10)return false;var wb=b.w||[],wx=x.w||[];var real=/^(sound|range|offsite)$/;return (real.test(x.c)&&real.test(b.c)&&wb.some(function(t){return wx.indexOf(t)>=0;}))||k12(x.n)===k12(b.n);});};
+      var inCat=M.bars.filter(function(b){return b.c===cat&&(!meC||mine(b));});if(!inCat.length)return;
       out.push({g:CAT[cat]});
       var by={};inCat.forEach(function(b){(by[b.n]=by[b.n]||[]).push(b);});
       Object.keys(by).sort(function(a,b){return Math.min.apply(0,by[a].map(function(x){return x.s;}))-Math.min.apply(0,by[b].map(function(x){return x.s;}));})
@@ -979,9 +982,9 @@ function html(){
     '<div class="seg zoom" role="group" aria-label="Zoom"><button data-z="out" aria-label="Zoom out">−</button><button data-z="fit">Fit day</button><button data-z="in" aria-label="Zoom in">+</button></div>'+
     '<button class="lnk" data-all>'+(st.all?'Collapse all':'Expand all')+'</button>'+
     (sd?'<button class="lnk now" data-now>Now</button>':'')+
-    '<button class="lnk" data-legend aria-expanded="'+st.legend+'">Key</button>'+
+    
    '</div>'+
-   '<div class="legend mt-legend"'+(st.legend?'':' hidden')+'><span><i class="sw c-sound"></i>Sound setup</span><span><i class="sw c-range"></i>Group / range</span><span><i class="sw c-offsite"></i>Off-site</span><span><i class="sw c-mcv"></i>MCV spot</span><span><i class="sw c-other"></i>Other unit</span><span><i class="sw c-prep"></i>Mic-up</span><span><i class="sw c-a2"></i>A2: change / lunch / wrap</span><span><i class="sw c-lunch"></i>Lunch</span><span><i class="sw c-comms"></i>Comms</span><span><i class="sw c-hs"></i>Headsets live</span></div>'+
+   '<div class="legend mt-legend"><span><i class="sw c-sound"></i>Sound setup</span><span><i class="sw c-range"></i>Group / range</span><span><i class="sw c-offsite"></i>Off-site</span><span><i class="sw c-mcv"></i>MCV spot</span><span><i class="sw c-other"></i>Other unit</span><span><i class="sw c-prep"></i>Mic-up</span><span><i class="sw c-a2"></i>A2: change / lunch / wrap</span><span><i class="sw c-lunch"></i>Lunch</span><span><i class="sw c-comms"></i>Comms</span><span><i class="sw c-hs"></i>Headsets live</span></div>'+
    '<div class="mt-sc" id="mt-sc"><div class="mt-chart" id="mt-chart"></div></div>'+
    '<p class="hint">Pinch or use − / + to zoom. Tap a name to expand their day; tap a bar for details.</p>'+
    '<details class="mt-live" open><summary>At <b id="mt-lt"></b> <span id="mt-verdict"></span></summary><ul class="live" id="mt-live"></ul></details>'+
@@ -1075,7 +1078,6 @@ function mount(el,crew){
   el.querySelectorAll('[data-z]').forEach(function(x){x.addEventListener('click',function(){var z=x.dataset.z;if(z==='fit'){applyZoom(fitPPH());sc.scrollLeft=0;}else applyZoom(st.pph*(z==='in'?1.5:1/1.5));save();});});
   el.querySelector('[data-all]').addEventListener('click',function(){st.all=!st.all;st.open={};var sl=sc.scrollLeft;el.querySelector('[data-all]').textContent=st.all?'Collapse all':'Expand all';drawChart();sc.scrollLeft=sl;});
   var nb=el.querySelector('[data-now]');if(nb)nb.addEventListener('click',function(){setCur(nowMin());scrollTo(st.cur);});
-  el.querySelector('[data-legend]').addEventListener('click',function(e){st.legend=!st.legend;el.querySelector('.mt-legend').hidden=!st.legend;e.target.setAttribute('aria-expanded',st.legend);});
   el.querySelector('#mt-sheet').addEventListener('click',function(e){if(e.target.closest('[data-close]'))e.currentTarget.hidden=true;});
 }
 window.addEventListener('resize',function(){if(sc&&sc.isConnected){sizeDetail();chart.style.setProperty('--lw',lw()+'px');}});
