@@ -1391,7 +1391,7 @@ function myday(){
   }).join('');
   return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
  };
- if(MAPS[c.id])h+='<h2>My route <small class="mr-d">Monday</small></h2><img class="md-map" src="maps/'+c.id+'-mon.jpg?v=2" alt="Monday route map for '+esc(c.name)+'"><p class="note">Solid line follows the red cart routes; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
+ if(MAPS[c.id])h+='<h2>My route <small class="mr-d">Monday</small></h2><img class="md-map" src="maps/'+c.id+'-mon.jpg?v=3" alt="Monday route map for '+esc(c.name)+'"><p class="note">Solid line follows the red cart routes; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
  if(c.id==='freddie')h+='<h2>Kit tuning: before and after the range break</h2>'+kitTune();
  var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b class="gc">'+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set (same both days).</p>';
  h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab). Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
