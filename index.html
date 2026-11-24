@@ -352,7 +352,9 @@ var DAYS=[
  {d:'Mon Nov 23',k:'Shoot · Day 1',t:'Crew call 6:15 AM at the production tent, everyone. Christmas Card pros are mic\'d at the tent 6:45–7:15, before the shoot (BTS audio): Joel mics Rory when he gets to the tent, Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Tim runs the station. Mixers leave for the range with their camera teams; any pro not mic\'d by then, Tim, Heather and Adriana pick up. Brandon goes straight to the range to set up. At the range, mixers mic talent as they arrive. Adriana also mics Grant and Ruffels at the tent ~8:00 before warm-ups. Then Christmas Card 7:30–8:15. Freddie sets the Hubs at the tent (not linked; every Hub on the Alpha kit IFB), hands them to the camera teams and rides out to the range with them. Tim and the A2s head to the range once everyone is mic\'d and Christmas Card wraps (8:15). Everyone else moves out with their camera team, or midway through Christmas Card, to their first spot. All mixers (Dave, Joel, Brandon, Michal, Andy, Josh) report to the range with their camera teams, there by 7:30 to mic arrivals and set up to receive. Range Warm Up 8:30–9:00 with Brandon on the range Scorpio; Hubs stay separate, all listening to the Alpha kit IFB, then each Hub retunes to its own team. Tiger mic\'d 11:45. Wrap around 6:00 (sunset 5:45).'},
  {d:'Tue Nov 24',k:'Shoot · Day 2',t:'Sound call 6:00–6:15 AM. Pros arrive 7:00; each mixer mics their own talent at the start of their first set, 7:30–7:45, with the A2s helping the big sets. Bridgeman arrives 9:15. Tiger, Rory and Nelly are off Day 2; Haeran Ryu and the amateurs are added. Wrap around 6:00. Hotel checkout is today; most of us travel home after wrap.'},
  {d:'Wed Nov 25',k:'Travel',t:'Paid travel day home (half rate). Need a room the night of the 24th? Tell Tim.'}];
+var TUE=(function(){var d=new Date();return d.getFullYear()>2026||(d.getFullYear()===2026&&(d.getMonth()>10||(d.getMonth()===10&&d.getDate()>=24)));})();
 function schedule(){
+ if(TUE)return '<p class="note">Location: APOGEE, 2103 SW Bridge Rd, Hobe Sound, FL 33455. Hotel: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd. <b>Today, Tuesday Nov 24:</b> sound call 6:00–6:15 AM at the production tent. TM producer frequencies are not in use today. Block times can still move; this page is the latest.</p><div class="card">'+DAYS.filter(function(x){return /Tue|Wed/.test(x.d);}).map(function(x){return '<div class="day"><div class="d">'+x.d.split(' ').slice(1).join(' ')+'<span>'+x.d.split(' ')[0]+'</span></div><div><span class="k">'+x.k+'</span><div>'+esc(x.t)+'</div></div></div>';}).join('')+'</div>';
  return '<p class="note">Location: APOGEE, 2103 SW Bridge Rd, Hobe Sound, FL 33455. Hotel: DoubleTree by Hilton Palm Beach Gardens, 4431 PGA Blvd. Monday crew call 6:15 AM at the production tent, everyone; Tuesday sound call 6:00–6:15 AM at the production tent. Block times can still move; this page is the latest.</p><div class="card">'+
  DAYS.map(function(x){return '<div class="day"><div class="d">'+x.d.split(' ').slice(1).join(' ')+'<span>'+x.d.split(' ')[0]+'</span></div><div><span class="k">'+x.k+'</span><div>'+esc(x.t)+'</div></div></div>';}).join('')+'</div>'+prep();
 }
@@ -626,7 +628,7 @@ function commsTeams(d,lanes){
   });
   return out;
 }
-function camTeams(crew){buildCrew(crew);return {teams:teamRows("d1"),none:"Echo (Rotation Station, Ember + Phantom) and Studio Photography are MOS per Maurece; no mixer, no TC on the high-speed rigs. Fore Play and YouTube get timecode but no comms."};}
+function camTeams(crew){buildCrew(crew);return {teams:teamRows(typeof TUE!=='undefined'&&TUE?"d2":"d1"),none:"Echo (Rotation Station, Ember + Phantom) and Studio Photography are MOS per Maurece; no mixer, no TC on the high-speed rigs. Fore Play and YouTube get timecode but no comms."};}
 function lunchGap(items){
   const W0=690,W1=870;let t=W0,best=0;
   items.filter(b=>b.c!=="lunch"&&b.e>W0&&b.s<W1).sort((a,b)=>a.s-b.s).forEach(b=>{best=Math.max(best,Math.min(b.s,W1)-t);t=Math.max(t,b.e)});
@@ -822,14 +824,15 @@ function mount(el,crew){
 return {mount:mount,camTeams:camTeams,model:function(crew,d){buildCrew(crew);var r=coverage(d);return {crew:CREW,lanes:r.lanes,unc:r.unc,extras:r.extras||[],a2short:r.a2short||[],mos:r.mos||[],comms:commsTeams(d,r.lanes),bars:data[d],meta:META[d],teams:TEAMS,who:who};}};
 })();
 
+var TW={alpha:'Korea (Haeran + Jae) #12, Flight Club x2 #13 TEE, Korea #1',bravo:'CA/EU Bag Swap, Canada #9, Social w/ Grant + Ruffels #10/11, Mini Camp #3, Flight Club social',charlie:'Retail x5 (Wagner) #1 / #4, TCP Irons #1 FWY, Adrian Tour Truck',delta:'DOT vs. NOT, Bag Swap, James/Spider #15, Canada #12, TP5 Speed Testing x2 (Range)',foreplay:'Range Warm Up, Scheffler #15, 2v2v2, Thor, LPGA, Grant/Ruffels #14',social:'Rick: Tommy #16, Charley EU #8, Bridgeman #11 + #3, CG vs. MOI #1 GRN',youtube:'2v2 SKY match, Ruffels w/ Tommy, Thor w/ Ruffels (holes 4-5-6)'};
 function cams(){
- var R=[['Gary M','CAM A · FX6','Sticks',1],['Paul B','CAM B · FX6','Sticks',1],['Aidan C','CAM C · FX6','Sticks',1],['David D','CAM D · FX6','Sticks',1],['Dom E','CAM E · FX6','Sticks · Day 1 only',1],['Matt A','CAM F · FX6 + CAM M · 4D','Sticks + gimbal; Day 2 adds a drone',2],['Justin N','CAM G · FX6','Sticks',1],['Jackson V','CAM H · FX6 + CAM Z · 4D','Sticks + gimbal',2],['Gordon C','CAM I · FX6 + CAM Q · 4D','Sticks + gimbal',2],['Mike M','CAM N · 4D + CAM J · FX6','Gimbal + handheld',2],['Matt W','CAM O · 4D + CAM K · FX6','Gimbal + sticks',2],['Mike S','CAM P · 4D','Gimbal',1],['John S','CAM R · 4D','Gimbal',1],['Xavier','CAM S · FX9','Jib',1],['Jared C','CAM T · C300','Sticks',1],['Nick S','Ember + drone','High-speed (Rotation Station)',1],['Andres T','Phantom','High-speed',1],['Juan N','Drone','','no'],['Giancarlo Z','GoPros + drone','','no'],['Mark S, Christian C','No camera listed','Likely producers / director',''],['Andres U, Federico H, Gil H, Chloe I','No camera listed','Second group, likely photo / BTS','']];
+ var R=(TUE?[]:[['Dom E','CAM E · FX6','Sticks · Day 1 only',1]]).concat([['Gary M','CAM A · FX6','Sticks',1],['Paul B','CAM B · FX6','Sticks',1],['Aidan C','CAM C · FX6','Sticks',1],['David D','CAM D · FX6','Sticks',1],['Matt A','CAM F · FX6 + CAM M · 4D','Sticks + gimbal; Day 2 adds a drone',2],['Justin N','CAM G · FX6','Sticks',1],['Jackson V','CAM H · FX6 + CAM Z · 4D','Sticks + gimbal',2],['Gordon C','CAM I · FX6 + CAM Q · 4D','Sticks + gimbal',2],['Mike M','CAM N · 4D + CAM J · FX6','Gimbal + handheld',2],['Matt W','CAM O · 4D + CAM K · FX6','Gimbal + sticks',2],['Mike S','CAM P · 4D','Gimbal',1],['John S','CAM R · 4D','Gimbal',1],['Xavier','CAM S · FX9','Jib',1],['Jared C','CAM T · C300','Sticks',1],['Nick S','Ember + drone','High-speed (Rotation Station)',1],['Andres T','Phantom','High-speed',1],['Juan N','Drone','','no'],['Giancarlo Z','GoPros + drone','','no'],['Mark S, Christian C','No camera listed','Likely producers / director',''],['Andres U, Federico H, Gil H, Chloe I','No camera listed','Second group, likely photo / BTS','']]);
  return '<p class="note">From Scratch\'s "TM262151 2026 Crew Assignments" (Nov 9, still in progress). Operators and cameras per that sheet; camera teams per Scratch\'s TEAM ROSTER tab (Nov 13), listed below with each unit\'s mixer.</p>'+
- '<div class="cam-stats"><div><b class="tab-num">20</b><span>lettered cameras Day 1</span></div><div><b class="tab-num">19</b><span>Day 2 (no Dom / CAM E)</span></div><div><b class="tab-num">~22</b><span>bodies needing TC incl. Ember + Phantom</span></div><div><b class="tab-num">28</b><span>TC boxes in our kits (17 Lockit + Brandon 6 UltraSync, 5 JB-1)</span></div></div>'+
+ '<div class="cam-stats">'+(TUE?'':'<div><b class="tab-num">20</b><span>lettered cameras Day 1</span></div>')+'<div><b class="tab-num">19</b><span>Day 2 (no Dom / CAM E)</span></div><div><b class="tab-num">~22</b><span>bodies needing TC incl. Ember + Phantom</span></div><div><b class="tab-num">28</b><span>TC boxes in our kits (17 Lockit + Brandon 6 UltraSync, 5 JB-1)</span></div></div>'+
  '<div class="tbl"><table><thead><tr><th>Operator</th><th>Camera(s)</th><th>Rig</th><th class="num">TC</th></tr></thead><tbody>'+R.map(function(r){return '<tr><td class="name" style="white-space:normal">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="prev">'+esc(r[2])+'</td><td class="num">'+esc(r[3])+'</td></tr>';}).join('')+'</tbody></table></div>'+
  '<p class="note" style="margin-top:8px">Five operators run an FX6 and a 4D. Plan hops and TC per operator, and expect the 4D as the second angle on the same setup.</p>'+
  '<h2 style="margin-top:22px">Camera units and comms stations</h2><p class="note">From Scratch\'s 2026 Crew Assignments, columns Alpha through YouTube. Each unit keeps one mixer and one headset system all day. Camera crews per Scratch\'s TEAM ROSTER tab (Nov 13). Mixers are Tim\'s assignments; Scratch\'s mixer names are placeholders.</p>'+
- (function(){var T=Board.camTeams(typeof S!=='undefined'&&S.crew?S.crew:CREW);return '<div class="tbl teams"><table><thead><tr><th>Unit</th><th>Shoots</th><th>Mixer</th><th>Headsets</th><th>Cameras</th></tr></thead><tbody>'+T.teams.map(function(t){return '<tr><td class="name">'+esc(t.name)+'</td><td style="white-space:normal;min-width:220px">'+esc(t.what)+'</td><td class="name">'+esc(t.mixer?t.mixer.name:'Needs a mixer')+'<br><span class="prev">'+esc(t.role)+'</span></td><td>'+esc(t.hubNow)+'<br><span class="prev">'+esc(t.hs)+'</span></td><td class="prev" style="white-space:normal;min-width:160px">'+esc(t.cams)+'</td></tr>';}).join('')+'</tbody></table></div><p class="note" style="margin-top:8px">'+esc(T.none)+' On Day 1, Hubs 1–5 are linked at the range with program on the main Hub (tested by Lensrentals Nov 16). At 08:45 the links come out: Alpha Hub 1, Charlie Hub 3, Delta Hub 4, and Bravo keeps Hubs 2 + 5 linked. The Roaming Hub is the spare.</p>';})()+
+ (function(){var T=Board.camTeams(typeof S!=='undefined'&&S.crew?S.crew:CREW);return '<div class="tbl teams"><table><thead><tr><th>Unit</th><th>Shoots</th><th>Mixer</th><th>Headsets</th><th>Cameras</th></tr></thead><tbody>'+T.teams.map(function(t){return '<tr><td class="name">'+esc(t.name)+'</td><td style="white-space:normal;min-width:220px">'+esc(TUE&&TW[t.id]?'Tue: '+TW[t.id]:t.what)+'</td><td class="name">'+esc(t.mixer?t.mixer.name:'Needs a mixer')+'<br><span class="prev">'+esc(t.role)+'</span></td><td>'+esc(t.hubNow)+'<br><span class="prev">'+esc(t.hs)+'</span></td><td class="prev" style="white-space:normal;min-width:160px">'+esc(t.cams)+'</td></tr>';}).join('')+'</tbody></table></div><p class="note" style="margin-top:8px">'+esc(T.none)+' On Day 1, Hubs 1–5 are linked at the range with program on the main Hub (tested by Lensrentals Nov 16). At 08:45 the links come out: Alpha Hub 1, Charlie Hub 3, Delta Hub 4, and Bravo keeps Hubs 2 + 5 linked. The Roaming Hub is the spare.</p>';})()+
  '';
 }
 
@@ -842,7 +845,7 @@ function sound(){
  '<div class="tbl teams kit"><table><thead><tr><th>Who</th><th>Unit</th><th>Recorder</th><th>Bringing into the pool</th><th>Notes</th></tr></thead><tbody>'+[
   ['Dave Wade','Alpha','SD 888','2× MTP60, 1× MCR54',''],
   ['Joel Tower','Bravo','SD 888','6× MTP61, 2× MCR54',''],
-  ['Brandon Dew','Charlie','SD Scorpio','2× MTP61, 1× MCR54','Monday he runs the range Scorpio kit for Range Warm Up, then takes his own kit to Charlie at 9:15'],
+  ['Brandon Dew','Charlie','SD Scorpio','2× MTP61, 1× MCR54',TUE?'':'Monday he runs the range Scorpio kit for Range Warm Up, then takes his own kit to Charlie at 9:15'],
   ['Michal Maksymowicz','Delta','SD 833','None','Reticle gives him 1× MCR54 (Baggett sub-rental)'],
   ['Andy Sankar','Fore Play / Barstool, audio only','SD 833','4× MTP60, 1× MCR54',''],
   ['Josh Laemmle','YouTube / Ruffels, audio only','SD 833','2× MCR54',''],
@@ -858,7 +861,7 @@ function sound(){
   'Rigs stay on under wardrobe through Zambezi sets (MCV, DOC, Year in Review). If Zambezi says no, A2s de-mic and re-mic; the fallback slots are on the schedule.',
   'Barstool talent (Riggs, Frankie, Trent) is not ours. Cover our athletes only.'])+
  '<h2>Mic-up</h2>'+ul([
-  '<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival. Thor + James Holley: Brandon (Charlie) mics them at the start of Retail - Holley 9:15, #1 GRN. Tiger at 11:45.',
+  TUE?'':'<b>Monday:</b> Christmas Card pros at the tent 6:45–7:15: Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at the range on arrival. Thor + James Holley: Brandon (Charlie) mics them at the start of Retail - Holley 9:15, #1 GRN. Tiger at 11:45.',
   '<b>Tuesday:</b> each mixer mics their own team at the start of the first set, 7:30–7:45. A2s help DOT vs. NOT and the CA/EU Bag Swap. Extra mic for fitter Jae at Korea (Alpha).',
   'Athletes stay mic\'d all day. Mic once, collect at wrap.'])+
  '<h2>Main field kit (every mixer)</h2>'+ul([
@@ -870,16 +873,16 @@ function sound(){
   'Boundary mic for club SFX.',
   'Rain cover for your bag.',
   'Phone with Unity Intercom and a cable from the phone into your mixer\'s return.'])+
- '<h2>Range kit (Monday)</h2>'+ul([
+ (TUE?'':'<h2>Range kit (Monday)</h2>'+ul([
   'Sound cart with 16 Wisycom RX (Scorpio + 4 MCR54), 2x Lectro IFB-A1 for comms/hop, 1x SRC-B1 for producer PTT.',
   'Green mics go to the local recorder on the cart.',
-  'Comms send into the linked Hollyland Hubs (see Comms).']);
+  'Comms send into the linked Hollyland Hubs (see Comms).']));
 }
 /* Freddie's Hollyland kit tuning sheet (SoundBase 11/23). TX = Lectro LT in the Hollyland case (Hub comms out). RX = IFB receiver in the case feeding the Hub program input. */
 function kitTune(){
  var K=[['Alpha','Hub 1','479.400','523.100','523.100','Alpha kit · Dave'],['Bravo','Hubs 2+5*','479.900','523.100','528.500','Bravo kit · Joel'],['Charlie','Hub 3','481.400','523.100','534.100','Charlie kit · Brandon'],['Delta','Hub 4','488.400','523.100','534.800','Delta kit · Michal'],['Spare','Roaming','489.100','523.100','as replaced','—']];
- return '<div class="kt"><table><thead><tr><th>Kit</th><th>Hollyland TX<br><small>all day</small></th><th>IFB RX range<br><small>until break</small></th><th>IFB RX after<br><small>+ all Tue</small></th></tr></thead><tbody>'+
- K.map(function(k){return '<tr><td><b>'+k[0]+'</b><br><small>'+k[1]+'</small></td><td><span class="gc">'+k[2]+'</span></td><td><span class="gc">'+k[3]+'</span><br><small>Alpha kit</small></td><td><span class="gc">'+k[4]+'</span><br><small>'+k[5]+'</small></td></tr>';}).join('')+
+ return '<div class="kt"><table><thead><tr><th>Kit</th><th>Hollyland TX<br><small>all day</small></th>'+(TUE?'':'<th>IFB RX range<br><small>until break</small></th>')+'<th>IFB RX'+(TUE?'':' after')+'<br><small>'+(TUE?'all day Tue':'+ all Tue')+'</small></th></tr></thead><tbody>'+
+ K.map(function(k){return '<tr><td><b>'+k[0]+'</b><br><small>'+k[1]+'</small></td><td><span class="gc">'+k[2]+'</span></td>'+(TUE?'':'<td><span class="gc">'+k[3]+'</span><br><small>Alpha kit</small></td>')+'<td><span class="gc">'+k[4]+'</span><br><small>'+k[5]+'</small></td></tr>';}).join('')+
  '</tbody></table></div><p class="note">*Bravo Hubs 2 + 5 stay paired; one TX and one IFB RX, on Hub 2. Spare TX 489.100 is spare 1 (spares 2–4: 489.500, 490.100, 490.900).</p><p class="note"><b>Hollyland TX</b> = the Lectro transmitter in the Hollyland case, tuned to that camera team\'s Hollyland TX frequency (the Hub\'s comms out). It never changes. <b>IFB RX</b> = the IFB receiver in the case feeding the Hub, tuned to an IFB-AUDIO-KIT transmitter: everyone on the Alpha kit (523.100) at the range so every team hears producer/director, then each kit retunes to its own team\'s audio kit as that team leaves the range. Hubs are not linked at any point.</p>';
 }
 
@@ -904,30 +907,30 @@ function comms(){
  return '<p class="note">Four separate systems. Camera teams are on Hollyland, sound is on Unity, TaylorMade producer/directors are on Lectro in-ears, and production and PAs are on walkies. Sound does not carry walkies.</p>'+
  '<div class="cam-stats"><div><b class="tab-num">5</b><span>Hollyland C1 Pro Hubs + 1 spare Roaming Hub</span></div><div><b class="tab-num">54</b><span>rented remote headsets</span></div><div><b class="tab-num">8</b><span>producer in-ear packs (6 + 2 spare)</span></div><div><b class="tab-num">30</b><span>production walkies (not sound)</span></div></div>'+
  '<h2>Hollyland: camera teams</h2>'+kv([
-  ['Range (Mon)','Hubs 1–5 NOT linked, about 40 headsets','Each team Hub stays isolated. Every Hub\'s IFB receiver is tuned to the <b>Alpha kit IFB TX 523.100</b> on the range Scorpio, so every team hears producer/director. Teams talk only inside their own Hub. At the split Freddie retunes each Hub to its own team\'s kit TX'],
-  ['Alpha','Hub 1','Mixer: Dave'],
+  ].concat(TUE?[]:[['Range (Mon)','Hubs 1–5 NOT linked, about 40 headsets','Each team Hub stays isolated. Every Hub\'s IFB receiver is tuned to the <b>Alpha kit IFB TX 523.100</b> on the range Scorpio, so every team hears producer/director. Teams talk only inside their own Hub. At the split Freddie retunes each Hub to its own team\'s kit TX'],
+  ]).concat([['Alpha','Hub 1','Mixer: Dave'],
   ['Bravo','Hubs 2 + 5, stay linked','Mixer: Joel. Bigger team, so two Hubs'],
   ['Charlie','Hub 3','Mixer: Brandon'],
   ['Delta','Hub 4','Mixer: Michal'],
-  ['Spare','Roaming Hub + loose headsets','Hot spare for any Hub that fails']])+
+  ['Spare','Roaming Hub + loose headsets','Hot spare for any Hub that fails']]))+
  ul(['Camera department only. Sound, grips and PAs are not on Hollyland.',
   '<b>Mixers:</b> send program to your team\'s Hub (3.5 mm PGM input) and keep it under talkback.',
   'Headsets charge at the production tent. Freddie runs charging and swaps.'])+
  '<h2>Kit tuning (Freddie)</h2>'+kitTune()+
- '<h2>Producer / director in-ears</h2>'+
+ (TUE?'<h2>Producer / director in-ears</h2><p class="note"><b>Not in use Tuesday.</b> We are not using the TM producer frequencies today. Mixers monitor their own team IFB / Hollyland only.</p>':'<h2>Producer / director in-ears</h2>'+
  '<p class="note">For the 6 TaylorMade producer/directors: Tyler Brett, Lauren Nisavic, Mike Barbuti, Steve Breazeale, Mike Esse, Austin Jack.</p>'+
  ul(['<b>Listen:</b> Lectro R1a in-ear. Each team\'s Hub feeds its own Lectro IFB TX (Block 470). R1a presets: Range, Alpha, Bravo, Charlie, Delta.',
   '<b>Talk:</b> Lectro TX with a TA5 push-to-talk, one fixed B1 frequency per producer. It lands on your SRC-B1.',
   '<b>Mixers:</b> when a director joins your team, tune their talk channel into your Lectro receiver and route it only to the Hub feed. <b>Max two directors per team</b> (the SRC-B1 is 2 channels).',
   'Director talk never goes to the main mix, camera hops or the recorder. Never route the Hub back into the Hub feed.',
   '<b>Range:</b> producer/director talk goes into the range Scorpio and out on the Alpha kit IFB TX <b>523.100</b>; every Hub listens to it. At the split Freddie retunes each Hub to its team kit TX.',
-  'R1a runs on 9 V lithium (about 20 h). Wired earpieces only; the cord is the antenna.'])+
+  'R1a runs on 9 V lithium (about 20 h). Wired earpieces only; the cord is the antenna.']))+
  '<h2>Frequencies (SoundBase, Nov 23)</h2>'+kv([
-  ['Producer talk TX','Lectro SMDWB · B1','Lauren 574.500 · Tyler 569.700 · Mike B 567.200 · Steve 559.500 · Mike E 555.000 · Austin 551.400 · Andrew 548.100 · spares 543.900 / 540.750 / 539.550 / 538.200'],
-  ['Hollyland case IFB TX','Lectro LT · A1','Alpha 479.400 · Bravo 479.900 · Charlie 481.400 · Delta 488.400 · spares 489.100 / 489.500 / 490.100 / 490.900'],
+  ].concat(TUE?[]:[['Producer talk TX','Lectro SMDWB · B1','Lauren 574.500 · Tyler 569.700 · Mike B 567.200 · Steve 559.500 · Mike E 555.000 · Austin 551.400 · Andrew 548.100 · spares 543.900 / 540.750 / 539.550 / 538.200'],
+  ]).concat([['Hollyland case IFB TX','Lectro LT · A1','Alpha 479.400 · Bravo 479.900 · Charlie 481.400 · Delta 488.400 · spares 489.100 / 489.500 / 490.100 / 490.900'],
   ['Audio kit IFB TX (Scorpio)','Lectro LT · A1','Alpha 523.100 · Bravo 528.500 · Charlie 534.100 · Delta 534.800 · YouTube 501.400 · Social 503.000 · Fore Play 504.300 · spare 517.900'],
-  ['Presentation','Lectro HMa · A1','493.900']])+
- '<p class="note">Which producer is on each set (and their talk TX) is listed under the set on My Day and in the Timeline detail, from TaylorMade\'s producer tabs.</p>'+
+  ['Presentation','Lectro HMa · A1','493.900']]))+
+ (TUE?'':'<p class="note">Which producer is on each set (and their talk TX) is listed under the set on My Day and in the Timeline detail, from TaylorMade\'s producer tabs.</p>')+
  '<h2>Unity Intercom: sound crew</h2>'+
  ul(['Course-wide over cellular.',
   '<b>Mixers:</b> phone in the bag, cable from the phone into your mixer\'s return so Unity is in your cans.',
@@ -1003,7 +1006,7 @@ function html(){
   var b=function(k,v,l,cur){return '<button data-'+k+'="'+v+'" aria-pressed="'+(cur===v)+'">'+l+'</button>';};
   return '<div class="mtl">'+
    '<div class="mt-ctl">'+
-    '<div class="seg">'+b('mday','d1','Day 1 <small>Mon 11/23</small>',st.day)+b('mday','d2','Day 2 <small>Tue 11/24</small>',st.day)+'</div>'+
+    (TUE?'':'<div class="seg">'+b('mday','d1','Day 1 <small>Mon 11/23</small>',st.day)+b('mday','d2','Day 2 <small>Tue 11/24</small>',st.day)+'</div>')+
     '<div class="seg">'+b('mview','mix','By crew',st.view)+b('mview','set','By setup',st.view)+'</div>'+
     '<label class="me">I am <select id="mt-me"><option value="">Everyone</option>'+M.crew.map(function(c){return '<option value="'+c.id+'"'+(st.me===c.id?' selected':'')+'>'+esc(c.name)+'</option>';}).join('')+'</select></label>'+
    '</div>'+
@@ -1093,7 +1096,7 @@ function wire(){
 }
 function mount(el,crew){
   root=el;CREW_IN=crew;
-  var sd=shootDay();if(sd&&!mount._auto){mount._auto=1;st.day=sd;st.cur=nowMin();}
+  if(TUE)st.day='d2';var sd=shootDay();if(sd&&!mount._auto){mount._auto=1;st.day=sd;st.cur=nowMin();}
   model();
   if(st.me&&!M.crew.some(function(c){return c.id===st.me;}))st.me='';
   el.innerHTML=html();
@@ -1116,7 +1119,7 @@ return {mount:mount};
 
 
 // ===== MIC GRID: single source. Edit MICS below; times are 24h "H:MM". on/off null = not mic'd that day; 'TBC' = waiting on Scratch.
-var MIC_ASOF='Nov 22, 9:45 PM (TM final Day 1)';
+var MIC_ASOF='Nov 24, 8:45 AM (Day 2 sheet, 8:04 update)';
 var MICS=[
  {n:'Tiger Woods',d1:['11:45','16:30'],d2:null,x1:'Last set: social 4:15'},
  {n:'Rory McIlroy',d1:['7:15','15:30','tent'],d2:null,x1:'Joel mics him when he gets to the tent (after his Cold Open, before Christmas Card). Last audio set: Eras Driver to 3:00'},
@@ -1145,14 +1148,14 @@ var MICS=[
 var MIC_RULES={d1:'Christmas Card pros mic\'d at the tent 6:45–7:15 (BTS audio): Joel Rory (when he gets to the tent), Michal Scottie, Andy Tommy, Dave Collin, Heather Charley, Adriana Brooke; Adriana Grant + Ruffels ~8:00. Everyone else at their first set or on arrival at the range.',d2:'Talent mic\'d at the start of their first set, 7:30–7:45. Each mixer mics their own team; A2s help the big sets.'};
 var MIC_SHORT={'Johnson Wagner':'Wagner','Michael Thorbjornsen':'Thor','Jacob Bridgeman':'Bridgeman','Ryan Ruffels':'Ruffels','James Holley':'Holley','Matt Bovee':'Bovee','Jackson Bragg':'Bragg','Todd Chew':'Chew','Cory Johnson':'Cory J','Brian Bazzel':'Bazzel','Keith Sbarbaro':'Sbarbaro','Adrian Rietveld':'Rietveld','Matt Simone':'Simone'};
 function sn(r){return MIC_SHORT[r.n]||r.n.split(' ')[0];}
-var micDay=(function(){var d=new Date();if(d.getFullYear()===2026&&d.getMonth()===10){if(d.getDate()===23)return 'd1';if(d.getDate()===24)return 'd2';}try{var v=localStorage.getItem('tm26micday');if(v==='d1'||v==='d2'||v==='both')return v;}catch(e){}return 'd1';})();
+var micDay=(function(){if(typeof TUE!=='undefined'&&TUE)return 'd2';var d=new Date();if(d.getFullYear()===2026&&d.getMonth()===10){if(d.getDate()===23)return 'd1';if(d.getDate()===24)return 'd2';}try{var v=localStorage.getItem('tm26micday');if(v==='d1'||v==='d2'||v==='both')return v;}catch(e){}return 'd1';})();
 function mm(t){if(!t||t==='TBC')return null;var a=t.split(':');return +a[0]*60+ +a[1];}
 function t12(t){if(t==='TBC')return '<span class="tbc">TBC</span>';var m=mm(t),h=Math.floor(m/60),mi=m%60;return (h%12||12)+':'+String(mi).padStart(2,'0')+(h<12?'a':'p');}
 function micToday(){var d=new Date();if(d.getFullYear()!==2026||d.getMonth()!==10)return null;return d.getDate()===23?'d1':d.getDate()===24?'d2':null;}
 function micStatus(r,day,now){var v=r[day];if(!v||micToday()!==day)return '';var a=mm(v[0]),b=mm(v[1]);if(a==null)return '';if(now<a-30)return '';if(now<a)return 'st-due';if(now<b)return 'st-on';return 'st-done';}
 function mics(){
  var now=new Date().getHours()*60+new Date().getMinutes(),today=micToday();
- var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var seg=TUE?'':'<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
  var h='<p class="note"><a href="#rig" onclick="document.getElementById(\'rig\').scrollIntoView({behavior:\'smooth\'});return false;">How we rig talent ↓</a> · <a href="#rf" onclick="document.getElementById(\'rf\').scrollIntoView({behavior:\'smooth\'});return false;">Frequencies ↓</a></p><p class="note">Talent mic-up and wrap times. This tab is the live grid; the printed sheet is for TX# and frequencies. Rigs stay on under wardrobe through Zambezi sets (plan A). Grid as of '+MIC_ASOF+'.</p><div class="mic-ctl">'+seg+'</div>';
  if(micDay==='both'){
   var rows=MICS.slice().sort(function(a,b){return key(a,'d1')-key(b,'d1')||key(a,'d2')-key(b,'d2');});
@@ -1208,13 +1211,13 @@ var MIC_RF={
  'Brian Bazzel':{p:{tx:'CH38',f:'662.000'},b:{tx:'',f:''},x:''},
 };
 function micRF(){
- var rows=MICS.map(function(r){var a=MIC_RF[r.n]||{};var u=buFor(r.n);return {r:r,p:a.p||{},b:u||a.b||{},x:(u?'ON BU '+u.tx+'. ':'')+(a.x||'')};});
+ var rows=MICS.filter(function(r){return !TUE||r.d2;}).map(function(r){var a=MIC_RF[r.n]||{};var u=buFor(r.n);return {r:r,p:a.p||{},b:u||a.b||{},x:(u?'ON BU '+u.tx+'. ':'')+(a.x||'')};});
  var done=rows.filter(function(o){return o.p.f;}).length;
  function c(v,cls,g){return '<td class="t'+(cls?' '+cls:'')+'">'+(v?(g?'<span class="gc">'+esc(v)+'</span>':esc(v)):'<span class="off">—</span>')+'</td>';}
  function days(r){return [r.d1?'Mon':'',r.d2?'Tue':''].filter(Boolean).join(' · ')||'—';}
- return '<h2 id="rf" style="margin-top:22px">Frequencies</h2><p class="note">Primary (PRI) and backup (BU) TX for each talent. Same frequencies both days. Any swap in the field goes on the printed log and gets texted to Tim so this page stays current. '+(MIC_RF_ASOF?'As of '+esc(MIC_RF_ASOF)+' · ':'')+done+' of '+rows.length+' assigned.</p>'+
- '<div class="tbl mic rf"><table><thead><tr><th>Talent</th><th class="t">PRI TX</th><th class="t">PRI MHz</th><th class="t">BU TX</th><th class="t">BU MHz</th><th class="x rfd">Days</th><th class="x">Notes</th></tr></thead><tbody>'+
- rows.map(function(o){return '<tr><td class="n"><span class="rl">'+esc(o.r.n)+'</span><span class="rs">'+esc(sn(o.r))+'</span></td>'+c(o.p.tx,'',1)+c(o.p.f,'mhz')+c(o.b.tx,'',1)+c(o.b.f,'mhz')+'<td class="x rfd">'+days(o.r)+'</td><td class="x">'+esc(o.x)+'</td></tr>';}).join('')+
+ return '<h2 id="rf" style="margin-top:22px">Frequencies</h2><p class="note">Primary (PRI) and backup (BU) TX for each talent. '+(TUE?'Talent on today only. ':'Same frequencies both days. ')+'Any swap in the field goes on the printed log and gets texted to Tim so this page stays current. '+(MIC_RF_ASOF?'As of '+esc(MIC_RF_ASOF)+' · ':'')+done+' of '+rows.length+' assigned.</p>'+
+ '<div class="tbl mic rf"><table><thead><tr><th>Talent</th><th class="t">PRI TX</th><th class="t">PRI MHz</th><th class="t">BU TX</th><th class="t">BU MHz</th>'+(TUE?'':'<th class="x rfd">Days</th>')+'<th class="x">Notes</th></tr></thead><tbody>'+
+ rows.map(function(o){return '<tr><td class="n"><span class="rl">'+esc(o.r.n)+'</span><span class="rs">'+esc(sn(o.r))+'</span></td>'+c(o.p.tx,'',1)+c(o.p.f,'mhz')+c(o.b.tx,'',1)+c(o.b.f,'mhz')+(TUE?'':'<td class="x rfd">'+days(o.r)+'</td>')+'<td class="x">'+esc(o.x)+'</td></tr>';}).join('')+
  '</tbody></table></div>';
 }
 function micRig(){
@@ -1324,7 +1327,7 @@ function mWhere(loc){var l=String(loc||'').toLowerCase();if(!l)return null;if(l.
  var nums=(String(loc).split('(')[0].match(/\d+/g)||[]).map(Number).filter(function(n){return MH[n];});if(!nums.length)return null;
  if(l.indexOf('holes')===0)return MH[nums[0]];var a=nums.slice(0,2).map(function(n){return MH[n];});return [(a[0][0]+(a[1]||a[0])[0])/2,(a[0][1]+(a[1]||a[0])[1])/2];}
 function mapTab(){var now=new Date(),nm=now.getHours()*60+now.getMinutes();
- if(!mapSt.d)mapSt.d=micToday();if(mapSt.t==null)mapSt.t=Math.max(375,Math.min(1110,Math.round(nm/15)*15));
+ if(TUE)mapSt.d='d2';if(!mapSt.d)mapSt.d=micToday();if(mapSt.t==null)mapSt.t=Math.max(375,Math.min(1110,Math.round(nm/15)*15));
  var d=mapSt.d,T=mapSt.t,M=Board.model(CREW,d),f=function(m){var h=Math.floor(m/60),mm=m%60;return (h>12?h-12:h)+':'+String(mm).padStart(2,'0')+(h<12?' AM':' PM');};
  var pins=[],list=[];
  M.crew.forEach(function(c){var L=(M.lanes[c.id]||[]).filter(function(x){return / @ /.test(x.n)&&x.c!=='lunch';}).sort(function(a,b){return a.s-b.s;});
@@ -1336,7 +1339,7 @@ function mapTab(){var now=new Date(),nm=now.getHours()*60+now.getMinutes();
   if(pos)pins.push({id:c.id,n:nmF,pos:pos,st:st});
   list.push({id:c.id,n:nmF,cur:cur,st:st,nx:nx});});
  var placed=[];pins.forEach(function(q){q.x=q.pos[0];q.y=q.pos[1];var n=0;while(placed.some(function(o){return Math.abs(o.x-q.x)<260&&Math.abs(o.y-q.y)<95;})&&n<12){q.y+=(q.pos[1]>1250?-100:100);n++;}placed.push(q);});
- var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-mapday="'+o[0]+'" aria-pressed="'+(d===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var seg=TUE?'':'<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-mapday="'+o[0]+'" aria-pressed="'+(d===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
  var h='<h2>Map: who’s where</h2><div class="mp-ctl">'+seg+'<div class="mp-tm"><button data-mapt="-15" aria-label="Earlier">‹</button><b>'+f(T)+'</b><button data-mapt="15" aria-label="Later">›</button><button data-mapnow>Now</button></div><input type="range" id="mp-r" min="375" max="1110" step="15" value="'+T+'" aria-label="Time"></div>'+
   '<div class="mp-w"><img src="maps/course.jpg" alt="Apogee course map">'+pins.map(function(q){return '<span class="mp-p'+(q.st==='last'?' was':'')+'" style="left:'+(q.x/1626*100).toFixed(2)+'%;top:'+(q.y/1564*100).toFixed(2)+'%;background:'+MCOL[q.id]+'">'+esc(q.n)+'</span>';}).join('')+'</div>'+
   '<p class="note">Solid pin = on that set now; faded = their last spot (between sets). Pins sit on the hole number.</p><ol class="mp-l">'+
@@ -1351,9 +1354,9 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 document.addEventListener('change',function(e){if(e.target&&e.target.id==='mp-r'){mapSt.t=Number(e.target.value);mapRedraw();}});
 
 function talent(){
- var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var seg=TUE?'':'<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24'],['both','Both']].map(function(o){return '<button data-micday="'+o[0]+'" aria-pressed="'+(micDay===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
  // Print always lists everyone mic'd either day (plus no-mic TM staff on the schedule); screen filters by the day picker.
- var all=MICS.filter(function(r){return r.d1||r.d2;});
+ var all=MICS.filter(function(r){return TUE?r.d2:(r.d1||r.d2);});
  function rng(v){if(!v)return 'off';return t12(v[0])+'–'+t12(v[1]);}
  function rf(o){return o&&o.f?(o.tx?'<span class="gc">'+esc(o.tx)+'</span> · ':'')+esc(o.f)+'<span class="mu"> MHz</span>':'<span class="sv">—</span><span class="wl"></span>';}
  function day(lbl,v,x,cls){var tag=v&&v[2]?'<b class="wh">'+esc(v[2])+'</b> ':'';return '<div class="dy '+cls+'"><div class="ln"><span>'+lbl+'</span><span>'+rng(v)+'</span></div>'+(x||tag?'<div class="tn">'+tag+esc(x||'')+'</div>':'')+'</div>';}
@@ -1362,7 +1365,7 @@ function talent(){
  all.map(function(r){var a=MIC_RF[r.n]||{},ini=r.n.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
   var show=micDay==='both'?true:!!r[micDay];
   var lines='';
-  if(micDay!=='d2')lines+=day('Mon',r.d1,r.d1?r.x1:'','pd1');
+  if(TUE){}else if(micDay!=='d2')lines+=day('Mon',r.d1,r.d1?r.x1:'','pd1');
   else lines+=day('Mon',r.d1,r.d1?r.x1:'','pd1 hd');
   if(micDay!=='d1')lines+=day('Tue',r.d2,r.d2?r.x2:'','pd2');
   else lines+=day('Tue',r.d2,r.d2?r.x2:'','pd2 hd');
@@ -1395,12 +1398,12 @@ function prodHtml(d,s,e,n){var L=prodFor(d,s,e,n);if(!L.length)return '';return 
 /* TM producers' schedule flow (Timeline tab), from PRODS + PRODRF. Shows which of our crew is on each producer set. */
 var prodDay=null;
 function prodFlow(){
- var d=prodDay;if(!d){try{d=(JSON.parse(localStorage.getItem('tm26mtl')||'{}').day)||'d1';}catch(e){d='d1';}}
+ var d=TUE?'d2':prodDay;if(!d){try{d=(JSON.parse(localStorage.getItem('tm26mtl')||'{}').day)||'d1';}catch(e){d='d1';}}
  var M=Board.model(CREW,d),f=function(m){var hh=Math.floor(m/60),mm=m%60;return (hh>12?hh-12:hh)+':'+String(mm).padStart(2,'0');};
  var first=function(n){var x=String(n).split(' ')[0];return x==='David'?'Dave':x;};
  var cov=function(x){var out=[];M.crew.forEach(function(c){(M.lanes[c.id]||[]).forEach(function(b){if(/^(prep|lunch|comms|a2)$/.test(b.c))return;if(Math.min(b.e,x[1])-Math.max(b.s,x[0])<10)return;if(prodFor(d,b.s,b.e,b.n).indexOf(x[2])>=0&&out.indexOf(first(c.name))<0)out.push(first(c.name));});});return out;};
  var order=['Tyler','Lauren','Mike','Steve','Esse','Austin','Andrew'];
- var seg='<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-prodday="'+o[0]+'" aria-pressed="'+(d===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var seg=TUE?'':'<div class="seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-prodday="'+o[0]+'" aria-pressed="'+(d===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
  var h='<h2 style="margin-top:22px">TM producers: schedule flow</h2><p class="note">Where each TaylorMade producer/director goes, with their talk TX, and which of our crew is on that set. From TaylorMade’s producer tabs'+(d==='d2'?' (Tuesday tab not final)':'')+'.</p>'+seg;
  if(d==='d2')return h+'<p class="note"><b>Tuesday: we are not using the TM producer frequencies.</b> Mixers monitor their own team IFB / Hollyland only.</p>';
  order.forEach(function(k){var L=(PRODS[d]||[]).filter(function(x){return x[2]===k;});if(!L.length)return;var r=PRODRF[k];
@@ -1437,7 +1440,7 @@ function mrInit(){var vp=document.getElementById('mr-vp'),im=document.getElement
 }
 
 var mdDay=null;try{mdDay=localStorage.getItem('tm26mdday');}catch(e){}
-function mdDayGet(){if(mdDay==='d1'||mdDay==='d2')return mdDay;var d=new Date();return (d.getMonth()===10&&(d.getDate()>=24||(d.getDate()===23&&d.getHours()>=19)))?'d2':'d1';}
+function mdDayGet(){if(TUE)return 'd2';if(mdDay==='d1'||mdDay==='d2')return mdDay;var d=new Date();return (d.getMonth()===10&&(d.getDate()>=24||(d.getDate()===23&&d.getHours()>=19)))?'d2':'d1';}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mdday]');if(!b)return;mdDay=b.getAttribute('data-mdday');try{localStorage.setItem('tm26mdday',mdDay);}catch(x){}var y=window.scrollY;render();window.scrollTo(0,y);});
 
 function myday(){
@@ -1445,7 +1448,7 @@ function myday(){
  var opts='<option value="">Choose your name…</option>'+M1.crew.map(function(c){return '<option value="'+c.id+'"'+(c.id===me?' selected':'')+'>'+esc(c.name)+'</option>';}).join('');
  var h='<div class="md-pick"><label for="md-sel">Who are you?</label><select id="md-sel">'+opts+'</select></div>';
  var c=M1.crew.filter(function(x){return x.id===me;})[0];
- if(!c)return h+'<p class="note">Pick your name to see your Monday and Tuesday, where to be, and your Monday route map. Your phone remembers it next time.</p>';
+ if(!c)return h+'<p class="note">Pick your name to see '+(TUE?'your Tuesday':'your Monday and Tuesday')+', where to be, and your route map. Your phone remembers it next time.</p>';
  var f=function(m){var hh=Math.floor(m/60),mm=m%60;return (hh>12?hh-12:hh)+':'+String(mm).padStart(2,'0');};
  var K={sound:'Set',range:'Range',prep:'Prep',lunch:'Lunch',a2:'A2',comms:'Comms',offsite:'Set'};
  var day=function(lbl,L,dd){
@@ -1455,18 +1458,18 @@ function myday(){
   }).join('');
   return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
  };
- var MD=mdDayGet();h+='<div class="seg md-seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-mdday="'+o[0]+'" aria-pressed="'+(MD===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ var MD=mdDayGet();if(!TUE)h+='<div class="seg md-seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-mdday="'+o[0]+'" aria-pressed="'+(MD===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
  if(MAPS[c.id])h+='<h2>My route <small class="mr-d">'+(MD==='d1'?'Monday':'Tuesday')+'</small></h2><img class="md-map" src="maps/'+c.id+'-'+(MD==='d1'?'mon':'tue')+'.jpg?v=4" alt="Route map for '+esc(c.name)+'" onerror="this.style.display=\'none\'"><p class="note">Each stop and the route into it share a colour, in time order. Routes follow the red cart paths; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
- if(c.id==='freddie')h+='<h2>Kit tuning: before and after the range break</h2>'+kitTune();
- var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b class="gc">'+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set (same both days).</p>';
- h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab). Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
+ if(c.id==='freddie')h+='<h2>Kit tuning'+(TUE?'':': before and after the range break')+'</h2>'+kitTune();
+ var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b class="gc">'+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set.</p>';
+ h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+(TUE?'. Call 6:00–6:15 AM at the production tent. Locations from TaylorMade\u2019s Day 2 tab (8:04 AM update). TM producer frequencies are not in use today.':'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab).')+' Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
  h+=MD==='d1'?day('Monday, Nov 23',M1.lanes[c.id]||[],'d1'):day('Tuesday, Nov 24',M2.lanes[c.id]||[],'d2');
  return h;
 }
 var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent','myday','map','notes'].indexOf(t)>=0)tab=t;}catch(e){}
 if(location.hash==='#cameras')tab='cams';if(/^#me/.test(location.hash)||location.hash==='#myday')tab='myday';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Updated Nov 24, 8:45 AM</div></header>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Updated Nov 24, 8:50 AM</div></header>';
  h+='<nav role="tablist">'+[['myday','My Day'],['timeline','Timeline'],['talent','Talent'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras'],['map','Map'],['notes','Notes'],['schedule','Schedule']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
  h+='<section>'+(tab==='myday'?myday():tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():tab==='talent'?talent():tab==='notes'?notesTab():tab==='map'?mapTab():'<div id="tl-root"></div><div id="prod-flow"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
