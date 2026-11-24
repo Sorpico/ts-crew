@@ -1430,6 +1430,10 @@ function mrInit(){var vp=document.getElementById('mr-vp'),im=document.getElement
  window.addEventListener('mouseup',function(){dr=null;});
 }
 
+var mdDay=null;try{mdDay=localStorage.getItem('tm26mdday');}catch(e){}
+function mdDayGet(){if(mdDay==='d1'||mdDay==='d2')return mdDay;var d=new Date();return (d.getMonth()===10&&(d.getDate()>=24||(d.getDate()===23&&d.getHours()>=19)))?'d2':'d1';}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mdday]');if(!b)return;mdDay=b.getAttribute('data-mdday');try{localStorage.setItem('tm26mdday',mdDay);}catch(x){}var y=window.scrollY;render();window.scrollTo(0,y);});
+
 function myday(){
  var M1=Board.model(CREW,'d1'),M2=Board.model(CREW,'d2');var who=M1.who;
  var opts='<option value="">Choose your name…</option>'+M1.crew.map(function(c){return '<option value="'+c.id+'"'+(c.id===me?' selected':'')+'>'+esc(c.name)+'</option>';}).join('');
@@ -1445,15 +1449,15 @@ function myday(){
   }).join('');
   return '<h2>'+lbl+'</h2>'+(rows?'<table class="md-tb">'+rows+'</table>':'<p class="note">Nothing scheduled.</p>');
  };
- if(MAPS[c.id])h+='<h2>My route <small class="mr-d">Monday</small></h2><img class="md-map" src="maps/'+c.id+'-mon.jpg?v=3" alt="Monday route map for '+esc(c.name)+'"><p class="note">Solid line follows the red cart routes; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
+ var MD=mdDayGet();h+='<div class="seg md-seg">'+[['d1','Mon 11/23'],['d2','Tue 11/24']].map(function(o){return '<button data-mdday="'+o[0]+'" aria-pressed="'+(MD===o[0])+'">'+o[1]+'</button>';}).join('')+'</div>';
+ if(MAPS[c.id])h+='<h2>My route <small class="mr-d">'+(MD==='d1'?'Monday':'Tuesday')+'</small></h2><img class="md-map" src="maps/'+c.id+'-'+(MD==='d1'?'mon':'tue')+'.jpg?v=4" alt="Route map for '+esc(c.name)+'" onerror="this.style.display=\'none\'"><p class="note">Each stop and the route into it share a colour, in time order. Routes follow the red cart paths; dashed is the last bit in to the spot. Markers sit on the hole number.</p>';
  if(c.id==='freddie')h+='<h2>Kit tuning: before and after the range break</h2>'+kitTune();
  var U=UNITRF[c.id];if(U)h+='<p class="md-rf">Your field channels ('+U[0]+'): <b class="gc">'+U[1]+'</b> · '+U[2]+' MHz. Talent TX are listed under each set (same both days).</p>';
  h+='<p class="note"><b>'+esc(c.name)+'</b> · '+esc(c.role)+'. Monday call 6:15 AM at the production tent; Tuesday 6:00–6:15 AM. Locations from TaylorMade\u2019s schedule (Monday final; Tuesday from their Day 2 tab). Link straight to this page: <b>schedule.theorysound.com/#me='+c.id+'</b></p>';
- h+=day('Monday, Nov 23',M1.lanes[c.id]||[],'d1');
- h+=day('Tuesday, Nov 24',M2.lanes[c.id]||[],'d2');
+ h+=MD==='d1'?day('Monday, Nov 23',M1.lanes[c.id]||[],'d1'):day('Tuesday, Nov 24',M2.lanes[c.id]||[],'d2');
  return h;
 }
-var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent','myday'].indexOf(t)>=0)tab=t;}catch(e){}
+var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent','myday','map','notes'].indexOf(t)>=0)tab=t;}catch(e){}
 if(location.hash==='#cameras')tab='cams';if(/^#me/.test(location.hash)||location.hash==='#myday')tab='myday';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
  var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Updated Nov 23, 10:00 PM</div></header>';
