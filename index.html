@@ -644,7 +644,7 @@ function coverage(d){
     if(!c){bl.filter(b=>b.c!=="range").forEach(b=>unc.push({...b,n:u.name+": "+b.n}));return}
     bl.forEach(b=>lanes[c.id].push(b));});
   /* Scratch's team lunches (sheet, Nov 20): mixers eat with their camera team (Tim, Nov 20) */
-  const TLUNCH={d1:{alpha:[645,660],bravo:[630,645],charlie:[645,660],delta:[630,645],social:[690,705]},d2:{alpha:[660,675],bravo:[660,675],charlie:[690,705]}};
+  const TLUNCH={d1:{alpha:[645,660],bravo:[630,645],charlie:[645,660],delta:[630,645],social:[690,705]},d2:{alpha:[660,675],bravo:[660,675],charlie:[690,705],delta:[675,690]}};
   CREW.forEach(c=>{const u=unitOf(c.role),tl=u&&(TLUNCH[d]||{})[u.id];if(tl&&lanes[c.id])lanes[c.id].push({n:"Lunch with your team (Scratch: "+(tl[1]-tl[0])+" min)",s:tl[0],e:tl[1],w:[],c:"lunch",fixed:true})});
   const last={};A2S.forEach(x=>last[x]=-999);
   const freeAt=(id,s,e)=>!lanes[id].some(x=>x.s<e&&x.e>s);
@@ -1475,7 +1475,7 @@ function myday(){
 var tab='schedule'; try{var t=localStorage.getItem('tm26crewtab');if(['cams','timeline','schedule','sound','comms','mics','talent','myday','map','notes'].indexOf(t)>=0)tab=t;}catch(e){}
 if(location.hash==='#cameras')tab='cams';if(/^#me/.test(location.hash)||location.hash==='#myday')tab='myday';if(location.hash==='#sound')tab='sound';if(location.hash==='#comms')tab='comms';if(location.hash==='#talent')tab='talent';if(location.hash==='#mics'||location.hash==='#micing'||location.hash==='#rig')tab='mics';
 function render(){
- var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Updated Nov 24, 10:38 AM</div></header>';
+ var h='<header><div><h1>TaylorMade Supershoot 2026 · Sound Crew</h1><div class="sub">Theory Sound for Scratch Media · Apogee Club<span class="addr">, 2103 SW Bridge Rd, Hobe Sound/Indiantown FL</span> · Mon Nov 23 – Tue Nov 24</div></div><div class="po">Updated Nov 24, 10:55 AM</div></header>';
  h+='<nav role="tablist">'+[['myday','My Day'],['timeline','Timeline'],['talent','Talent'],['mics','Micing'],['sound','Sound'],['comms','Comms'],['cams','Cameras'],['map','Map'],['notes','Notes'],['schedule','Schedule']].map(function(t){var sh={Schedule:'Sched',Timeline:'Time',Cameras:'Cams'}[t[1]];return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(tab===t[0])+'">'+(sh?'<span class="tl-l">'+t[1]+'</span><span class="tl-s">'+sh+'</span>':t[1])+'</button>';}).join('')+'</nav>';
  h+='<section>'+(tab==='myday'?myday():tab==='cams'?cams():tab==='sound'?sound():tab==='comms'?comms():tab==='schedule'?schedule():tab==='mics'?mics():tab==='talent'?talent():tab==='notes'?notesTab():tab==='map'?mapTab():'<div id="tl-root"></div><div id="prod-flow"></div>')+'</section>';
  document.getElementById('app').innerHTML=h;
