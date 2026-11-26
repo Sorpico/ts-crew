@@ -129,7 +129,7 @@ function createJob(){
 function jobView(){
  var j=job();if(!j){view.screen='home';return render();}
  if(j.modules.indexOf(view.tab)<0)view.tab=j.modules[0];
- var h='<header class="top"><div><h1>'+esc(j.name)+'</h1><div class="sub">'+D[j.dept].icon+' '+esc(D[j.dept].label)+(j.client?' · '+esc(j.client):'')+(j.location?' · '+esc(j.location):'')+'</div></div><div class="bar" style="margin:0"><button data-a="home">Jobs</button><button data-a="export">Export</button><button data-a="print">Print</button></div></header>';
+ var h='<header class="top"><div><h1>'+esc(j.name)+'</h1><div class="sub">'+D[j.dept].icon+' '+esc(D[j.dept].label)+(j.client?' · '+esc(j.client):'')+(j.location?' · '+esc(j.location):'')+'</div></div><div class="bar" style="margin:0"><button data-a="home">Jobs</button>'+(window.self===window.top?'<button data-a="export">Export</button><button data-a="print">Print</button>':'')+'</div></header>';
  h+='<nav class="tabs">'+j.modules.map(function(k){return '<button class="'+(view.tab===k?'on':'')+'" data-tab="'+k+'">'+esc(M[k].label)+'</button>';}).join('')+'</nav>';
  h+='<div class="muted" style="margin-bottom:8px">'+esc(M[view.tab].blurb)+'</div>';
  h+=moduleView(j,view.tab);
