@@ -6,8 +6,9 @@
 <title>CrewSheet — prototype</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-:root{--bg:#f3f4f2;--panel:#fff;--ink:#1b2320;--muted:#5b6661;--line:#d9ddd8;--accent:#c77a12;--tint:#eaece8;--ok:#1f7a4a;--ok-bg:#dff1e6;--warn:#9a6400;--warn-bg:#fbefd6;
+:root{color-scheme:dark;--bg:#101413;--panel:#181d1c;--ink:#e8ece9;--muted:#93a09a;--line:#2b3331;--accent:#e08f25;--tint:#212826;--field:#0d1110;--focus:#2a2412;--inv:#e8ece9;--inv-ink:#101413;--ok:#5cc98d;--ok-bg:#163325;--warn:#f0b65a;--warn-bg:#2e2413;
 --f-d:'Barlow Condensed',sans-serif;--f-b:'Source Sans 3',-apple-system,sans-serif;--f-m:'JetBrains Mono',monospace}
+:root[data-mode=light]{color-scheme:light;--bg:#f3f4f2;--panel:#fff;--ink:#1b2320;--muted:#5b6661;--line:#d9ddd8;--accent:#c77a12;--tint:#eaece8;--field:#fff;--focus:#fffbe9;--inv:#1b2320;--inv-ink:#fff;--ok:#1f7a4a;--ok-bg:#dff1e6;--warn:#9a6400;--warn-bg:#fbefd6}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-b);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .wrap{max-width:1100px;margin:0 auto;padding:16px}
@@ -17,7 +18,7 @@ h1{font-size:1.9rem}h2{font-size:1.4rem;margin:18px 0 8px}
 header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:3px solid var(--accent);padding-bottom:8px;flex-wrap:wrap}
 header.top .sub{font-size:.85rem;color:var(--muted)}
 button,.btn{font:600 .9rem var(--f-b);border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer}
-button.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.pri{background:var(--inv);color:var(--inv-ink);border-color:var(--inv)}
 button.link{border:0;background:none;color:var(--accent);padding:4px}
 button:disabled{opacity:.4;cursor:default}
 .steps{display:flex;gap:6px;margin:16px 0}.steps span{flex:1;height:4px;border-radius:2px;background:var(--line)}.steps span.on{background:var(--accent)}
@@ -26,7 +27,7 @@ button:disabled{opacity:.4;cursor:default}
 .pick:hover{border-color:var(--muted)}.pick.sel{border-color:var(--accent);box-shadow:0 0 0 3px rgba(199,122,18,.15)}
 .pick .ic{font-size:1.6rem}.pick b{display:block;font:700 1.15rem var(--f-d);margin:4px 0 2px}.pick small{color:var(--muted)}
 label.f{display:block;margin:10px 0}label.f span{display:block;font:600 .75rem var(--f-m);text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-input,select,textarea{font:inherit;width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+input,select,textarea{font:inherit;width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink)}
 textarea{min-height:160px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
@@ -40,9 +41,9 @@ nav.tabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
 .tbl{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font:600 .72rem var(--f-m);text-transform:uppercase;color:var(--muted);background:var(--tint);white-space:nowrap}
-td[contenteditable]{outline:none;min-width:70px}td[contenteditable]:focus{background:#fffbe9}
+td[contenteditable]{outline:none;min-width:70px}td[contenteditable]:focus{background:var(--focus)}
 td.del{width:1%;white-space:nowrap}
-.pd{display:inline-block;min-width:64px;min-height:1.2em;border-bottom:1px dotted var(--muted);outline:none}.pd:focus{background:#fffbe9}
+.pd{display:inline-block;min-width:64px;min-height:1.2em;border-bottom:1px dotted var(--muted);outline:none}.pd:focus{background:var(--focus)}
 .empty{background:var(--panel);border:1px dashed var(--line);border-radius:8px;padding:22px;text-align:center;color:var(--muted)}
 .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
@@ -55,13 +56,13 @@ td.del{width:1%;white-space:nowrap}
 .lane h3{font-size:1.05rem;padding:8px 10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
 .set{display:grid;grid-template-columns:110px 1fr;gap:8px;padding:6px 10px;border-bottom:1px solid var(--line)}
 .set:last-child{border-bottom:0}.set .t{font-family:var(--f-m);font-size:.82rem}
-.daytabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.daytabs button.on{background:var(--ink);color:#fff}
+.daytabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.daytabs button.on{background:var(--inv);color:var(--inv-ink)}
 .jobs .job{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
 .chip{font:600 .7rem var(--f-m);text-transform:uppercase;background:var(--tint);color:var(--muted);padding:2px 6px;border-radius:4px}
 .log{background:var(--panel);border:1px solid var(--line);border-radius:8px}.log div{padding:8px 10px;border-bottom:1px solid var(--line)}
 .proto{background:var(--warn-bg);color:var(--warn);font-size:.8rem;padding:6px 10px;border-radius:6px;margin-top:10px}
 @media (max-width:640px){.row2{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}h1{font-size:1.5rem}.set{grid-template-columns:90px 1fr}}
-@media print{nav.tabs,.bar,button,.proto{display:none!important}body{background:#fff}}
+@media print{nav.tabs,.bar,button,.proto{display:none!important}:root{--bg:#fff;--panel:#fff;--ink:#000;--muted:#444;--line:#ccc;--tint:#eee}}
 </style>
 </head><body><div class="wrap" id="app"></div>
 <script src="templates.js"></script>
@@ -69,6 +70,10 @@ td.del{width:1%;white-space:nowrap}
 (function(){
 var M=window.MODULES,D=window.DEPARTMENTS,app=document.getElementById('app');
 var KEY='crewsheet.v1';
+function mode(){try{return localStorage.getItem('crewsheet.mode')||'dark';}catch(e){return 'dark';}}
+function applyMode(){document.documentElement.dataset.mode=mode();}
+applyMode();
+var MODEBTN=function(){return '<button data-a="mode" aria-label="Switch theme">'+(mode()==='dark'?'☀ Light':'☾ Dark')+'</button>';};
 var store=load();
 var view={screen:store.jobs.length?'home':'new',step:0,draft:null,job:null,tab:null,day:0};
 
@@ -89,7 +94,7 @@ function render(){
 
 // ---------- HOME ----------
 function home(){
- app.innerHTML='<header class="top"><div><h1>CrewSheet</h1><div class="sub">Your jobs</div></div><button class="pri" data-a="new">+ New job</button></header>'+
+ app.innerHTML='<header class="top"><div><h1>CrewSheet</h1><div class="sub">Your jobs</div></div><div class="bar" style="margin:0">'+MODEBTN()+'<button class="pri" data-a="new">+ New job</button></div></header>'+
  '<div class="jobs" style="margin-top:14px">'+store.jobs.map(function(j){return '<div class="job" data-open="'+j.id+'"><div><b>'+esc(j.name)+'</b><div class="muted" style="font-size:.85rem">'+esc(j.client||'')+(j.location?' · '+esc(j.location):'')+' · '+j.ndays+' days from '+esc(j.start)+'</div></div><span class="chip">'+D[j.dept].icon+' '+esc(D[j.dept].label)+'</span></div>';}).join('')+'</div>'+
  '<p class="proto">Prototype: jobs are saved in this browser only.</p>';
 }
@@ -129,7 +134,7 @@ function createJob(){
 function jobView(){
  var j=job();if(!j){view.screen='home';return render();}
  if(j.modules.indexOf(view.tab)<0)view.tab=j.modules[0];
- var h='<header class="top"><div><h1>'+esc(j.name)+'</h1><div class="sub">'+D[j.dept].icon+' '+esc(D[j.dept].label)+(j.client?' · '+esc(j.client):'')+(j.location?' · '+esc(j.location):'')+'</div></div><div class="bar" style="margin:0"><button data-a="home">Jobs</button>'+(window.self===window.top?'<button data-a="export">Export</button><button data-a="print">Print</button>':'')+'</div></header>';
+ var h='<header class="top"><div><h1>'+esc(j.name)+'</h1><div class="sub">'+D[j.dept].icon+' '+esc(D[j.dept].label)+(j.client?' · '+esc(j.client):'')+(j.location?' · '+esc(j.location):'')+'</div></div><div class="bar" style="margin:0">'+MODEBTN()+'<button data-a="home">Jobs</button>'+(window.self===window.top?'<button data-a="export">Export</button><button data-a="print">Print</button>':'')+'</div></header>';
  h+='<nav class="tabs">'+j.modules.map(function(k){return '<button class="'+(view.tab===k?'on':'')+'" data-tab="'+k+'">'+esc(M[k].label)+'</button>';}).join('')+'</nav>';
  h+='<div class="muted" style="margin-bottom:8px">'+esc(M[view.tab].blurb)+'</div>';
  h+=moduleView(j,view.tab);
@@ -205,6 +210,7 @@ app.addEventListener('click',function(e){
  if(a==='home'){view={screen:store.jobs.length?'home':'new',step:0};return render();}
  if(a==='back'){view.step--;return render();}
  if(a==='next'){if(view.step===3)return createJob();view.step++;return render();}
+ if(a==='mode'){try{localStorage.setItem('crewsheet.mode',mode()==='dark'?'light':'dark');}catch(x){}applyMode();return render();}
  if(a==='edittable'){view.edit=!view.edit;return render();}
  if(a==='print')return window.print();
  if(a==='addlog'){var inp=app.querySelector('[data-newlog]');if(inp.value.trim()){rows(j,'updates').unshift({id:uid(),when:new Date().toLocaleString(),what:inp.value.trim()});save();render();}return;}
