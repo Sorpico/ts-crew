@@ -93,3 +93,18 @@ window.DEPARTMENTS = {
     modules: ['sources','timeline','schedule','locations','crew','logistics','updates'],
     terms: { on: 'On', off: 'Off', talent: 'Talent', lane: 'Crew' } },
 };
+
+// Where schedules come from. "live" = wired through a connected Claude connector.
+// Others show up so users see them; they light up once the connector is connected and wired.
+window.SOURCES = {
+  mail: [
+    { id: 'gmail',   label: 'Gmail',   server: 'Gmail',          live: true },
+    { id: 'outlook', label: 'Outlook', server: 'Microsoft 365',  live: false },
+  ],
+  storage: [
+    { id: 'gdrive',   label: 'Google Drive',         server: 'Google Drive',  live: true },
+    { id: 'dropbox',  label: 'Dropbox',              server: 'Dropbox',       live: false },
+    { id: 'box',      label: 'Box',                  server: 'Box',           live: false },
+    { id: 'onedrive', label: 'OneDrive / SharePoint', server: 'Microsoft 365', live: false },
+  ],
+};

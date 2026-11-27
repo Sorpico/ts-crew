@@ -62,6 +62,8 @@ td.del{width:1%;white-space:nowrap}
 .chip{font:600 .7rem var(--f-m);text-transform:uppercase;background:var(--tint);color:var(--muted);padding:2px 6px;border-radius:4px}
 .log{background:var(--panel);border:1px solid var(--line);border-radius:8px}.log div{padding:8px 10px;border-bottom:1px solid var(--line)}
 .proto{background:var(--warn-bg);color:var(--warn);font-size:.8rem;padding:6px 10px;border-radius:6px;margin-top:10px}
+.seg2{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}.seg2 button{padding:6px 10px;font-size:.85rem}.seg2 button.on{background:var(--inv);color:var(--inv-ink);border-color:var(--inv)}
+.soon{font:600 .62rem var(--f-m);text-transform:uppercase;opacity:.7;margin-left:2px}
 .drop{display:flex;flex-direction:column;align-items:center;gap:4px;padding:26px 16px;border:2px dashed var(--line);border-radius:12px;background:var(--panel);cursor:pointer;text-align:center}
 .drop b{font:700 1.25rem var(--f-d)}.drop.over{border-color:var(--accent);background:var(--tint)}
 .srcrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start;margin:10px 0}.srcrow textarea{min-height:70px}
@@ -222,7 +224,8 @@ function timelineView(j,k){
 // ---------- SOURCES: pull the schedule out of call sheets, spreadsheets and emails ----------
 var LIB={pdf:'lib/pdf.min.js',pdfw:'lib/pdf.worker.min.js',xlsx:'lib/xlsx.full.min.js'}; // pdf.js 3.11.174, SheetJS 0.18.5, bundled
 var CAP={sample:null,mcp:null,images:false};
-var imp={busy:'',stream:'',result:null,err:'',gmail:null,drive:null,gq:'(call sheet OR callsheet OR schedule OR "call time") newer_than:60d',dq:'',paste:''};
+var SRC=window.SOURCES;
+var imp={mail:'gmail',store:'gdrive',busy:'',stream:'',result:null,err:'',gmail:null,drive:null,gq:'(call sheet OR callsheet OR schedule OR "call time") newer_than:60d',dq:'',paste:''};
 try{if(window.claude&&window.claude.use){
  window.claude.use('sample').then(function(s){CAP.sample=s;if(s&&s.limits)s.limits().then(function(l){CAP.images=!!(l&&l.images);}).catch(function(){});if(view.tab==='sources')render();});
  window.claude.use('mcp').then(function(m){CAP.mcp=m;if(view.tab==='sources')render();});
@@ -351,12 +354,20 @@ function sourcesView(j){
  if(!CAP.sample)h+='<p class="proto">Claude reading isn\'t available in this view, so only simple time ranges are picked up. Open the app in Claude to read full call sheets and emails.</p>';
  h+='<label class="drop" id="drop"><input type="file" id="file" accept=".pdf,.xlsx,.xls,.xlsm,.csv,.eml,.txt,.png,.jpg,.jpeg,.webp" hidden><b>Drop a call sheet, spreadsheet or email</b><span class="muted">PDF · Excel · CSV · .eml · photo of a call sheet</span></label>';
  h+='<div class="srcrow"><textarea data-paste placeholder="…or paste an email or schedule text here">'+esc(imp.paste)+'</textarea><button class="pri" data-a="readpaste"'+(imp.paste.trim()?'':' disabled')+'>Read pasted text</button></div>';
- if(CAP.mcp){
-  h+='<div class="conn"><h3>Gmail</h3><div class="bar"><input data-gq value="'+esc(imp.gq)+'"><button data-a="gsearch">Search</button></div>'+
-   (imp.gmail?(imp.gmail.length?imp.gmail.map(function(t,i){return '<div class="hit"><div><b>'+esc(t.subject)+'</b><div class="muted" style="font-size:.8rem">'+esc(t.from)+' · '+esc(t.date)+'</div><div class="muted" style="font-size:.82rem">'+esc(t.snippet)+'</div></div><button data-gread="'+i+'">Read</button></div>';}).join(''):'<div class="muted">No matching email.</div>'):'')+'</div>';
-  h+='<div class="conn"><h3>Google Drive</h3><div class="bar"><input data-dq value="'+esc(imp.dq)+'" placeholder="File name, e.g. Crew Assignments"><button data-a="dsearch"'+(imp.dq.trim()?'':' disabled')+'>Search</button></div>'+
-   (imp.drive?(imp.drive.length?imp.drive.map(function(f,i){return '<div class="hit"><div><b>'+esc(f.title)+'</b><div class="muted" style="font-size:.8rem">'+esc(f.mod)+'</div></div><button data-dread="'+i+'">Read</button></div>';}).join(''):'<div class="muted">No matching files.</div>'):'')+'</div>';
- }
+ function pick(list,cur,key){return '<div class="seg2">'+list.map(function(p){return '<button data-'+key+'="'+p.id+'" class="'+(cur===p.id?'on':'')+'">'+esc(p.label)+(p.live?'':' <span class="soon">connect</span>')+'</button>';}).join('')+'</div>';}
+ function notLive(p,what){return '<div class="muted" style="padding:6px 0">'+esc(p.label)+' isn\'t connected yet. Connect the '+esc(p.server)+' connector in Claude and it will '+what+' here.'+(what.indexOf('files')>=0?' Until then, drag the file from your '+esc(p.label)+' folder into the box above; that works now.':' Until then, forward the email or paste it above.')+'</div>';}
+ var M=SRC.mail.find(function(p){return p.id===imp.mail;}),S=SRC.storage.find(function(p){return p.id===imp.store;});
+ h+='<div class="conn"><h3>Email</h3>'+pick(SRC.mail,imp.mail,'mailp');
+ if(!M.live)h+=notLive(M,'search your mail');
+ else if(!CAP.mcp)h+='<div class="muted">Open the app in Claude to search '+esc(M.label)+'.</div>';
+ else h+='<div class="bar"><input data-gq value="'+esc(imp.gq)+'"><button data-a="gsearch">Search</button></div>'+
+   (imp.gmail?(imp.gmail.length?imp.gmail.map(function(t,i){return '<div class="hit"><div><b>'+esc(t.subject)+'</b><div class="muted" style="font-size:.8rem">'+esc(t.from)+' · '+esc(t.date)+'</div><div class="muted" style="font-size:.82rem">'+esc(t.snippet)+'</div></div><button data-gread="'+i+'">Read</button></div>';}).join(''):'<div class="muted">No matching email.</div>'):'');
+ h+='</div><div class="conn"><h3>Cloud storage</h3>'+pick(SRC.storage,imp.store,'storep');
+ if(!S.live)h+=notLive(S,'search your files');
+ else if(!CAP.mcp)h+='<div class="muted">Open the app in Claude to search '+esc(S.label)+'.</div>';
+ else h+='<div class="bar"><input data-dq value="'+esc(imp.dq)+'" placeholder="File name, e.g. Crew Assignments"><button data-a="dsearch"'+(imp.dq.trim()?'':' disabled')+'>Search</button></div>'+
+   (imp.drive?(imp.drive.length?imp.drive.map(function(f,i){return '<div class="hit"><div><b>'+esc(f.title)+'</b><div class="muted" style="font-size:.8rem">'+esc(f.mod)+'</div></div><button data-dread="'+i+'">Read</button></div>';}).join(''):'<div class="muted">No matching files.</div>'):'');
+ h+='</div>';
  if(imp.busy)h+='<div class="busy"><b>'+esc(imp.busy)+'</b><pre id="stream">'+esc(imp.stream.slice(-400))+'</pre></div>';
  if(imp.err)h+='<div class="proto">'+esc(imp.err)+'</div>';
  if(imp.result)h+=reviewView(j,imp.result);
@@ -392,6 +403,8 @@ app.addEventListener('click',function(e){
  if(b.dataset.day){view.day=+b.dataset.day;return render();}
  if(b.dataset.add){var r={id:uid()};if(b.dataset.add==='timeline')r.day=view.day;rows(j,b.dataset.add).push(r);save();return render();}
  if(b.dataset.del){var l=rows(j,view.tab),i=l.findIndex(function(r){return r.id===b.dataset.del;});if(i>=0)l.splice(i,1);save();return render();}
+ if(b.dataset.mailp){imp.mail=b.dataset.mailp;return render();}
+ if(b.dataset.storep){imp.store=b.dataset.storep;return render();}
  if(b.dataset.gread){var t=imp.gmail[+b.dataset.gread];gmailRead(t.id,t.subject);return;}
  if(b.dataset.dread){driveRead(imp.drive[+b.dataset.dread]);return;}
  if(a==='readpaste'){extract(imp.paste,'Pasted text','Pasted text');return;}
