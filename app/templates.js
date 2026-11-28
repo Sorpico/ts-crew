@@ -3,7 +3,7 @@
 // BRAND: the app's name lives here and only here. Change it and every screen follows.
 // (Saved data uses fixed internal keys, so renaming never loses anyone's jobs.)
 window.BRAND = {
-  name: 'Crew Cue',
+  name: 'OnMark',
   tagline: 'The schedule, pulled from your call sheets, spreadsheets and email.',
   stage: 'prototype',   // shown next to the name; set to '' at launch
 };
