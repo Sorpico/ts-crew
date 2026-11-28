@@ -1,4 +1,12 @@
-// CrewSheet templates: the whole app is generated from this file.
+// App templates: the whole app is generated from this file.
+
+// BRAND: the app's name lives here and only here. Change it and every screen follows.
+// (Saved data uses fixed internal keys, so renaming never loses anyone's jobs.)
+window.BRAND = {
+  name: 'Crew Cue',
+  tagline: 'The schedule, pulled from your call sheets, spreadsheets and email.',
+  stage: 'prototype',   // shown next to the name; set to '' at launch
+};
 // MODULES = building blocks. DEPARTMENTS = which blocks a department starts with,
 // its roles, and its words. Add a department by adding an entry; no other code changes.
 

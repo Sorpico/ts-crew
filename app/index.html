@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>CrewSheet — prototype</title>
+<title>Crew Cue</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 :root{color-scheme:dark;--bg:#101413;--panel:#181d1c;--ink:#e8ece9;--muted:#93a09a;--line:#2b3331;--accent:#e08f25;--tint:#212826;--field:#0d1110;--focus:#2a2412;--inv:#e8ece9;--inv-ink:#101413;--ok:#5cc98d;--ok-bg:#163325;--warn:#f0b65a;--warn-bg:#2e2413;
@@ -89,7 +89,8 @@ td.del{width:1%;white-space:nowrap}
 <script>
 (function(){
 var M=window.MODULES,D=window.DEPARTMENTS,app=document.getElementById('app');
-var KEY='crewsheet.v1';
+var B=window.BRAND||{name:'App'};document.title=B.name+(B.stage?' — '+B.stage:'');
+var KEY='crewsheet.v1'; // internal storage key: never tied to the brand name
 function mode(){try{return localStorage.getItem('crewsheet.mode')||'dark';}catch(e){return 'dark';}}
 function applyMode(){document.documentElement.dataset.mode=mode();}
 applyMode();
@@ -117,7 +118,7 @@ function render(){
 
 // ---------- HOME ----------
 function home(){
- app.innerHTML='<header class="top"><div><h1>CrewSheet</h1><div class="sub">Your jobs</div></div><div class="bar" style="margin:0">'+MODEBTN()+'<button class="pri" data-a="new">+ New job</button></div></header>'+
+ app.innerHTML='<header class="top"><div><h1>'+esc(B.name)+(B.stage?' <span class="chip">'+esc(B.stage)+'</span>':'')+'</h1><div class="sub">'+esc(B.tagline||'Your jobs')+'</div></div><div class="bar" style="margin:0">'+MODEBTN()+'<button class="pri" data-a="new">+ New job</button></div></header>'+
  '<div class="jobs" style="margin-top:14px">'+store.jobs.map(function(j){return '<div class="job" data-open="'+j.id+'"><div><b>'+esc(j.name)+'</b><div class="muted" style="font-size:.85rem">'+esc(j.client||'')+(j.location?' · '+esc(j.location):'')+' · '+j.ndays+' days from '+esc(j.start)+'</div></div><span class="chip">'+D[j.dept].icon+' '+esc(D[j.dept].label)+'</span></div>';}).join('')+'</div>'+
  '<p class="proto">Prototype: jobs are saved in this browser only.</p>';
 }
